@@ -2,6 +2,7 @@
 name = "snake_bevy"
 version = "0.1.0"
 edition = "2024"
+description = "Simple snake game with Bevy, Rust and Wasm"
 
 [lib]
 crate-type = ["cdylib", "rlib"]
