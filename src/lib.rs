@@ -1,0 +1,57 @@
+use bevy::prelude::*;
+use wasm_bindgen::prelude::*;
+
+#[wasm_bindgen]
+pub fn bevy_init() {
+    let mut app = bevy::app::App::new();
+    app.add_plugins(DefaultPlugins.set(WindowPlugin {
+        primary_window: Some(Window {
+            // provide the ID selector string here
+            canvas: Some("#snake_bevy_canvas".into()),
+            resolution:
+                bevy::window::WindowResolution::new(500., 500.).with_scale_factor_override(1.0),
+            // ... any other window properties ...
+            ..default()
+        }),
+        ..default()
+    }));
+
+    app
+        .add_systems(Startup, setup)
+        .add_systems(Update, sprite_movement)
+.run();
+}
+
+
+#[derive(Component)]
+enum Direction {
+    Left,
+    Right,
+}
+
+fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
+    commands.spawn(Camera2d);
+
+    commands.spawn((
+        Sprite::from_image(asset_server.load("icon.png")),
+        Transform::from_xyz(0., 0., 0.),
+        Direction::Right,
+    ));
+}
+
+/// The sprite is animated by changing its translation depending on the time that has passed since
+/// the last frame.
+fn sprite_movement(time: Res<Time>, mut sprite_position: Query<(&mut Direction, &mut Transform)>) {
+    for (mut logo, mut transform) in &mut sprite_position {
+        match *logo {
+            Direction::Right => transform.translation.x += 150. * time.delta_secs(),
+            Direction::Left => transform.translation.x -= 150. * time.delta_secs(),
+        }
+
+        if transform.translation.x > 200. {
+            *logo = Direction::Left;
+        } else if transform.translation.x < -200. {
+            *logo = Direction::Right;
+        }
+    }
+}
