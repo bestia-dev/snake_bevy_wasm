@@ -16,77 +16,80 @@ pub fn bevy_init() {
         ..default()
     }));
 
-    app
-        .add_systems(Startup, setup)
-        .add_systems(Update, sprite_movement)
-.run();
+    app.add_systems(Startup, setup)
+        .add_systems(
+            Update,
+            (
+                sprite_movement,
+                handle_jump.run_if(bevy::input::common_conditions::input_just_pressed(
+                    KeyCode::Space,
+                )),
+            ),
+        )
+        .run();
 }
 
+#[derive(Component)]
+struct FoodPosition {
+    x: i32,
+    y: i32,
+}
 
 #[derive(Component)]
-struct Direction (f32,f32);
+enum SnakeDirection {
+    Up,
+    Down,
+    Left,
+    Right,
+}
 
-fn setup(mut commands: Commands, asset_server: Res<AssetServer>,    mut meshes: ResMut<Assets<Mesh>>,
-    mut materials: ResMut<Assets<ColorMaterial>>,) {
+fn setup(
+    mut commands: Commands,
+    mut meshes: ResMut<Assets<Mesh>>,
+    mut materials: ResMut<Assets<ColorMaterial>>,
+) {
     commands.spawn(Camera2d);
 
+    let color = Color::hsl(300., 0.95, 0.7);
+
     commands.spawn((
-        Sprite::from_image(asset_server.load("icon.png")),
+        Mesh2d(meshes.add(Rectangle::new(50.0, 50.0))),
         Transform::from_xyz(0., 0., 0.),
-        Direction(1.,1.),
+        MeshMaterial2d(materials.add(color)),
+        SnakeDirection::Down,
     ));
 
-    let shapes = [
-        meshes.add(Circle::new(50.0)),
-        meshes.add(CircularSector::new(50.0, 1.0)),
-        meshes.add(CircularSegment::new(50.0, 1.25)),
-        meshes.add(Ellipse::new(25.0, 50.0)),
-        meshes.add(Annulus::new(25.0, 50.0)),
-        meshes.add(Capsule2d::new(25.0, 50.0)),
-        meshes.add(Rhombus::new(75.0, 100.0)),
-        meshes.add(Rectangle::new(50.0, 100.0)),
-        meshes.add(RegularPolygon::new(50.0, 6)),
-        meshes.add(Triangle2d::new(
-            Vec2::Y * 50.0,
-            Vec2::new(-50.0, -50.0),
-            Vec2::new(50.0, -50.0),
-        )),
-    ];
-    let num_shapes = shapes.len();
+    let color = Color::hsl(2., 0.95, 0.7);
 
-    for (i, shape) in shapes.into_iter().enumerate() {
-        // Distribute colors evenly across the rainbow.
-        let color = Color::hsl(360. * i as f32 / num_shapes as f32, 0.95, 0.7);
-
-        const X_EXTENT: f32 = 900.;
-        commands.spawn((
-            Mesh2d(shape),
-            MeshMaterial2d(materials.add(color)),
-            Transform::from_xyz(
-                // Distribute shapes from -X_EXTENT/2 to +X_EXTENT/2.
-                -X_EXTENT / 2. + i as f32 / (num_shapes - 1) as f32 * X_EXTENT,
-                100.0,
-                0.0,
-            ),
-            Direction(1.,0.5),
-        ));
-    }
+    commands.spawn((
+        Mesh2d(meshes.add(Circle::new(50.0))),
+        MeshMaterial2d(materials.add(color)),
+        Transform::from_xyz(0., 100.0, 0.0),
+        FoodPosition { x: 50, y: 50 },
+    ));
 }
 
 /// The sprite is animated by changing its translation depending on the time that has passed since
 /// the last frame.
-fn sprite_movement(time: Res<Time>, mut sprite_position: Query<(&mut Direction, &mut Transform)>) {
+fn sprite_movement(
+    time: Res<Time>,
+    mut sprite_position: Query<(&mut SnakeDirection, &mut Transform)>,
+) {
     for (mut direction, mut transform) in &mut sprite_position {
-        
-            transform.translation.x += direction.0 * 150. * time.delta_secs();
-            transform.translation.y += direction.1 * 150. * time.delta_secs();
-        
+        transform.translation.x += direction.x * 50. * time.delta_secs();
+        transform.translation.y += direction.y * 50. * time.delta_secs();
 
-        if transform.translation.x > 500. || transform.translation.x < -500.{
-            direction.0 *= -1.; 
+        if transform.translation.x > 500. || transform.translation.x < -500. {
+            direction.x *= -1.;
         }
-        if transform.translation.y > 500. || transform.translation.y < -500.{
-            direction.1 *= -1.; 
+        if transform.translation.y > 500. || transform.translation.y < -500. {
+            direction.y *= -1.;
         }
+    }
+}
+
+fn handle_jump(mut sprite_position: Query<(&mut SnakeDirection, &mut Transform)>) {
+    for (mut direction, mut _transform) in &mut sprite_position {
+        direction.x *= -1.;
     }
 }
