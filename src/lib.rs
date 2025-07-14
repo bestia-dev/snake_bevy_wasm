@@ -1,8 +1,8 @@
-use bevy::prelude::*;
+use bevy::{ input::common_conditions::input_just_pressed, prelude::*};
 use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
-pub fn bevy_init() {
+pub fn main() {
     let mut app = bevy::app::App::new();
     app.add_plugins(DefaultPlugins.set(WindowPlugin {
         primary_window: Some(Window {
@@ -20,10 +20,11 @@ pub fn bevy_init() {
         .add_systems(
             Update,
             (
-                sprite_movement,
-                handle_jump.run_if(bevy::input::common_conditions::input_just_pressed(
-                    KeyCode::Space,
-                )),
+                snake_move,
+                event_up.run_if(input_just_pressed(KeyCode::ArrowUp)),
+                event_down.run_if(input_just_pressed(KeyCode::ArrowDown)),
+                event_left.run_if(input_just_pressed(KeyCode::ArrowLeft)),
+                event_right.run_if(input_just_pressed(KeyCode::ArrowRight)),
             ),
         )
         .run();
@@ -69,27 +70,34 @@ fn setup(
     ));
 }
 
-/// The sprite is animated by changing its translation depending on the time that has passed since
-/// the last frame.
-fn sprite_movement(
-    time: Res<Time>,
-    mut sprite_position: Query<(&mut SnakeDirection, &mut Transform)>,
-) {
-    for (mut direction, mut transform) in &mut sprite_position {
-        transform.translation.x += direction.x * 50. * time.delta_secs();
-        transform.translation.y += direction.y * 50. * time.delta_secs();
-
-        if transform.translation.x > 500. || transform.translation.x < -500. {
-            direction.x *= -1.;
-        }
-        if transform.translation.y > 500. || transform.translation.y < -500. {
-            direction.y *= -1.;
+fn snake_move(time: Res<Time>, mut snake_position: Query<(&mut SnakeDirection, &mut Transform)>) {
+    if let Ok((direction, mut transform)) = snake_position.single_mut() {
+        match direction.as_ref() {
+            SnakeDirection::Up => transform.translation.y += 50. * time.delta_secs(),
+            SnakeDirection::Down => transform.translation.y -= 50. * time.delta_secs(),
+            SnakeDirection::Left => transform.translation.x -= 50. * time.delta_secs(),
+            SnakeDirection::Right => transform.translation.x += 50. * time.delta_secs(),
         }
     }
 }
 
-fn handle_jump(mut sprite_position: Query<(&mut SnakeDirection, &mut Transform)>) {
-    for (mut direction, mut _transform) in &mut sprite_position {
-        direction.x *= -1.;
+fn event_up(mut snake_direction: Query<&mut SnakeDirection>) {
+    if let Ok(mut d) = snake_direction.single_mut() {
+        *d = SnakeDirection::Up;
+    }
+}
+fn event_down(mut snake_direction: Query<&mut SnakeDirection>) {
+    if let Ok(mut d) = snake_direction.single_mut() {
+        *d = SnakeDirection::Down;
+    }
+}
+fn event_left(mut snake_direction: Query<&mut SnakeDirection>) {
+    if let Ok(mut d) = snake_direction.single_mut() {
+        *d = SnakeDirection::Left;
+    }
+}
+fn event_right(mut snake_direction: Query<&mut SnakeDirection>) {
+    if let Ok(mut d) = snake_direction.single_mut() {
+        *d = SnakeDirection::Right;
     }
 }
