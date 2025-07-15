@@ -25,7 +25,7 @@ jobs:
       run: sudo apt install libasound2-dev
 
     - name: install libudev  
-      tun: sudo apt-get install libudev-dev
+      run: sudo apt-get install libudev-dev
 
     - name: Run cache for rust dependencies
       uses: Swatinem/rust-cache@v2.7.7
