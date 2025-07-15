@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["SnakeDirection"],"fn":["event_down","event_left","event_right","event_up","main","setup","snake_move"],"mod":["web_sys_mod"],"struct":["FoodPosition"]};

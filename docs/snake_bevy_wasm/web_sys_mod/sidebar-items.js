@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["add_listener_to_button","debug_write","get_element_by_id","get_html_element_by_id","get_input_element_value_string_by_id","open_url_in_new_tab","set_html_element_inner_html","set_html_element_inner_text","window"]};
