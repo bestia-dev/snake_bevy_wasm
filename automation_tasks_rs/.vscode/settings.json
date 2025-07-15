@@ -2,8 +2,8 @@
     "workbench.colorCustomizations": {
         "titleBar.activeForeground": "#fff",
         "titleBar.inactiveForeground": "#ffffffcc",
-        "titleBar.activeBackground": "#477587",
-        "titleBar.inactiveBackground": "#3F758DCC"
+        "titleBar.activeBackground": "#a81c1c",
+        "titleBar.inactiveBackground": "#630b0bcc"
     },
     "spellright.language": [
         "en"
@@ -20,39 +20,32 @@
     "cSpell.words": [
         "Alla",
         "alloc",
-        "apos",
         "appender",
         "bestia",
         "bestiadev",
-        "bindgen",
         "camino",
-        "cdylib",
         "CRUSTDE",
-        "Decryptor",
-        "Encryptor",
+        "decryptor",
+        "encryptor",
         "endregion",
         "keygen",
-        "libasound",
-        "libudev",
         "Nazdravlje",
-        "onchange",
-        "onclick",
-        "onhashchange",
+        "new_cli",
+        "octocrab",
         "passcode",
         "plantuml",
         "Prost",
         "reqwest",
-        "rustc",
         "rustdevuser",
-        "rustlang",
         "rustprojects",
         "serde",
+        "sshadd",
         "struct",
         "subsecond",
         "substack",
         "thiserror",
-        "webassembly",
         "zcvf",
-        "zdravje"
+        "zdravje",
+        "zeroize"
     ]
 }

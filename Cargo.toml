@@ -1,15 +1,63 @@
 [package]
 name = "snake_bevy_wasm"
-version = "0.1.0"
+# binary executable does not need to be SemVer, because nobody depends on it
+version = "0.0.14"
+authors = ["bestia.dev"]
+homepage = "https://bestia.dev"
 edition = "2024"
 description = "Simple snake game with Bevy, Rust and Wasm"
+repository = "https://github.com/bestia-dev/snake_bevy_wasm"
+readme = "README.md"
+license = "MIT"
+# Keyword must be only one word: lowercase letters, hyphens(-) or numbers, less then 35 characters, at most 5 keywords per crate
+keywords = ["maintained", "work-in-progress", "rustlang", "wasm"]
+categories = ["wasm"]
+publish = false
 
 [lib]
-crate-type = ["cdylib", "rlib"]
+# cdylib is for the wasm module library
+crate-type = ["cdylib"]
 
 [dependencies]
-wasm-bindgen="0.2.100"
+# SemVer rules: Major version zero (0.y.z) is for initial development. Anything MAY change at any time. The public API SHOULD NOT be considered stable.
+# WARNING: Although dependencies in Cargo.toml look like a specific version of the crate, they are just like a caret version (^x.y.z) and actually specify 
+# the minimum version and allow automatic SemVer compatible updates up to a MAJOR increment! Always check the true version with `cargo tree`!
+
+# the macro unwrap is great for WASM, because it shows the correct file and line number of the error
+unwrap = "1.2.1"
+wasm-bindgen = { version = "0.2.100", features = ["serde-serialize"] }
+console_error_panic_hook = "0.1.7"
+js-sys = "0.3.77"
+thiserror="2.0.12"
+anyhow="1.0.98"
+log = "0.4.27"
+wasm-logger = "0.2.0"
+wasm-rs-dbg = {version="0.1.2", default-features = false, features = ["console-log"]}
+html-escape = "0.2.13"
+
 bevy = "0.16.1"
 
+
+[dependencies.web-sys]
+version = "0.3.63"
+features = [
+  "AbortController",
+  "console",
+  "Document",
+  "Element",
+  "ErrorEvent",
+  "HtmlElement",
+  "HtmlInputElement",
+  "Location",
+  "Window",
+]
+
+# [dev-dependencies]
+# wasm-bindgen-test = "0.3.36"
+
+[profile.release]
+panic = "abort"
+
 [package.metadata.wasm-pack.profile.profiling]
+# for faster builds
 wasm-opt = false
