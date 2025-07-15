@@ -2,6 +2,8 @@
 //! helper functions for web_sys, window, document, dom, console,
 //! Trying to isolate/hide all javascript code and conversion here.
 
+#![allow(dead_code)]
+
 // region: use
 // the macro unwrap! shows the TRUE location where the error has ocurred.
 use unwrap::unwrap;
