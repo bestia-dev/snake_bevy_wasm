@@ -6,12 +6,12 @@
 [//]: # (auto_cargo_toml_to_md start)
 
 **Simple snake game with Bevy, Rust and Wasm**  
-***version: 0.0.8 date: 2025-03-18 author: [bestia.dev](https://bestia.dev) repository: [GitHub](https://github.com/bestia-dev/snake_bevy_wasm)***
+***version: 0.0.15 date: 2025-07-15 author: [bestia.dev](https://bestia.dev) repository: [GitHub](https://github.com/bestia-dev/snake_bevy_wasm)***
 
  ![maintained](https://img.shields.io/badge/maintained-green)
  ![work-in-progress](https://img.shields.io/badge/work_in_progress-yellow)
  ![rustlang](https://img.shields.io/badge/rustlang-orange)
- ![wasm](https://img.shields.io/badge/wasm-orange)
+ ![bevy](https://img.shields.io/badge/bevy-orange)
 
 [//]: # (auto_cargo_toml_to_md end)
 
@@ -19,11 +19,11 @@
  ![snake_bevy_wasm](https://bestia.dev/webpage_hit_counter/get_svg_image/1481465721.svg)
 
 [//]: # (auto_lines_of_code start)
-[![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-348-green.svg)](https://github.com/bestia-dev/snake_bevy_wasm/)
-[![Lines in Doc comments](https://img.shields.io/badge/Lines_in_Doc_comments-130-blue.svg)](https://github.com/bestia-dev/snake_bevy_wasm/)
-[![Lines in Comments](https://img.shields.io/badge/Lines_in_comments-70-purple.svg)](https://github.com/bestia-dev/snake_bevy_wasm/)
+[![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-162-green.svg)](https://github.com/bestia-dev/snake_bevy_wasm/)
+[![Lines in Doc comments](https://img.shields.io/badge/Lines_in_Doc_comments-74-blue.svg)](https://github.com/bestia-dev/snake_bevy_wasm/)
+[![Lines in Comments](https://img.shields.io/badge/Lines_in_comments-21-purple.svg)](https://github.com/bestia-dev/snake_bevy_wasm/)
 [![Lines in examples](https://img.shields.io/badge/Lines_in_examples-0-yellow.svg)](https://github.com/bestia-dev/snake_bevy_wasm/)
-[![Lines in tests](https://img.shields.io/badge/Lines_in_tests-16-orange.svg)](https://github.com/bestia-dev/snake_bevy_wasm/)
+[![Lines in tests](https://img.shields.io/badge/Lines_in_tests-0-orange.svg)](https://github.com/bestia-dev/snake_bevy_wasm/)
 
 [//]: # (auto_lines_of_code end)
 
@@ -35,7 +35,7 @@ I recommend using the [CRUSTDE - Containerized Rust Development Environment](htt
 
 Everybody knows this game. This is an educational example.
 
-## Faster build in development
+## Faster builds
 
 Into Cargo.toml I added:
 
@@ -45,11 +45,18 @@ Into Cargo.toml I added:
 wasm-opt = false
 ```
 
-Now I can build faster using the mode `--profiling`
+Now I can build faster in development using the mode `--profiling`
 
 ```bash
 wasm-pack build --target web --profiling
 ```
+
+For the release mode, wasm-opt was still too slow: 10 minutes.
+I copied the files from <https://github.com/WebAssembly/binaryen/releases/download/version_123/binaryen-version_123-x86_64-linux.tar.gz> from the bin/ folder into ~/bin. Then make them all executable `chmod +x *.*`. wasm-pack was able to find the executable wasm-opt in this folder.  
+
+Now I have wasm-opt version 123.
+The wasm-opt now takes only 30 seconds! Much less than 10 minutes.
+Size reduction of the wasm file is from 65MB to 40MB.
 
 ## Bevy prerequisites
 
@@ -61,6 +68,8 @@ Run from container host:
 podman exec --user=root crustde_vscode_cnt apt install libasound2-dev
 podman exec --user=root crustde_vscode_cnt apt-get install libudev-dev
 ```
+
+
 
 ## Development details
 

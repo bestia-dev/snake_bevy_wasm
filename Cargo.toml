@@ -1,7 +1,7 @@
 [package]
 name = "snake_bevy_wasm"
 # binary executable does not need to be SemVer, because nobody depends on it
-version = "0.0.14"
+version = "0.0.15"
 authors = ["bestia.dev"]
 homepage = "https://bestia.dev"
 edition = "2024"
@@ -10,7 +10,7 @@ repository = "https://github.com/bestia-dev/snake_bevy_wasm"
 readme = "README.md"
 license = "MIT"
 # Keyword must be only one word: lowercase letters, hyphens(-) or numbers, less then 35 characters, at most 5 keywords per crate
-keywords = ["maintained", "work-in-progress", "rustlang", "wasm"]
+keywords = ["maintained", "work-in-progress", "rustlang", "bevy"]
 categories = ["wasm"]
 publish = false
 
