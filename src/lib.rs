@@ -112,6 +112,7 @@ const SPRITE_HEIGHT: i32 = 50;
 const SNAKE_Z_LAYER: f32 = 1.0;
 const OTHER_Z_LAYER: f32 = 0.0;
 
+#[derive(Clone)]
 struct Position {
     x: usize,
     y: usize,
@@ -135,27 +136,18 @@ enum Direction {
 struct SnakeHead {
     position: Position,
     direction: Direction,
+    last_position: Position,
+    segment_len: usize,
+    just_eating: bool,
     updated: bool,
 }
 
 // one component can spawn many entities
 #[derive(Component)]
-struct SnakeBody {
-    body_vec: Position,
-    direction: Direction,
-    updated: bool,
-}
-
-#[derive(Component)]
-struct SnakeTail {
+struct SnakeSegment {
     position: Position,
-    direction: Direction,
+    index: usize,
     updated: bool,
-}
-
-struct BevyPosition {
-    x: f32,
-    y: f32,
 }
 
 #[wasm_bindgen]
@@ -193,9 +185,10 @@ pub fn main() {
     // game logic
     app.add_systems(FixedUpdate, fixed_update_snake_head_move);
     app.add_systems(FixedUpdate, handle_eat_food.after(fixed_update_snake_head_move));
+    app.add_systems(FixedUpdate, move_segments.after(handle_eat_food));
 
     // render frame and react to events
-    app.add_systems(Update, (update_render_snake_head, update_render_bird, handle_movement_input));
+    app.add_systems(Update, (update_render_snake_head, update_render_bird, update_render_segment, handle_movement_input));
     app.run();
 }
 
@@ -206,43 +199,37 @@ fn startup(mut commands: Commands, mut meshes: ResMut<Assets<Mesh>>, mut materia
     let snake_head_position = Position { x: 10, y: 10 };
     commands.spawn((
         Mesh2d(meshes.add(Rectangle::new(50.0, 50.0))),
-        Transform::from_xyz(snake_head_position.into_bevy_x(), snake_head_position.into_bevy_y(), SNAKE_Z_LAYER),
+        Transform::from_xyz(snake_head_position.to_bevy_x(), snake_head_position.to_bevy_y(), SNAKE_Z_LAYER),
         MeshMaterial2d(materials.add(Color::hsl(300., 0.95, 0.7))),
         SnakeHead {
-            position: snake_head_position,
+            position: snake_head_position.clone(),
             direction: Direction::Down,
+            last_position: snake_head_position,
+            just_eating: false,
+            segment_len: 1,
             updated: false,
         },
     ));
 
-    // snake body is empty on start
-    /*     let snake_head_position = Position { x: 10, y: 10 };
+    // first and only segment
+    let segment_position = Position { x: 10, y: 9 };
     commands.spawn((
         Mesh2d(meshes.add(Rectangle::new(50.0, 50.0))),
-        Transform::from_xyz(snake_head_position.into_bevy_x(), snake_head_position.into_bevy_y(), OTHER_Z_LAYER),
-        Visibility::Hidden,
+        Transform::from_xyz(segment_position.to_bevy_x(), segment_position.to_bevy_y(), OTHER_Z_LAYER),
         MeshMaterial2d(materials.add(Color::hsl(250., 0.95, 0.7))),
-        SnakeBody { body_vec: , updated: false },
-    )); */
-
-    let snake_tail_position = Position { x: 10, y: 9 };
-    commands.spawn((
-        Mesh2d(meshes.add(Rectangle::new(50.0, 50.0))),
-        Transform::from_xyz(snake_tail_position.into_bevy_x(), snake_tail_position.into_bevy_y(), OTHER_Z_LAYER),
-        MeshMaterial2d(materials.add(Color::hsl(200., 0.95, 0.7))),
-        SnakeTail {
-            position: snake_tail_position,
-            direction: Direction::Down,
+        SnakeSegment {
+            position: segment_position,
+            index: 0,
             updated: false,
         },
     ));
 
-    // first bird
+    // spawn entity bird
     let bird_position = Position { x: 9, y: 9 };
     commands.spawn((
         Mesh2d(meshes.add(Circle::new(25.0))),
         MeshMaterial2d(materials.add(Color::hsl(2., 0.95, 0.7))),
-        Transform::from_xyz(bird_position.into_bevy_x(), bird_position.into_bevy_y(), OTHER_Z_LAYER),
+        Transform::from_xyz(bird_position.to_bevy_x(), bird_position.to_bevy_y(), OTHER_Z_LAYER),
         Bird {
             position: bird_position,
             updated: false,
@@ -252,18 +239,19 @@ fn startup(mut commands: Commands, mut meshes: ResMut<Assets<Mesh>>, mut materia
 
 impl Position {
     /// transform GameCoordinates to BevyCoordinates
-    pub fn into_bevy_x(&self) -> f32 {
+    pub fn to_bevy_x(&self) -> f32 {
         self.x as f32 * SPRITE_WIDTH as f32 - (BOARD_CENTER as f32 * SPRITE_WIDTH as f32)
     }
     /// transform GameCoordinates to BevyCoordinates
-    pub fn into_bevy_y(&self) -> f32 {
-        -1. * self.y as f32 * SPRITE_HEIGHT as f32 + (BOARD_CENTER as f32 * SPRITE_HEIGHT as f32)
+    pub fn to_bevy_y(&self) -> f32 {
+        -(self.y as f32) * SPRITE_HEIGHT as f32 + (BOARD_CENTER as f32 * SPRITE_HEIGHT as f32)
     }
 }
 
 // fixed time every 0.5 seconds
 fn fixed_update_snake_head_move(_time: Res<Time>, mut queried_entities: Query<&mut SnakeHead>) {
     if let Ok(mut snake_head) = queried_entities.single_mut() {
+        snake_head.last_position = snake_head.position.clone();
         match &snake_head.direction {
             Direction::Up => snake_head.position.y -= 1,
             Direction::Down => snake_head.position.y += 1,
@@ -271,40 +259,93 @@ fn fixed_update_snake_head_move(_time: Res<Time>, mut queried_entities: Query<&m
             Direction::Right => snake_head.position.x += 1,
         }
         snake_head.updated = true;
+        // move also all the segments
     }
 }
 fn handle_eat_food(_time: Res<Time>, mut snake_query: Query<&mut SnakeHead>, mut bird_query: Query<&mut Bird>) {
     if let Ok(mut snake_head) = snake_query.single_mut() {
         if let Ok(mut bird) = bird_query.single_mut() {
             if snake_head.position.x == bird.position.x && snake_head.position.y == bird.position.y {
-                // njam: point, longer tail
+                snake_head.just_eating = true;
+                // food: point, longer body
                 // new random position
                 bird.position.x = ops::floor(js_sys::Math::random() as f32 * BOARD_WIDTH as f32) as usize;
                 bird.position.y = ops::floor(js_sys::Math::random() as f32 * BOARD_HEIGHT as f32) as usize;
                 bird.updated = true;
+
+                // new segment entity
             }
             snake_head.updated = true;
         }
     }
 }
 
-fn update_render_snake_head(time: Res<Time>, mut queried_entities: Query<(&mut SnakeHead, &mut Transform)>) {
+/// first segment is after the snake head
+fn move_segments(
+    mut commands: Commands,
+    mut meshes: ResMut<Assets<Mesh>>,
+    mut materials: ResMut<Assets<ColorMaterial>>,
+    mut snake_query: Query<&mut SnakeHead>,
+    mut segment_query: Query<&mut SnakeSegment>,
+) {
+    if let Ok(mut snake_head) = snake_query.single_mut() {
+        // Sort according to `usize index`.
+        let sorted_snake_segments = segment_query.iter_mut().sort_by::<&SnakeSegment>(|value_1, value_2| value_1.index.cmp(&value_2.index));
+        //move position from segment to segment
+        let mut last_position = snake_head.last_position.clone();
+        for mut snake_segment in sorted_snake_segments {
+            let prev_pos = snake_segment.position.clone();
+            snake_segment.position = last_position;
+            last_position = prev_pos;
+            snake_segment.updated = true;
+        }
+        // I will use the last_position to spawn the new segment - tail
+        if snake_head.just_eating {
+            snake_head.just_eating = false;
+
+            commands.spawn((
+                Mesh2d(meshes.add(Rectangle::new(50.0, 50.0))),
+                Transform::from_xyz(last_position.to_bevy_x(), last_position.to_bevy_y(), OTHER_Z_LAYER),
+                MeshMaterial2d(materials.add(Color::hsl(250., 0.95, 0.7))),
+                SnakeSegment {
+                    position: last_position.clone(),
+                    index: snake_head.segment_len,
+                    updated: true,
+                },
+            ));
+            snake_head.segment_len += 1;
+        }
+    }
+}
+
+fn update_render_snake_head(mut queried_entities: Query<(&mut SnakeHead, &mut Transform)>) {
     if let Ok((mut snake_head, mut transform)) = queried_entities.single_mut() {
         if snake_head.updated {
-            transform.translation.x = snake_head.position.into_bevy_x();
-            transform.translation.y = snake_head.position.into_bevy_y();
+            transform.translation.x = snake_head.position.to_bevy_x();
+            transform.translation.y = snake_head.position.to_bevy_y();
 
             snake_head.updated = false;
         }
     }
 }
-fn update_render_bird(time: Res<Time>, mut queried_entities: Query<(&mut Bird, &mut Transform)>) {
+fn update_render_bird(mut queried_entities: Query<(&mut Bird, &mut Transform)>) {
     if let Ok((mut bird, mut transform)) = queried_entities.single_mut() {
         if bird.updated {
-            transform.translation.x = bird.position.into_bevy_x();
-            transform.translation.y = bird.position.into_bevy_y();
+            transform.translation.x = bird.position.to_bevy_x();
+            transform.translation.y = bird.position.to_bevy_y();
 
             bird.updated = false;
+        }
+    }
+}
+
+fn update_render_segment(mut queried_entities: Query<(&mut SnakeSegment, &mut Transform)>) {
+    for (mut segment, mut transform) in queried_entities.iter_mut() {
+        if segment.updated {
+            transform.translation.x = segment.position.to_bevy_x();
+            transform.translation.y = segment.position.to_bevy_y();
+
+            segment.updated = false;
         }
     }
 }
