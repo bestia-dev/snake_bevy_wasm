@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["check_dead","eat_bird","move_segments","snake_head_move"]};
