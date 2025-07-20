@@ -17,6 +17,9 @@
         "LICENSE": "plain text"
     },
     "rust-analyzer.showUnlinkedFileNotification": false,
+    "rust-analyzer.cargo.extraEnv": {
+        "RUSTFLAGS": "-Clink-arg=-B/home/rustdevuser/.cargo/bin/mold"
+    },
     "cSpell.words": [
         "Alla",
         "alloc",
@@ -48,6 +51,7 @@
         "reqwest",
         "rustc",
         "rustdevuser",
+        "RUSTFLAGS",
         "rustlang",
         "rustprojects",
         "sccache",

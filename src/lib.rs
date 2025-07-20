@@ -94,62 +94,23 @@
 //!
 // endregion: auto_md_to_doc_comments include README.md A //!
 
-use bevy::{input::common_conditions::input_just_pressed, prelude::*};
+use bevy::prelude::*;
 use wasm_bindgen::prelude::*;
 
 mod web_sys_mod;
 use web_sys_mod as wsm;
 
-const TIME_STEP: f64 = 1. / 9.;
-
-#[wasm_bindgen]
-pub fn main() {
-    // rust has `Raw string literals` that are great!
-    // just add r# before the starting double quotes and # after the ending double quotes.
-    let html = r#"
-<canvas id="snake_bevy_canvas" width="1000" height="1000"></canvas>
-"#;
-
-    // WARNING for HTML INJECTION! Never put user provided strings in set_html_element_inner_html.
-    // Only correctly html encoded strings can use this function.
-    wsm::set_html_element_inner_html("div_for_wasm_html_injecting", html);
-
-    // bevy initiation
-    let mut app = bevy::app::App::new();
-    app.add_plugins(DefaultPlugins.set(WindowPlugin {
-        primary_window: Some(Window {
-            // provide the ID selector string here
-            canvas: Some("#snake_bevy_canvas".into()),
-            resolution: bevy::window::WindowResolution::new(1000., 1000.).with_scale_factor_override(1.0),
-            // ... any other window properties ...
-            ..default()
-        }),
-        ..default()
-    }));
-
-    // Set the Fixed Timestep interval for game logic to 0.5 seconds
-    app.insert_resource(Time::<Fixed>::from_seconds(0.5));
-
-    app.add_systems(Startup, setup)
-        .add_systems(FixedUpdate, (snake_move,))
-        .add_systems(
-            Update,
-            (
-                snake_render,
-                event_up.run_if(input_just_pressed(KeyCode::ArrowUp)),
-                event_down.run_if(input_just_pressed(KeyCode::ArrowDown)),
-                event_left.run_if(input_just_pressed(KeyCode::ArrowLeft)),
-                event_right.run_if(input_just_pressed(KeyCode::ArrowRight)),
-            ),
-        )
-        .run();
-}
+const CANVAS_WIDTH: usize = 1000;
+const CANVAS_HEIGHT: usize = 1000;
 
 const BOARD_WIDTH: usize = 20;
 const BOARD_HEIGHT: usize = 20;
 const BOARD_CENTER: usize = 10;
 const SPRITE_WIDTH: i32 = 50;
 const SPRITE_HEIGHT: i32 = 50;
+
+const SNAKE_Z_LAYER: f32 = 1.0;
+const OTHER_Z_LAYER: f32 = 0.0;
 
 struct Position {
     x: usize,
@@ -159,9 +120,11 @@ struct Position {
 #[derive(Component)]
 struct Bird {
     position: Position,
+    updated: bool,
 }
 
-enum SnakeDirection {
+#[derive(PartialEq)]
+enum Direction {
     Up,
     Down,
     Left,
@@ -169,10 +132,25 @@ enum SnakeDirection {
 }
 
 #[derive(Component)]
-struct Snake {
-    snake_vec: Vec<Position>,
-    snake_direction: SnakeDirection,
-    rendered: bool,
+struct SnakeHead {
+    position: Position,
+    direction: Direction,
+    updated: bool,
+}
+
+// one component can spawn many entities
+#[derive(Component)]
+struct SnakeBody {
+    body_vec: Position,
+    direction: Direction,
+    updated: bool,
+}
+
+#[derive(Component)]
+struct SnakeTail {
+    position: Position,
+    direction: Direction,
+    updated: bool,
 }
 
 struct BevyPosition {
@@ -180,99 +158,167 @@ struct BevyPosition {
     y: f32,
 }
 
+#[wasm_bindgen]
+pub fn main() {
+    // rust has `Raw string literals` that are great!
+    // just add r# before the starting double quotes and # after the ending double quotes.
+    let html = format!(
+        r#"
+<canvas id="snake_bevy_canvas" width="{CANVAS_WIDTH}" height="{CANVAS_HEIGHT}"></canvas>
+"#
+    );
+
+    // WARNING for HTML INJECTION! Never put user provided strings in set_html_element_inner_html.
+    // Only correctly html encoded strings can use this function.
+    wsm::set_html_element_inner_html("div_for_wasm_html_injecting", &html);
+
+    // bevy initiation
+    let mut app = bevy::app::App::new();
+    app.add_plugins(DefaultPlugins.set(WindowPlugin {
+        primary_window: Some(Window {
+            // provide the ID selector string here
+            canvas: Some("#snake_bevy_canvas".into()),
+            resolution: bevy::window::WindowResolution::new(CANVAS_WIDTH as f32, CANVAS_HEIGHT as f32).with_scale_factor_override(1.0),
+            resizable: false,
+            // ... any other window properties ...
+            ..default()
+        }),
+        ..default()
+    }));
+
+    // Set the Fixed Timestep interval for game logic to 0.5 seconds
+    app.insert_resource(Time::<Fixed>::from_seconds(0.5));
+    // only once on startup
+    app.add_systems(Startup, startup);
+    // game logic
+    app.add_systems(FixedUpdate, fixed_update_snake_head_move);
+    app.add_systems(FixedUpdate, handle_eat_food.after(fixed_update_snake_head_move));
+
+    // render frame and react to events
+    app.add_systems(Update, (update_render_snake_head, update_render_bird, handle_movement_input));
+    app.run();
+}
+
 // run on startup
-fn setup(mut commands: Commands, mut meshes: ResMut<Assets<Mesh>>, mut materials: ResMut<Assets<ColorMaterial>>) {
+fn startup(mut commands: Commands, mut meshes: ResMut<Assets<Mesh>>, mut materials: ResMut<Assets<ColorMaterial>>) {
     commands.spawn(Camera2d);
-
-    let snake_position = Position { x: 10, y: 10 };
-    let bevy_snake_position = transform_coordinates(&snake_position);
-
-    // first snake
+    // snake head
+    let snake_head_position = Position { x: 10, y: 10 };
     commands.spawn((
         Mesh2d(meshes.add(Rectangle::new(50.0, 50.0))),
-        Transform::from_xyz(bevy_snake_position.x, bevy_snake_position.y, 1.),
+        Transform::from_xyz(snake_head_position.into_bevy_x(), snake_head_position.into_bevy_y(), SNAKE_Z_LAYER),
         MeshMaterial2d(materials.add(Color::hsl(300., 0.95, 0.7))),
-        Snake {
-            snake_vec: vec![snake_position],
-            snake_direction: SnakeDirection::Down,
-            rendered: true,
+        SnakeHead {
+            position: snake_head_position,
+            direction: Direction::Down,
+            updated: false,
         },
     ));
 
-    let bird_position = Position { x: 9, y: 9 };
-    let bevy_bird_position = transform_coordinates(&bird_position);
+    // snake body is empty on start
+    /*     let snake_head_position = Position { x: 10, y: 10 };
+    commands.spawn((
+        Mesh2d(meshes.add(Rectangle::new(50.0, 50.0))),
+        Transform::from_xyz(snake_head_position.into_bevy_x(), snake_head_position.into_bevy_y(), OTHER_Z_LAYER),
+        Visibility::Hidden,
+        MeshMaterial2d(materials.add(Color::hsl(250., 0.95, 0.7))),
+        SnakeBody { body_vec: , updated: false },
+    )); */
+
+    let snake_tail_position = Position { x: 10, y: 9 };
+    commands.spawn((
+        Mesh2d(meshes.add(Rectangle::new(50.0, 50.0))),
+        Transform::from_xyz(snake_tail_position.into_bevy_x(), snake_tail_position.into_bevy_y(), OTHER_Z_LAYER),
+        MeshMaterial2d(materials.add(Color::hsl(200., 0.95, 0.7))),
+        SnakeTail {
+            position: snake_tail_position,
+            direction: Direction::Down,
+            updated: false,
+        },
+    ));
 
     // first bird
+    let bird_position = Position { x: 9, y: 9 };
     commands.spawn((
         Mesh2d(meshes.add(Circle::new(25.0))),
         MeshMaterial2d(materials.add(Color::hsl(2., 0.95, 0.7))),
-        Transform::from_xyz(bevy_bird_position.x, bevy_bird_position.y, 0.),
-        Bird { position: bird_position },
+        Transform::from_xyz(bird_position.into_bevy_x(), bird_position.into_bevy_y(), OTHER_Z_LAYER),
+        Bird {
+            position: bird_position,
+            updated: false,
+        },
     ));
 }
 
-/// transform GameCoordinates to BevyCoordinates
-fn transform_coordinates(position: &Position) -> BevyPosition {
-    let x = position.x as f32 * SPRITE_WIDTH as f32 - (BOARD_CENTER as f32 * SPRITE_WIDTH as f32);
-    let y = -1. * position.y as f32 * SPRITE_HEIGHT as f32 + (BOARD_CENTER as f32 * SPRITE_HEIGHT as f32);
-    BevyPosition { x, y }
-}
-
-// fixed time every 0.5 seconds
-fn snake_move(_time: Res<Time>, mut snake_entity: Query<&mut Snake>) {
-    if let Ok(mut snake) = snake_entity.single_mut() {
-        let snake_position = match &snake.snake_direction {
-            SnakeDirection::Up => Position {
-                x: snake.snake_vec[0].x,
-                y: snake.snake_vec[0].y - 1,
-            },
-            SnakeDirection::Down => Position {
-                x: snake.snake_vec[0].x,
-                y: snake.snake_vec[0].y + 1,
-            },
-            SnakeDirection::Left => Position {
-                x: snake.snake_vec[0].x - 1,
-                y: snake.snake_vec[0].y,
-            },
-            SnakeDirection::Right => Position {
-                x: snake.snake_vec[0].x + 1,
-                y: snake.snake_vec[0].y,
-            },
-        };
-        snake.snake_vec[0] = snake_position;
-        snake.rendered = false;
+impl Position {
+    /// transform GameCoordinates to BevyCoordinates
+    pub fn into_bevy_x(&self) -> f32 {
+        self.x as f32 * SPRITE_WIDTH as f32 - (BOARD_CENTER as f32 * SPRITE_WIDTH as f32)
+    }
+    /// transform GameCoordinates to BevyCoordinates
+    pub fn into_bevy_y(&self) -> f32 {
+        -1. * self.y as f32 * SPRITE_HEIGHT as f32 + (BOARD_CENTER as f32 * SPRITE_HEIGHT as f32)
     }
 }
 
-fn snake_render(time: Res<Time>, mut snake_entity: Query<(&mut Snake, &mut Transform)>) {
-    if let Ok((mut snake, mut transform)) = snake_entity.single_mut() {
-        if !snake.rendered {
-            let bevy_position = transform_coordinates(&snake.snake_vec[0]);
-            transform.translation.x = bevy_position.x;
-            transform.translation.y = bevy_position.y;
-
-            snake.rendered = true;
+// fixed time every 0.5 seconds
+fn fixed_update_snake_head_move(_time: Res<Time>, mut queried_entities: Query<&mut SnakeHead>) {
+    if let Ok(mut snake_head) = queried_entities.single_mut() {
+        match &snake_head.direction {
+            Direction::Up => snake_head.position.y -= 1,
+            Direction::Down => snake_head.position.y += 1,
+            Direction::Left => snake_head.position.x -= 1,
+            Direction::Right => snake_head.position.x += 1,
+        }
+        snake_head.updated = true;
+    }
+}
+fn handle_eat_food(_time: Res<Time>, mut snake_query: Query<&mut SnakeHead>, mut bird_query: Query<&mut Bird>) {
+    if let Ok(mut snake_head) = snake_query.single_mut() {
+        if let Ok(mut bird) = bird_query.single_mut() {
+            if snake_head.position.x == bird.position.x && snake_head.position.y == bird.position.y {
+                // njam: point, longer tail
+                // new random position
+                bird.position.x = ops::floor(js_sys::Math::random() as f32 * BOARD_WIDTH as f32) as usize;
+                bird.position.y = ops::floor(js_sys::Math::random() as f32 * BOARD_HEIGHT as f32) as usize;
+                bird.updated = true;
+            }
+            snake_head.updated = true;
         }
     }
 }
 
-fn event_up(mut snake: Query<&mut Snake>) {
-    if let Ok(mut snake) = snake.single_mut() {
-        snake.snake_direction = SnakeDirection::Up;
+fn update_render_snake_head(time: Res<Time>, mut queried_entities: Query<(&mut SnakeHead, &mut Transform)>) {
+    if let Ok((mut snake_head, mut transform)) = queried_entities.single_mut() {
+        if snake_head.updated {
+            transform.translation.x = snake_head.position.into_bevy_x();
+            transform.translation.y = snake_head.position.into_bevy_y();
+
+            snake_head.updated = false;
+        }
     }
 }
-fn event_down(mut snake: Query<&mut Snake>) {
-    if let Ok(mut snake) = snake.single_mut() {
-        snake.snake_direction = SnakeDirection::Down;
+fn update_render_bird(time: Res<Time>, mut queried_entities: Query<(&mut Bird, &mut Transform)>) {
+    if let Ok((mut bird, mut transform)) = queried_entities.single_mut() {
+        if bird.updated {
+            transform.translation.x = bird.position.into_bevy_x();
+            transform.translation.y = bird.position.into_bevy_y();
+
+            bird.updated = false;
+        }
     }
 }
-fn event_left(mut snake: Query<&mut Snake>) {
-    if let Ok(mut snake) = snake.single_mut() {
-        snake.snake_direction = SnakeDirection::Left;
-    }
-}
-fn event_right(mut snake: Query<&mut Snake>) {
-    if let Ok(mut snake) = snake.single_mut() {
-        snake.snake_direction = SnakeDirection::Right;
+
+fn handle_movement_input(keys: Res<ButtonInput<KeyCode>>, mut queried_entities: Query<&mut SnakeHead>) {
+    if let Ok(mut snake_head) = queried_entities.single_mut() {
+        if keys.pressed(KeyCode::ArrowUp) && snake_head.direction != Direction::Down {
+            snake_head.direction = Direction::Up;
+        } else if keys.pressed(KeyCode::ArrowDown) && snake_head.direction != Direction::Up {
+            snake_head.direction = Direction::Down;
+        } else if keys.pressed(KeyCode::ArrowLeft) && snake_head.direction != Direction::Right {
+            snake_head.direction = Direction::Left;
+        } else if keys.pressed(KeyCode::ArrowRight) && snake_head.direction != Direction::Left {
+            snake_head.direction = Direction::Right;
+        }
     }
 }

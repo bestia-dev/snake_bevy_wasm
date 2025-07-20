@@ -1,7 +1,7 @@
 [package]
 name = "snake_bevy_wasm"
 # binary executable does not need to be SemVer, because nobody depends on it
-version = "0.0.26"
+version = "0.0.40"
 authors = ["bestia.dev"]
 homepage = "https://bestia.dev"
 edition = "2024"
@@ -36,7 +36,6 @@ wasm-rs-dbg = {version="0.1.2", default-features = false, features = ["console-l
 html-escape = "0.2.13"
 
 bevy = "0.16.1"
-
 
 [dependencies.web-sys]
 version = "0.3.63"

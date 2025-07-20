@@ -47,7 +47,24 @@ The game data will be in the game coordinate system. Then the renderer will tran
 
 ## Faster builds
 
-Into Cargo.toml I added:
+I use the mold linker to speed up the build. In ~/.cargo/config.toml I already have:
+
+```toml
+[target.x86_64-unknown-linux-gnu]
+rustflags = ["-C", "link-arg=-B/home/rustdevuser/.cargo/bin/mold"]
+```
+
+But rust-analyzer does not read that file. In .vscode/settings.json I added
+
+```json
+    "rust-analyzer.cargo.extraEnv": {
+        "RUSTFLAGS": "-Clink-arg=-B/home/rustdevuser/.cargo/bin/mold"
+    },
+```
+
+Hopefully it will help but I don't really know for sure.
+
+The build step `wasm-opt` was really slow so, into Cargo.toml I added:
 
 ```toml
 [package.metadata.wasm-pack.profile.profiling]
@@ -64,7 +81,7 @@ wasm-pack build --target web --profiling
 For the release mode, wasm-opt was still too slow: 10 minutes.
 I copied the files from <https://github.com/WebAssembly/binaryen/releases/download/version_123/binaryen-version_123-x86_64-linux.tar.gz> from the bin/ folder into ~/bin. Then make them all executable `chmod +x *.*`. wasm-pack was able to find the executable wasm-opt in this folder.  
 
-Now I have wasm-opt version 123.
+Now I have wasm-opt version 123. This version should be faster.
 The wasm-opt now takes only 30 seconds! Much less than 10 minutes.
 Size reduction of the wasm file is from 65MB to 40MB.
 
