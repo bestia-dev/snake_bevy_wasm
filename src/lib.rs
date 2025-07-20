@@ -99,23 +99,34 @@ use wasm_bindgen::prelude::*;
 
 mod web_sys_mod;
 use web_sys_mod as wsm;
+mod events_mod;
+use events_mod::*;
+mod game_logic_mod;
+use game_logic_mod::*;
+mod render_mod;
+use render_mod::*;
 
-const CANVAS_WIDTH: usize = 1000;
-const CANVAS_HEIGHT: usize = 1000;
-
-const BOARD_WIDTH: usize = 20;
-const BOARD_HEIGHT: usize = 20;
-const BOARD_CENTER: usize = 10;
+const CANVAS_WIDTH: i32 = 1000;
+const CANVAS_HEIGHT: i32 = 1000;
+const STEP_DURATION: f64 = 0.2;
+const BOARD_WIDTH: i32 = 20;
+const BOARD_HEIGHT: i32 = 20;
+const BOARD_CENTER: i32 = 10;
 const SPRITE_WIDTH: i32 = 50;
 const SPRITE_HEIGHT: i32 = 50;
 
 const SNAKE_Z_LAYER: f32 = 1.0;
 const OTHER_Z_LAYER: f32 = 0.0;
 
-#[derive(Clone)]
+#[derive(Component)]
+struct DebugText {
+    bird_position: String,
+}
+
+#[derive(Clone, PartialEq, Debug)]
 struct Position {
-    x: usize,
-    y: usize,
+    x: i32,
+    y: i32,
 }
 
 #[derive(Component)]
@@ -140,6 +151,7 @@ struct SnakeHead {
     segment_len: usize,
     just_eating: bool,
     updated: bool,
+    dead: bool,
 }
 
 // one component can spawn many entities
@@ -149,6 +161,10 @@ struct SnakeSegment {
     index: usize,
     updated: bool,
 }
+
+// Marker struct to help identify the color-changing Text component
+#[derive(Component)]
+struct AnimatedText;
 
 #[wasm_bindgen]
 pub fn main() {
@@ -178,17 +194,17 @@ pub fn main() {
         ..default()
     }));
 
-    // Set the Fixed Timestep interval for game logic to 0.5 seconds
-    app.insert_resource(Time::<Fixed>::from_seconds(0.5));
+    // Set the Fixed Timestep interval for game logic to 0.x seconds
+    app.insert_resource(Time::<Fixed>::from_seconds(STEP_DURATION));
     // only once on startup
     app.add_systems(Startup, startup);
-    // game logic
-    app.add_systems(FixedUpdate, fixed_update_snake_head_move);
-    app.add_systems(FixedUpdate, handle_eat_food.after(fixed_update_snake_head_move));
-    app.add_systems(FixedUpdate, move_segments.after(handle_eat_food));
-
+    // game logic is sequential
+    app.add_systems(
+        FixedUpdate,
+        (snake_head_move, eat_bird.after(snake_head_move), move_segments.after(eat_bird), check_dead.after(move_segments)),
+    );
     // render frame and react to events
-    app.add_systems(Update, (update_render_snake_head, update_render_bird, update_render_segment, handle_movement_input));
+    app.add_systems(Update, (render_snake_head, render_bird, render_segment, handle_movement_input, render_dead, render_debug_text));
     app.run();
 }
 
@@ -208,6 +224,7 @@ fn startup(mut commands: Commands, mut meshes: ResMut<Assets<Mesh>>, mut materia
             just_eating: false,
             segment_len: 1,
             updated: false,
+            dead: false,
         },
     ));
 
@@ -231,8 +248,41 @@ fn startup(mut commands: Commands, mut meshes: ResMut<Assets<Mesh>>, mut materia
         MeshMaterial2d(materials.add(Color::hsl(2., 0.95, 0.7))),
         Transform::from_xyz(bird_position.to_bevy_x(), bird_position.to_bevy_y(), OTHER_Z_LAYER),
         Bird {
-            position: bird_position,
+            position: bird_position.clone(),
             updated: false,
+        },
+    ));
+
+    // Text with one section
+    commands.spawn((
+        Visibility::Hidden,
+        // Accepts a `String` or any type that converts into a `String`, such as `&str`
+        Text::new("The snake\nis dead!"),
+        TextFont { font_size: 67.0, ..default() },
+        TextShadow::default(),
+        // Set the justification of the Text
+        TextLayout::new_with_justify(JustifyText::Center),
+        // Set the style of the Node itself.
+        Node {
+            position_type: PositionType::Absolute,
+            align_content: AlignContent::Center,
+            justify_content: JustifyContent::Center,
+            ..default()
+        },
+        AnimatedText,
+    ));
+
+    commands.spawn((
+        // Visibility::Hidden,
+        Text::new("Debug text: "),
+        Node {
+            position_type: PositionType::Absolute,
+            bottom: Val::Px(5.0),
+            left: Val::Px(15.0),
+            ..default()
+        },
+        DebugText {
+            bird_position: format!("{:?}", &bird_position),
         },
     ));
 }
@@ -240,126 +290,10 @@ fn startup(mut commands: Commands, mut meshes: ResMut<Assets<Mesh>>, mut materia
 impl Position {
     /// transform GameCoordinates to BevyCoordinates
     pub fn to_bevy_x(&self) -> f32 {
-        self.x as f32 * SPRITE_WIDTH as f32 - (BOARD_CENTER as f32 * SPRITE_WIDTH as f32)
+        self.x as f32 * SPRITE_WIDTH as f32 - (BOARD_CENTER as f32 * SPRITE_WIDTH as f32) + (SPRITE_WIDTH as f32 / 2.)
     }
-    /// transform GameCoordinates to BevyCoordinates
+    /// transform GameCoordinates to BevyCoordinates. Strange because it goes in the opposite direction.
     pub fn to_bevy_y(&self) -> f32 {
-        -(self.y as f32) * SPRITE_HEIGHT as f32 + (BOARD_CENTER as f32 * SPRITE_HEIGHT as f32)
-    }
-}
-
-// fixed time every 0.5 seconds
-fn fixed_update_snake_head_move(_time: Res<Time>, mut queried_entities: Query<&mut SnakeHead>) {
-    if let Ok(mut snake_head) = queried_entities.single_mut() {
-        snake_head.last_position = snake_head.position.clone();
-        match &snake_head.direction {
-            Direction::Up => snake_head.position.y -= 1,
-            Direction::Down => snake_head.position.y += 1,
-            Direction::Left => snake_head.position.x -= 1,
-            Direction::Right => snake_head.position.x += 1,
-        }
-        snake_head.updated = true;
-        // move also all the segments
-    }
-}
-fn handle_eat_food(_time: Res<Time>, mut snake_query: Query<&mut SnakeHead>, mut bird_query: Query<&mut Bird>) {
-    if let Ok(mut snake_head) = snake_query.single_mut() {
-        if let Ok(mut bird) = bird_query.single_mut() {
-            if snake_head.position.x == bird.position.x && snake_head.position.y == bird.position.y {
-                snake_head.just_eating = true;
-                // food: point, longer body
-                // new random position
-                bird.position.x = ops::floor(js_sys::Math::random() as f32 * BOARD_WIDTH as f32) as usize;
-                bird.position.y = ops::floor(js_sys::Math::random() as f32 * BOARD_HEIGHT as f32) as usize;
-                bird.updated = true;
-
-                // new segment entity
-            }
-            snake_head.updated = true;
-        }
-    }
-}
-
-/// first segment is after the snake head
-fn move_segments(
-    mut commands: Commands,
-    mut meshes: ResMut<Assets<Mesh>>,
-    mut materials: ResMut<Assets<ColorMaterial>>,
-    mut snake_query: Query<&mut SnakeHead>,
-    mut segment_query: Query<&mut SnakeSegment>,
-) {
-    if let Ok(mut snake_head) = snake_query.single_mut() {
-        // Sort according to `usize index`.
-        let sorted_snake_segments = segment_query.iter_mut().sort_by::<&SnakeSegment>(|value_1, value_2| value_1.index.cmp(&value_2.index));
-        //move position from segment to segment
-        let mut last_position = snake_head.last_position.clone();
-        for mut snake_segment in sorted_snake_segments {
-            let prev_pos = snake_segment.position.clone();
-            snake_segment.position = last_position;
-            last_position = prev_pos;
-            snake_segment.updated = true;
-        }
-        // I will use the last_position to spawn the new segment - tail
-        if snake_head.just_eating {
-            snake_head.just_eating = false;
-
-            commands.spawn((
-                Mesh2d(meshes.add(Rectangle::new(50.0, 50.0))),
-                Transform::from_xyz(last_position.to_bevy_x(), last_position.to_bevy_y(), OTHER_Z_LAYER),
-                MeshMaterial2d(materials.add(Color::hsl(250., 0.95, 0.7))),
-                SnakeSegment {
-                    position: last_position.clone(),
-                    index: snake_head.segment_len,
-                    updated: true,
-                },
-            ));
-            snake_head.segment_len += 1;
-        }
-    }
-}
-
-fn update_render_snake_head(mut queried_entities: Query<(&mut SnakeHead, &mut Transform)>) {
-    if let Ok((mut snake_head, mut transform)) = queried_entities.single_mut() {
-        if snake_head.updated {
-            transform.translation.x = snake_head.position.to_bevy_x();
-            transform.translation.y = snake_head.position.to_bevy_y();
-
-            snake_head.updated = false;
-        }
-    }
-}
-fn update_render_bird(mut queried_entities: Query<(&mut Bird, &mut Transform)>) {
-    if let Ok((mut bird, mut transform)) = queried_entities.single_mut() {
-        if bird.updated {
-            transform.translation.x = bird.position.to_bevy_x();
-            transform.translation.y = bird.position.to_bevy_y();
-
-            bird.updated = false;
-        }
-    }
-}
-
-fn update_render_segment(mut queried_entities: Query<(&mut SnakeSegment, &mut Transform)>) {
-    for (mut segment, mut transform) in queried_entities.iter_mut() {
-        if segment.updated {
-            transform.translation.x = segment.position.to_bevy_x();
-            transform.translation.y = segment.position.to_bevy_y();
-
-            segment.updated = false;
-        }
-    }
-}
-
-fn handle_movement_input(keys: Res<ButtonInput<KeyCode>>, mut queried_entities: Query<&mut SnakeHead>) {
-    if let Ok(mut snake_head) = queried_entities.single_mut() {
-        if keys.pressed(KeyCode::ArrowUp) && snake_head.direction != Direction::Down {
-            snake_head.direction = Direction::Up;
-        } else if keys.pressed(KeyCode::ArrowDown) && snake_head.direction != Direction::Up {
-            snake_head.direction = Direction::Down;
-        } else if keys.pressed(KeyCode::ArrowLeft) && snake_head.direction != Direction::Right {
-            snake_head.direction = Direction::Left;
-        } else if keys.pressed(KeyCode::ArrowRight) && snake_head.direction != Direction::Left {
-            snake_head.direction = Direction::Right;
-        }
+        -(self.y as f32) * SPRITE_HEIGHT as f32 + (BOARD_CENTER as f32 * SPRITE_HEIGHT as f32) - (SPRITE_HEIGHT as f32 / 2.)
     }
 }
