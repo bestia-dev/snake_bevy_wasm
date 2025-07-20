@@ -100,6 +100,8 @@ use wasm_bindgen::prelude::*;
 mod web_sys_mod;
 use web_sys_mod as wsm;
 
+const TIME_STEP: f64 = 1. / 9.;
+
 #[wasm_bindgen]
 pub fn main() {
     // rust has `Raw string literals` that are great!
@@ -125,11 +127,15 @@ pub fn main() {
         ..default()
     }));
 
+    // Set the Fixed Timestep interval for game logic to 0.5 seconds
+    app.insert_resource(Time::<Fixed>::from_seconds(0.5));
+
     app.add_systems(Startup, setup)
+        .add_systems(FixedUpdate, (snake_move,))
         .add_systems(
             Update,
             (
-                snake_move,
+                snake_render,
                 event_up.run_if(input_just_pressed(KeyCode::ArrowUp)),
                 event_down.run_if(input_just_pressed(KeyCode::ArrowDown)),
                 event_left.run_if(input_just_pressed(KeyCode::ArrowLeft)),
@@ -139,13 +145,22 @@ pub fn main() {
         .run();
 }
 
-#[derive(Component)]
-struct FoodPosition {
-    x: i32,
-    y: i32,
+const BOARD_WIDTH: usize = 20;
+const BOARD_HEIGHT: usize = 20;
+const BOARD_CENTER: usize = 10;
+const SPRITE_WIDTH: i32 = 50;
+const SPRITE_HEIGHT: i32 = 50;
+
+struct Position {
+    x: usize,
+    y: usize,
 }
 
 #[derive(Component)]
+struct Bird {
+    position: Position,
+}
+
 enum SnakeDirection {
     Up,
     Down,
@@ -153,56 +168,111 @@ enum SnakeDirection {
     Right,
 }
 
+#[derive(Component)]
+struct Snake {
+    snake_vec: Vec<Position>,
+    snake_direction: SnakeDirection,
+    rendered: bool,
+}
+
+struct BevyPosition {
+    x: f32,
+    y: f32,
+}
+
+// run on startup
 fn setup(mut commands: Commands, mut meshes: ResMut<Assets<Mesh>>, mut materials: ResMut<Assets<ColorMaterial>>) {
     commands.spawn(Camera2d);
 
-    let color = Color::hsl(300., 0.95, 0.7);
+    let snake_position = Position { x: 10, y: 10 };
+    let bevy_snake_position = transform_coordinates(&snake_position);
 
+    // first snake
     commands.spawn((
         Mesh2d(meshes.add(Rectangle::new(50.0, 50.0))),
-        Transform::from_xyz(0., 0., 0.),
-        MeshMaterial2d(materials.add(color)),
-        SnakeDirection::Down,
+        Transform::from_xyz(bevy_snake_position.x, bevy_snake_position.y, 1.),
+        MeshMaterial2d(materials.add(Color::hsl(300., 0.95, 0.7))),
+        Snake {
+            snake_vec: vec![snake_position],
+            snake_direction: SnakeDirection::Down,
+            rendered: true,
+        },
     ));
 
-    let color = Color::hsl(2., 0.95, 0.7);
+    let bird_position = Position { x: 9, y: 9 };
+    let bevy_bird_position = transform_coordinates(&bird_position);
 
+    // first bird
     commands.spawn((
-        Mesh2d(meshes.add(Circle::new(50.0))),
-        MeshMaterial2d(materials.add(color)),
-        Transform::from_xyz(0., 100.0, 0.0),
-        FoodPosition { x: 50, y: 50 },
+        Mesh2d(meshes.add(Circle::new(25.0))),
+        MeshMaterial2d(materials.add(Color::hsl(2., 0.95, 0.7))),
+        Transform::from_xyz(bevy_bird_position.x, bevy_bird_position.y, 0.),
+        Bird { position: bird_position },
     ));
 }
 
-fn snake_move(time: Res<Time>, mut snake_position: Query<(&mut SnakeDirection, &mut Transform)>) {
-    if let Ok((direction, mut transform)) = snake_position.single_mut() {
-        match direction.as_ref() {
-            SnakeDirection::Up => transform.translation.y += 50. * time.delta_secs(),
-            SnakeDirection::Down => transform.translation.y -= 50. * time.delta_secs(),
-            SnakeDirection::Left => transform.translation.x -= 50. * time.delta_secs(),
-            SnakeDirection::Right => transform.translation.x += 50. * time.delta_secs(),
+/// transform GameCoordinates to BevyCoordinates
+fn transform_coordinates(position: &Position) -> BevyPosition {
+    let x = position.x as f32 * SPRITE_WIDTH as f32 - (BOARD_CENTER as f32 * SPRITE_WIDTH as f32);
+    let y = -1. * position.y as f32 * SPRITE_HEIGHT as f32 + (BOARD_CENTER as f32 * SPRITE_HEIGHT as f32);
+    BevyPosition { x, y }
+}
+
+// fixed time every 0.5 seconds
+fn snake_move(_time: Res<Time>, mut snake_entity: Query<&mut Snake>) {
+    if let Ok(mut snake) = snake_entity.single_mut() {
+        let snake_position = match &snake.snake_direction {
+            SnakeDirection::Up => Position {
+                x: snake.snake_vec[0].x,
+                y: snake.snake_vec[0].y - 1,
+            },
+            SnakeDirection::Down => Position {
+                x: snake.snake_vec[0].x,
+                y: snake.snake_vec[0].y + 1,
+            },
+            SnakeDirection::Left => Position {
+                x: snake.snake_vec[0].x - 1,
+                y: snake.snake_vec[0].y,
+            },
+            SnakeDirection::Right => Position {
+                x: snake.snake_vec[0].x + 1,
+                y: snake.snake_vec[0].y,
+            },
+        };
+        snake.snake_vec[0] = snake_position;
+        snake.rendered = false;
+    }
+}
+
+fn snake_render(time: Res<Time>, mut snake_entity: Query<(&mut Snake, &mut Transform)>) {
+    if let Ok((mut snake, mut transform)) = snake_entity.single_mut() {
+        if !snake.rendered {
+            let bevy_position = transform_coordinates(&snake.snake_vec[0]);
+            transform.translation.x = bevy_position.x;
+            transform.translation.y = bevy_position.y;
+
+            snake.rendered = true;
         }
     }
 }
 
-fn event_up(mut snake_direction: Query<&mut SnakeDirection>) {
-    if let Ok(mut d) = snake_direction.single_mut() {
-        *d = SnakeDirection::Up;
+fn event_up(mut snake: Query<&mut Snake>) {
+    if let Ok(mut snake) = snake.single_mut() {
+        snake.snake_direction = SnakeDirection::Up;
     }
 }
-fn event_down(mut snake_direction: Query<&mut SnakeDirection>) {
-    if let Ok(mut d) = snake_direction.single_mut() {
-        *d = SnakeDirection::Down;
+fn event_down(mut snake: Query<&mut Snake>) {
+    if let Ok(mut snake) = snake.single_mut() {
+        snake.snake_direction = SnakeDirection::Down;
     }
 }
-fn event_left(mut snake_direction: Query<&mut SnakeDirection>) {
-    if let Ok(mut d) = snake_direction.single_mut() {
-        *d = SnakeDirection::Left;
+fn event_left(mut snake: Query<&mut Snake>) {
+    if let Ok(mut snake) = snake.single_mut() {
+        snake.snake_direction = SnakeDirection::Left;
     }
 }
-fn event_right(mut snake_direction: Query<&mut SnakeDirection>) {
-    if let Ok(mut d) = snake_direction.single_mut() {
-        *d = SnakeDirection::Right;
+fn event_right(mut snake: Query<&mut Snake>) {
+    if let Ok(mut snake) = snake.single_mut() {
+        snake.snake_direction = SnakeDirection::Right;
     }
 }

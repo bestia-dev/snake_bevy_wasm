@@ -6,7 +6,7 @@
 [//]: # (auto_cargo_toml_to_md start)
 
 **Simple snake game with Bevy, Rust and Wasm**  
-***version: 0.0.17 date: 2025-07-15 author: [bestia.dev](https://bestia.dev) repository: [GitHub](https://github.com/bestia-dev/snake_bevy_wasm)***
+***version: 0.0.19 date: 2025-07-20 author: [bestia.dev](https://bestia.dev) repository: [GitHub](https://github.com/bestia-dev/snake_bevy_wasm)***
 
  ![maintained](https://img.shields.io/badge/maintained-green)
  ![work-in-progress](https://img.shields.io/badge/work_in_progress-yellow)
@@ -19,9 +19,9 @@
  ![snake_bevy_wasm](https://bestia.dev/webpage_hit_counter/get_svg_image/1481465721.svg)
 
 [//]: # (auto_lines_of_code start)
-[![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-164-green.svg)](https://github.com/bestia-dev/snake_bevy_wasm/)
+[![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-174-green.svg)](https://github.com/bestia-dev/snake_bevy_wasm/)
 [![Lines in Doc comments](https://img.shields.io/badge/Lines_in_Doc_comments-104-blue.svg)](https://github.com/bestia-dev/snake_bevy_wasm/)
-[![Lines in Comments](https://img.shields.io/badge/Lines_in_comments-21-purple.svg)](https://github.com/bestia-dev/snake_bevy_wasm/)
+[![Lines in Comments](https://img.shields.io/badge/Lines_in_comments-25-purple.svg)](https://github.com/bestia-dev/snake_bevy_wasm/)
 [![Lines in examples](https://img.shields.io/badge/Lines_in_examples-0-yellow.svg)](https://github.com/bestia-dev/snake_bevy_wasm/)
 [![Lines in tests](https://img.shields.io/badge/Lines_in_tests-0-orange.svg)](https://github.com/bestia-dev/snake_bevy_wasm/)
 
@@ -34,6 +34,16 @@ I recommend using the [CRUSTDE - Containerized Rust Development Environment](htt
 ## The game
 
 Everybody knows this game. This is an educational example.
+
+## Graphics
+
+The canvas will be 1000x1000 pixels. The sprite will be 50x50 pixels. So the game-board will be 20x20 cells.
+The movements are based on elapsed time - tick.
+Bevy coordinate system is 0,0 in the middle of the canvas. Right is x+, Left is x-, Up is y+, Down in y-.
+For the game grid I will use the coordinate system 0,0 is in the up-left corner. Right is x+, Left is x-, Down in y+, Up is y-.
+Using this simplified coordinate system the array index is the same as the coordinate of the sprite.
+The game data will be in the game coordinate system. Then the renderer will transform that into the bevy coordinate system.
+ 
 
 ## Faster builds
 
