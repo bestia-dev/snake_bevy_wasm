@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"constant":["BOARD_CENTER","BOARD_HEIGHT","BOARD_WIDTH","CANVAS_HEIGHT","CANVAS_WIDTH","OTHER_Z_LAYER","SNAKE_Z_LAYER","SPRITE_HEIGHT","SPRITE_WIDTH","STEP_DURATION"],"enum":["Direction"],"fn":["main","startup"],"mod":["events_mod","game_logic_mod","render_mod","web_sys_mod"],"struct":["AnimatedText","Bird","DebugText","Position","SnakeHead","SnakeSegment"]};
+window.SIDEBAR_ITEMS = {"constant":["CANVAS_HEIGHT","CANVAS_WIDTH","VERSION"],"enum":["AppState"],"fn":["main"],"mod":["state_dead_mod","state_in_game_mod","state_main_menu_mod","web_sys_mod"]};

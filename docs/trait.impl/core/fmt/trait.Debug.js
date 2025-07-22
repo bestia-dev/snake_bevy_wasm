@@ -1,9 +1,9 @@
 (function() {
-    var implementors = Object.fromEntries([["snake_bevy_wasm",[["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/1.88.0/core/fmt/trait.Debug.html\" title=\"trait core::fmt::Debug\">Debug</a> for <a class=\"struct\" href=\"snake_bevy_wasm/struct.Position.html\" title=\"struct snake_bevy_wasm::Position\">Position</a>"]]]]);
+    var implementors = Object.fromEntries([["snake_bevy_wasm",[["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/1.88.0/core/fmt/trait.Debug.html\" title=\"trait core::fmt::Debug\">Debug</a> for <a class=\"enum\" href=\"snake_bevy_wasm/enum.AppState.html\" title=\"enum snake_bevy_wasm::AppState\">AppState</a>"],["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/1.88.0/core/fmt/trait.Debug.html\" title=\"trait core::fmt::Debug\">Debug</a> for <a class=\"struct\" href=\"snake_bevy_wasm/state_in_game_mod/struct.Position.html\" title=\"struct snake_bevy_wasm::state_in_game_mod::Position\">Position</a>"]]],["snake_bevy_wasm",[["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/1.88.0/core/fmt/trait.Debug.html\" title=\"trait core::fmt::Debug\">Debug</a> for <a class=\"struct\" href=\"snake_bevy_wasm/struct.Position.html\" title=\"struct snake_bevy_wasm::Position\">Position</a>"]]]]);
     if (window.register_implementors) {
         window.register_implementors(implementors);
     } else {
         window.pending_implementors = implementors;
     }
 })()
-//{"start":57,"fragment_lengths":[286]}
+//{"start":57,"fragment_lengths":[582,287]}

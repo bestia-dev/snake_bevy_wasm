@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["render_bird","render_debug_text","render_segment","render_snake_head"]};

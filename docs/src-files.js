@@ -1,3 +1,3 @@
-var srcIndex = new Map(JSON.parse('[["snake_bevy_wasm",["",[],["events_mod.rs","game_logic_mod.rs","lib.rs","render_mod.rs","web_sys_mod.rs"]]],["snake_bevy_wasm",["",[],["lib.rs","web_sys_mod.rs"]]]]'));
+var srcIndex = new Map(JSON.parse('[["snake_bevy_wasm",["",[["state_in_game_mod",[],["state_in_game_events_mod.rs","state_in_game_logic_mod.rs","state_in_game_render_mod.rs"]]],["lib.rs","state_dead_mod.rs","state_in_game_mod.rs","state_main_menu_mod.rs","web_sys_mod.rs"]]],["snake_bevy_wasm",["",[],["events_mod.rs","game_logic_mod.rs","lib.rs","render_mod.rs","web_sys_mod.rs"]]],["snake_bevy_wasm",["",[],["lib.rs","web_sys_mod.rs"]]]]'));
 createSrcSidebar();
-//{"start":36,"fragment_lengths":[107,56]}
+//{"start":36,"fragment_lengths":[238,108,56]}

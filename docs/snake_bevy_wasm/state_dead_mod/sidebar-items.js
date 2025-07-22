@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["add_dead_to_app","handle_dead_ui_input","on_enter_dead"]};

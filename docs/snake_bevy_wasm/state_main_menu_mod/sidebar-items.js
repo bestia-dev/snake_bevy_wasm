@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["add_main_menu_to_app","handle_main_menu_ui_input","on_enter_main_menu"]};
