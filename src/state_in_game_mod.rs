@@ -10,9 +10,6 @@ use state_in_game_logic_mod::*;
 mod state_in_game_render_mod;
 use state_in_game_render_mod::*;
 
-#[derive(SystemSet, Debug, Clone, PartialEq, Eq, Hash)]
-struct InGameSet;
-
 #[derive(Component)]
 struct DebugText {
     bird_position: String,
@@ -110,6 +107,7 @@ fn on_enter_in_game(mut commands: Commands, mut meshes: ResMut<Assets<Mesh>>, mu
     // snake head
     let snake_head_position = Position { x: 10, y: 10 };
     commands.spawn((
+        StateScoped(AppState::InGame),
         Mesh2d(meshes.add(Rectangle::new(50.0, 50.0))),
         Transform::from_xyz(snake_head_position.to_bevy_x(), snake_head_position.to_bevy_y(), SNAKE_Z_LAYER),
         MeshMaterial2d(materials.add(Color::hsl(300., 0.95, 0.7))),
@@ -127,6 +125,7 @@ fn on_enter_in_game(mut commands: Commands, mut meshes: ResMut<Assets<Mesh>>, mu
     // first and only segment
     let segment_position = Position { x: 10, y: 9 };
     commands.spawn((
+        StateScoped(AppState::InGame),
         Mesh2d(meshes.add(Rectangle::new(50.0, 50.0))),
         Transform::from_xyz(segment_position.to_bevy_x(), segment_position.to_bevy_y(), OTHER_Z_LAYER),
         MeshMaterial2d(materials.add(Color::hsl(250., 0.95, 0.7))),
@@ -140,6 +139,7 @@ fn on_enter_in_game(mut commands: Commands, mut meshes: ResMut<Assets<Mesh>>, mu
     // spawn entity bird
     let bird_position = Position { x: 9, y: 9 };
     commands.spawn((
+        StateScoped(AppState::InGame),
         Mesh2d(meshes.add(Circle::new(25.0))),
         MeshMaterial2d(materials.add(Color::hsl(2., 0.95, 0.7))),
         Transform::from_xyz(bird_position.to_bevy_x(), bird_position.to_bevy_y(), OTHER_Z_LAYER),
@@ -151,6 +151,7 @@ fn on_enter_in_game(mut commands: Commands, mut meshes: ResMut<Assets<Mesh>>, mu
 
     // Text with one section
     commands.spawn((
+        StateScoped(AppState::InGame),
         Visibility::Hidden,
         // Accepts a `String` or any type that converts into a `String`, such as `&str`
         Text::new("The snake\nis dead!"),
@@ -169,6 +170,7 @@ fn on_enter_in_game(mut commands: Commands, mut meshes: ResMut<Assets<Mesh>>, mu
     ));
 
     commands.spawn((
+        StateScoped(AppState::InGame),
         // Visibility::Hidden,
         Text::new("Debug text: "),
         Node {

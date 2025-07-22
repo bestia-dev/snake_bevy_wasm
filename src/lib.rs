@@ -133,7 +133,8 @@ const CANVAS_WIDTH: i32 = 1000;
 const CANVAS_HEIGHT: i32 = 1000;
 const VERSION: &str = env!("CARGO_PKG_VERSION");
 
-#[derive(States, Debug, Clone, PartialEq, Eq, Hash)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, Debug, States)]
+#[states(scoped_entities)]
 enum AppState {
     MainMenu,
     InGame,
@@ -180,6 +181,8 @@ pub fn main() {
     info!("snake_bevy_wasm {}", VERSION);
 
     // initial state is MainMenu
+    app.insert_state(AppState::MainMenu);
+    
     state_main_menu_mod::add_main_menu_to_app(&mut app);
 
     state_in_game_mod::add_in_game_to_app(&mut app);
