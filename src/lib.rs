@@ -117,7 +117,7 @@ pub fn main() {
             }),
     );
 
-    info!("snake_bevy_wasm {}", VERSION);
+    info!("started snake_bevy_wasm {}", VERSION);
 
     // initial state is MainMenu
     app.insert_state(AppState::MainMenu);

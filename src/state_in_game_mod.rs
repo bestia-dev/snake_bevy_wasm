@@ -136,6 +136,7 @@ fn on_enter_in_game(mut commands: Commands, mut meshes: ResMut<Assets<Mesh>>, mu
     // spawn entity bird
     let bird_position = Position { x: 9, y: 9 };
     commands.spawn((
+        Visibility::Hidden,
         StateScoped(AppState::InGame),
         Mesh2d(meshes.add(Circle::new(SPRITE_HEIGHT as f32 / 2.))),
         MeshMaterial2d(materials.add(Color::hsl(2., 0.95, 0.7))),

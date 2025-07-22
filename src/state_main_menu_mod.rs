@@ -44,12 +44,13 @@ pub fn on_enter_main_menu(mut commands: Commands) {
                 .with_children(|builder| {
                     // Header
                     builder.spawn((
-                        Text::new("Rust Wasm Bevy"),
+                        Text::new("bestia.dev/snake_bevy_wasm"),
                         TextFont {
                             font_size: SPRITE_HEIGHT as f32,
                             ..default()
                         },
-                        TextColor::from(YELLOW),
+                        TextLayout::new_with_justify(JustifyText::Center),
+                        TextColor::from(GREEN),
                     ));
                 });
             // middle
@@ -65,12 +66,13 @@ pub fn on_enter_main_menu(mut commands: Commands) {
                 .with_children(|builder| {
                     // middle
                     builder.spawn((
-                        Text::new("Snake Bevy Wasm \n game \n press N to start"),
+                        Text::new("Bestia.dev tutorial\nRust+Bevy+Wasm"),
                         TextFont {
                             font_size: SPRITE_HEIGHT as f32,
                             ..default()
                         },
-                        TextColor::from(GREEN),
+                        TextLayout::new_with_justify(JustifyText::Center),
+                        TextColor::from(YELLOW),
                     ));
                 });
             // footer
@@ -86,33 +88,16 @@ pub fn on_enter_main_menu(mut commands: Commands) {
                 .with_children(|builder| {
                     // footer
                     builder.spawn((
-                        Text::new("bestia.dev tutorial"),
+                        Text::new("Press N to start"),
                         TextFont {
                             font_size: SPRITE_HEIGHT as f32,
                             ..default()
                         },
+                        TextLayout::new_with_justify(JustifyText::Center),
                         TextColor::from(RED),
                     ));
                 });
         });
-
-    /*     // Text with one section
-    commands.spawn((
-        StateScoped(AppState::MainMenu),
-        // Accepts a `String` or any type that converts into a `String`, such as `&str`
-
-        TextFont { font_size: SPRITE_HEIGHT as f32, ..default() },
-        TextShadow::default(),
-        // Set the justification of the Text
-        TextLayout::new_with_justify(JustifyText::Center),
-        // Set the style of the Node itself.
-        Node {
-            position_type: PositionType::Absolute,
-            align_content: AlignContent::Center,
-            justify_content: JustifyContent::Center,
-            ..default()
-        },
-    )); */
 }
 
 pub fn handle_main_menu_ui_input(keys: Res<ButtonInput<KeyCode>>, mut next_state: ResMut<NextState<AppState>>) {

@@ -1,5 +1,6 @@
 // state_dead_mod.rs
 
+use bevy::color::palettes::css::{GREEN, RED, YELLOW};
 use bevy::prelude::*;
 
 use crate::AppState;
@@ -16,25 +17,88 @@ pub fn on_enter_dead(mut commands: Commands) {
     commands.spawn(Camera2d);
     debug!("on_enter_dead");
     // Text with one section
-    commands.spawn((
-        StateScoped(AppState::Dead),
-        // Accepts a `String` or any type that converts into a `String`, such as `&str`
-        Text::new("Snake \n is dead. \n press N to start"),
-        TextFont {
-            font_size: SPRITE_HEIGHT as f32,
-            ..default()
-        },
-        TextShadow::default(),
-        // Set the justification of the Text
-        TextLayout::new_with_justify(JustifyText::Center),
-        // Set the style of the Node itself.
-        Node {
-            position_type: PositionType::Absolute,
-            align_content: AlignContent::Center,
-            justify_content: JustifyContent::Center,
-            ..default()
-        },
-    ));
+    commands
+        .spawn((
+            StateScoped(AppState::Dead),
+            Node {
+                // Use the CSS Grid algorithm for laying out this node
+                display: Display::Grid,
+                // Make node fill the entirety of its parent (in this case the window)
+                width: Val::Percent(100.0),
+                height: Val::Percent(100.0),
+                // Set the grid to have 3 rows with sizes [20px, auto, 20px]
+                grid_template_rows: vec![GridTrack::vw(33.), GridTrack::vw(33.), GridTrack::vw(33.)],
+                ..default()
+            },
+        ))
+        .with_children(|builder| {
+            // Header
+            builder
+                .spawn((Node {
+                    flex_direction: FlexDirection::Column,
+                    align_items: AlignItems::Center,
+                    justify_content: JustifyContent::Center,
+                    //width: Val::Percent(100.),
+                    //height: Val::Percent(100.),
+                    ..default()
+                },))
+                .with_children(|builder| {
+                    // Header
+                    builder.spawn((
+                        Text::new("bestia.dev/snake_bevy_wasm"),
+                        TextFont {
+                            font_size: SPRITE_HEIGHT as f32,
+                            ..default()
+                        },
+                        TextLayout::new_with_justify(JustifyText::Center),
+                        TextColor::from(GREEN),
+                    ));
+                });
+            // middle
+            builder
+                .spawn((Node {
+                    flex_direction: FlexDirection::Column,
+                    align_items: AlignItems::Center,
+                    justify_content: JustifyContent::Center,
+                    //width: Val::Percent(100.),
+                    //height: Val::Percent(100.),
+                    ..default()
+                },))
+                .with_children(|builder| {
+                    // middle
+                    builder.spawn((
+                        Text::new("Snake is dead."),
+                        TextFont {
+                            font_size: SPRITE_HEIGHT as f32,
+                            ..default()
+                        },
+                        TextLayout::new_with_justify(JustifyText::Center),
+                        TextColor::from(YELLOW),
+                    ));
+                });
+            // footer
+            builder
+                .spawn((Node {
+                    flex_direction: FlexDirection::Column,
+                    align_items: AlignItems::Center,
+                    justify_content: JustifyContent::Center,
+                    //width: Val::Percent(100.),
+                    //height: Val::Percent(100.),
+                    ..default()
+                },))
+                .with_children(|builder| {
+                    // footer
+                    builder.spawn((
+                        Text::new("Press N to start"),
+                        TextFont {
+                            font_size: SPRITE_HEIGHT as f32,
+                            ..default()
+                        },
+                        TextLayout::new_with_justify(JustifyText::Center),
+                        TextColor::from(RED),
+                    ));
+                });
+        });
 }
 
 pub fn handle_dead_ui_input(keys: Res<ButtonInput<KeyCode>>, mut next_state: ResMut<NextState<AppState>>) {
