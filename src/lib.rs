@@ -126,72 +126,20 @@ use wasm_bindgen::prelude::*;
 
 mod web_sys_mod;
 use web_sys_mod as wsm;
-mod events_mod;
-use events_mod::*;
-mod game_logic_mod;
-use game_logic_mod::*;
-mod render_mod;
-use render_mod::*;
+mod state_main_menu_mod;
+//mod state_in_game_mod;
 
 const CANVAS_WIDTH: i32 = 1000;
 const CANVAS_HEIGHT: i32 = 1000;
-const STEP_DURATION: f64 = 0.2;
-const BOARD_WIDTH: i32 = 20;
-const BOARD_HEIGHT: i32 = 20;
-const BOARD_CENTER: i32 = 10;
-const SPRITE_WIDTH: i32 = 50;
-const SPRITE_HEIGHT: i32 = 50;
+const VERSION: &str = env!("CARGO_PKG_VERSION");
 
-const SNAKE_Z_LAYER: f32 = 1.0;
-const OTHER_Z_LAYER: f32 = 0.0;
-
-#[derive(Component)]
-struct DebugText {
-    bird_position: String,
+#[derive(States, Debug, Clone, PartialEq, Eq, Hash)]
+enum AppState {
+    MainMenu,
+    InGame,
+    Paused,
+    Dead,
 }
-
-#[derive(Clone, PartialEq, Debug)]
-struct Position {
-    x: i32,
-    y: i32,
-}
-
-#[derive(Component)]
-struct Bird {
-    position: Position,
-    updated: bool,
-}
-
-#[derive(PartialEq)]
-enum Direction {
-    Up,
-    Down,
-    Left,
-    Right,
-}
-
-#[derive(Component)]
-struct SnakeHead {
-    position: Position,
-    direction: Direction,
-    last_position: Position,
-    segment_len: usize,
-    just_eating: bool,
-    updated: bool,
-    dead: bool,
-}
-
-// one component can spawn many entities
-#[derive(Component)]
-struct SnakeSegment {
-    position: Position,
-    index: usize,
-    updated: bool,
-}
-
-// Marker struct to help identify the color-changing Text component
-#[derive(Component)]
-struct AnimatedText;
 
 #[wasm_bindgen]
 pub fn main() {
@@ -209,118 +157,40 @@ pub fn main() {
 
     // bevy initiation
     let mut app = bevy::app::App::new();
-    app.add_plugins(DefaultPlugins.set(WindowPlugin {
-        primary_window: Some(Window {
-            // provide the ID selector string here
-            canvas: Some("#snake_bevy_canvas".into()),
-            resolution: bevy::window::WindowResolution::new(CANVAS_WIDTH as f32, CANVAS_HEIGHT as f32).with_scale_factor_override(1.0),
-            resizable: false,
-            // ... any other window properties ...
-            ..default()
-        }),
-        ..default()
-    }));
-
-    // Set the Fixed Timestep interval for game logic to 0.x seconds
-    app.insert_resource(Time::<Fixed>::from_seconds(STEP_DURATION));
-    // only once on startup
-    app.add_systems(Startup, startup);
-    // game logic is sequential
-    app.add_systems(
-        FixedUpdate,
-        (snake_head_move, eat_bird.after(snake_head_move), move_segments.after(eat_bird), check_dead.after(move_segments)),
+    app.add_plugins(
+        DefaultPlugins
+            .set(WindowPlugin {
+                primary_window: Some(Window {
+                    // provide the ID selector string here
+                    canvas: Some("#snake_bevy_canvas".into()),
+                    resolution: bevy::window::WindowResolution::new(CANVAS_WIDTH as f32, CANVAS_HEIGHT as f32).with_scale_factor_override(1.0),
+                    resizable: false,
+                    // ... any other window properties ...
+                    ..default()
+                }),
+                ..default()
+            })
+            .set(bevy::log::LogPlugin {
+                filter: "info,wgpu_core=error,wgpu_hal=error,bevy_render=error,bevy_ecs=error,bevy_winit=error,bevy_core_pipeline=error,bevy_pbr=error,snake_bevy_wasm=debug".into(),
+                level: bevy::log::Level::DEBUG,
+                custom_layer: |_| None,
+            }),
     );
-    // render frame and react to events
-    app.add_systems(Update, (render_snake_head, render_bird, render_segment, handle_movement_input, render_dead, render_debug_text));
+
+    info!("snake_bevy_wasm {}", VERSION);
+
+    // initial state is MainMenu
+    state_main_menu_mod::add_main_menu_to_app(&mut app);
+
+    // TODO: how to add things to app only when in certain state
+    //state_in_game_mod::add_in_game_to_app(&mut app);
+
     app.run();
 }
 
-// run on startup
-fn startup(mut commands: Commands, mut meshes: ResMut<Assets<Mesh>>, mut materials: ResMut<Assets<ColorMaterial>>) {
-    commands.spawn(Camera2d);
-    // snake head
-    let snake_head_position = Position { x: 10, y: 10 };
-    commands.spawn((
-        Mesh2d(meshes.add(Rectangle::new(50.0, 50.0))),
-        Transform::from_xyz(snake_head_position.to_bevy_x(), snake_head_position.to_bevy_y(), SNAKE_Z_LAYER),
-        MeshMaterial2d(materials.add(Color::hsl(300., 0.95, 0.7))),
-        SnakeHead {
-            position: snake_head_position.clone(),
-            direction: Direction::Down,
-            last_position: snake_head_position,
-            just_eating: false,
-            segment_len: 1,
-            updated: false,
-            dead: false,
-        },
-    ));
-
-    // first and only segment
-    let segment_position = Position { x: 10, y: 9 };
-    commands.spawn((
-        Mesh2d(meshes.add(Rectangle::new(50.0, 50.0))),
-        Transform::from_xyz(segment_position.to_bevy_x(), segment_position.to_bevy_y(), OTHER_Z_LAYER),
-        MeshMaterial2d(materials.add(Color::hsl(250., 0.95, 0.7))),
-        SnakeSegment {
-            position: segment_position,
-            index: 0,
-            updated: false,
-        },
-    ));
-
-    // spawn entity bird
-    let bird_position = Position { x: 9, y: 9 };
-    commands.spawn((
-        Mesh2d(meshes.add(Circle::new(25.0))),
-        MeshMaterial2d(materials.add(Color::hsl(2., 0.95, 0.7))),
-        Transform::from_xyz(bird_position.to_bevy_x(), bird_position.to_bevy_y(), OTHER_Z_LAYER),
-        Bird {
-            position: bird_position.clone(),
-            updated: false,
-        },
-    ));
-
-    // Text with one section
-    commands.spawn((
-        Visibility::Hidden,
-        // Accepts a `String` or any type that converts into a `String`, such as `&str`
-        Text::new("The snake\nis dead!"),
-        TextFont { font_size: 67.0, ..default() },
-        TextShadow::default(),
-        // Set the justification of the Text
-        TextLayout::new_with_justify(JustifyText::Center),
-        // Set the style of the Node itself.
-        Node {
-            position_type: PositionType::Absolute,
-            align_content: AlignContent::Center,
-            justify_content: JustifyContent::Center,
-            ..default()
-        },
-        AnimatedText,
-    ));
-
-    commands.spawn((
-        // Visibility::Hidden,
-        Text::new("Debug text: "),
-        Node {
-            position_type: PositionType::Absolute,
-            bottom: Val::Px(5.0),
-            left: Val::Px(15.0),
-            ..default()
-        },
-        DebugText {
-            bird_position: format!("{:?}", &bird_position),
-        },
-    ));
-}
-
-impl Position {
-    /// transform GameCoordinates to BevyCoordinates
-    pub fn to_bevy_x(&self) -> f32 {
-        self.x as f32 * SPRITE_WIDTH as f32 - (BOARD_CENTER as f32 * SPRITE_WIDTH as f32) + (SPRITE_WIDTH as f32 / 2.)
+/* fn toggle_pause_game(state: Res<State<AppState>>, mut next_state: ResMut<NextState<AppState>>) {
+    match state.get() {
+        AppState::Paused => next_state.set(AppState::InGame),
+        _ => next_state.set(AppState::Paused),
     }
-    /// transform GameCoordinates to BevyCoordinates. Strange because it goes in the opposite direction.
-    pub fn to_bevy_y(&self) -> f32 {
-        -(self.y as f32) * SPRITE_HEIGHT as f32 + (BOARD_CENTER as f32 * SPRITE_HEIGHT as f32) - (SPRITE_HEIGHT as f32 / 2.)
-    }
-}
+} */

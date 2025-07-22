@@ -63,6 +63,8 @@
         "thiserror",
         "Timestep",
         "webassembly",
+        "wgpu",
+        "winit",
         "zcvf",
         "zdravje",
         "zeroize"

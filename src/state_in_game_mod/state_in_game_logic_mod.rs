@@ -3,7 +3,7 @@ use bevy::prelude::*;
 use crate::{BOARD_HEIGHT, BOARD_WIDTH, Bird, DebugText, Direction, OTHER_Z_LAYER, SnakeHead, SnakeSegment};
 
 // fixed time every 0.5 seconds
-pub fn snake_head_move(mut snake_query: Query<&mut SnakeHead>) {
+pub fn move_snake_head(mut snake_query: Query<&mut SnakeHead>) {
     if let Ok(mut snake_head) = snake_query.single_mut() {
         if !snake_head.dead {
             snake_head.last_position = snake_head.position.clone();
