@@ -1,5 +1,7 @@
 // state_in_game_mod.rs
 
+use std::f32::consts::PI;
+
 use bevy::prelude::*;
 
 use crate::{AppState, CANVAS_HEIGHT, CANVAS_WIDTH};
@@ -15,12 +17,16 @@ struct DebugText {
     bird_position: String,
 }
 
+#[derive(Component)]
+struct PointsText {}
+
 #[derive(Clone, PartialEq, Debug)]
 struct Position {
     x: i32,
     y: i32,
 }
 
+// only one bird at any time
 #[derive(Component)]
 struct Bird {
     position: Position,
@@ -35,14 +41,18 @@ enum Direction {
     Right,
 }
 
+// only one snake_head
 #[derive(Component)]
 struct SnakeHead {
     position: Position,
     direction: Direction,
+    rotate: f32,
     last_position: Position,
     segment_len: usize,
     just_eating: bool,
     updated: bool,
+    moves: i32,
+    points: i32,
 }
 
 // one component can spawn many entities
@@ -64,7 +74,8 @@ const BOARD_CENTER: i32 = BOARD_HEIGHT / 2;
 pub const SPRITE_WIDTH: i32 = CANVAS_WIDTH / BOARD_WIDTH;
 pub const SPRITE_HEIGHT: i32 = CANVAS_HEIGHT / BOARD_HEIGHT;
 
-const SNAKE_Z_LAYER: f32 = 1.0;
+const SNAKE_Z_LAYER: f32 = 2.0;
+const BIRD_Z_LAYER: f32 = 1.0;
 const OTHER_Z_LAYER: f32 = 0.0;
 
 pub fn add_in_game_to_app(app: &mut App) {
@@ -93,29 +104,32 @@ pub fn add_in_game_to_app(app: &mut App) {
             render_bird.run_if(in_state(AppState::InGame)),
             render_segment.run_if(in_state(AppState::InGame)),
             handle_movement_input.run_if(in_state(AppState::InGame)),
+            render_points_text.run_if(in_state(AppState::InGame)),
             render_debug_text.run_if(in_state(AppState::InGame)),
         ),
     );
 }
 
 // run on enter in state in_game
-fn on_enter_in_game(mut commands: Commands, mut meshes: ResMut<Assets<Mesh>>, mut materials: ResMut<Assets<ColorMaterial>>) {
+fn on_enter_in_game(mut commands: Commands, mut meshes: ResMut<Assets<Mesh>>, mut materials: ResMut<Assets<ColorMaterial>>, asset_server: Res<AssetServer>) {
     commands.spawn(Camera2d);
     debug!("on_enter_in_game");
     // snake head
     let snake_head_position = Position { x: 10, y: 10 };
     commands.spawn((
         StateScoped(AppState::InGame),
-        Mesh2d(meshes.add(Rectangle::new(SPRITE_WIDTH as f32, SPRITE_HEIGHT as f32))),
+        Sprite::from_image(asset_server.load("snake_head_left.png")),
         Transform::from_xyz(snake_head_position.to_bevy_x(), snake_head_position.to_bevy_y(), SNAKE_Z_LAYER),
-        MeshMaterial2d(materials.add(Color::hsl(300., 0.95, 0.7))),
         SnakeHead {
             position: snake_head_position.clone(),
             direction: Direction::Down,
+            rotate: PI * 0.5,
             last_position: snake_head_position,
             just_eating: false,
             segment_len: 1,
             updated: false,
+            moves: 0,
+            points: 0,
         },
     ));
 
@@ -136,11 +150,9 @@ fn on_enter_in_game(mut commands: Commands, mut meshes: ResMut<Assets<Mesh>>, mu
     // spawn entity bird
     let bird_position = Position { x: 9, y: 9 };
     commands.spawn((
-        Visibility::Hidden,
         StateScoped(AppState::InGame),
-        Mesh2d(meshes.add(Circle::new(SPRITE_HEIGHT as f32 / 2.))),
-        MeshMaterial2d(materials.add(Color::hsl(2., 0.95, 0.7))),
-        Transform::from_xyz(bird_position.to_bevy_x(), bird_position.to_bevy_y(), OTHER_Z_LAYER),
+        Sprite::from_image(asset_server.load("bird.png")),
+        Transform::from_xyz(bird_position.to_bevy_x(), bird_position.to_bevy_y(), BIRD_Z_LAYER),
         Bird {
             position: bird_position.clone(),
             updated: false,
@@ -149,12 +161,25 @@ fn on_enter_in_game(mut commands: Commands, mut meshes: ResMut<Assets<Mesh>>, mu
 
     commands.spawn((
         StateScoped(AppState::InGame),
-        // Visibility::Hidden,
-        Text::new("Debug text: "),
+        Text::new(""),
         Node {
             position_type: PositionType::Absolute,
             bottom: Val::Px(5.0),
             left: Val::Px(15.0),
+            ..default()
+        },
+        PointsText {},
+    ));
+
+    // DebugText
+    commands.spawn((
+        StateScoped(AppState::InGame),
+        Visibility::Hidden,
+        Text::new("Debug text: "),
+        Node {
+            position_type: PositionType::Absolute,
+            bottom: Val::Px(25.0),
+            left: Val::Px(300.0),
             ..default()
         },
         DebugText {

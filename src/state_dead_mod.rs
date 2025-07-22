@@ -17,34 +17,32 @@ pub fn on_enter_dead(mut commands: Commands) {
     commands.spawn(Camera2d);
     debug!("on_enter_dead");
     // Text with one section
-    commands
-        .spawn((
-            StateScoped(AppState::Dead),
-            Node {
-                // Use the CSS Grid algorithm for laying out this node
-                display: Display::Grid,
-                // Make node fill the entirety of its parent (in this case the window)
-                width: Val::Percent(100.0),
-                height: Val::Percent(100.0),
-                // Set the grid to have 3 rows with sizes [20px, auto, 20px]
-                grid_template_rows: vec![GridTrack::vw(33.), GridTrack::vw(33.), GridTrack::vw(33.)],
-                ..default()
-            },
-        ))
-        .with_children(|builder| {
+    let mut grid = commands.spawn((
+        StateScoped(AppState::Dead),
+        Node {
+            // Use the CSS Grid algorithm for laying out this node
+            display: Display::Grid,
+            // Make node fill the entirety of its parent (in this case the window)
+            width: Val::Percent(100.0),
+            height: Val::Percent(100.0),
+            // Set the grid to have 3 rows with sizes [20px, auto, 20px]
+            grid_template_rows: vec![GridTrack::vw(33.), GridTrack::vw(33.), GridTrack::vw(33.)],
+            ..default()
+        },
+    ));
+    {
+        grid.with_children(|grid| {
             // Header
-            builder
-                .spawn((Node {
-                    flex_direction: FlexDirection::Column,
-                    align_items: AlignItems::Center,
-                    justify_content: JustifyContent::Center,
-                    //width: Val::Percent(100.),
-                    //height: Val::Percent(100.),
-                    ..default()
-                },))
-                .with_children(|builder| {
+            let mut header_box = grid.spawn((Node {
+                flex_direction: FlexDirection::Column,
+                align_items: AlignItems::Center,
+                justify_content: JustifyContent::Center,
+                ..default()
+            },));
+            {
+                header_box.with_children(|header_box| {
                     // Header
-                    builder.spawn((
+                    header_box.spawn((
                         Text::new("bestia.dev/snake_bevy_wasm"),
                         TextFont {
                             font_size: SPRITE_HEIGHT as f32,
@@ -54,19 +52,18 @@ pub fn on_enter_dead(mut commands: Commands) {
                         TextColor::from(GREEN),
                     ));
                 });
+            }
             // middle
-            builder
-                .spawn((Node {
-                    flex_direction: FlexDirection::Column,
-                    align_items: AlignItems::Center,
-                    justify_content: JustifyContent::Center,
-                    //width: Val::Percent(100.),
-                    //height: Val::Percent(100.),
-                    ..default()
-                },))
-                .with_children(|builder| {
+            let mut middle_box = grid.spawn((Node {
+                flex_direction: FlexDirection::Column,
+                align_items: AlignItems::Center,
+                justify_content: JustifyContent::Center,
+                ..default()
+            },));
+            {
+                middle_box.with_children(|middle_box| {
                     // middle
-                    builder.spawn((
+                    middle_box.spawn((
                         Text::new("Snake is dead."),
                         TextFont {
                             font_size: SPRITE_HEIGHT as f32,
@@ -76,19 +73,18 @@ pub fn on_enter_dead(mut commands: Commands) {
                         TextColor::from(YELLOW),
                     ));
                 });
+            }
             // footer
-            builder
-                .spawn((Node {
-                    flex_direction: FlexDirection::Column,
-                    align_items: AlignItems::Center,
-                    justify_content: JustifyContent::Center,
-                    //width: Val::Percent(100.),
-                    //height: Val::Percent(100.),
-                    ..default()
-                },))
-                .with_children(|builder| {
+            let mut footer_box = grid.spawn((Node {
+                flex_direction: FlexDirection::Column,
+                align_items: AlignItems::Center,
+                justify_content: JustifyContent::Center,
+                ..default()
+            },));
+            {
+                footer_box.with_children(|footer_box| {
                     // footer
-                    builder.spawn((
+                    footer_box.spawn((
                         Text::new("Press N to start"),
                         TextFont {
                             font_size: SPRITE_HEIGHT as f32,
@@ -98,7 +94,9 @@ pub fn on_enter_dead(mut commands: Commands) {
                         TextColor::from(RED),
                     ));
                 });
+            }
         });
+    }
 }
 
 pub fn handle_dead_ui_input(keys: Res<ButtonInput<KeyCode>>, mut next_state: ResMut<NextState<AppState>>) {

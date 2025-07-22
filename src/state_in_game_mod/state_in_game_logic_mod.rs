@@ -16,6 +16,7 @@ pub fn move_snake_head(mut snake_query: Query<&mut SnakeHead>) {
             Direction::Right => snake_head.position.x += 1,
         }
         snake_head.updated = true;
+        snake_head.moves += 1;
     }
 }
 
@@ -39,6 +40,7 @@ pub fn eat_bird(_time: Res<Time>, mut snake_query: Query<&mut SnakeHead>, mut bi
         if let Ok(mut bird) = bird_query.single_mut() {
             if snake_head.position == bird.position {
                 snake_head.just_eating = true;
+                snake_head.points += 1;
                 // food: point, longer body
                 // new random position
                 bird.position.x = ops::floor(js_sys::Math::random() as f32 * BOARD_WIDTH as f32) as i32;

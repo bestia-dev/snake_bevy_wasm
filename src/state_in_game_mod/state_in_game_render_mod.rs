@@ -1,6 +1,6 @@
 use bevy::prelude::*;
 
-use crate::state_in_game_mod::{Bird, DebugText, SnakeHead, SnakeSegment};
+use crate::state_in_game_mod::{Bird, DebugText, PointsText, SnakeHead, SnakeSegment};
 
 pub fn render_snake_head(mut snake_head_query: Query<(&mut SnakeHead, &mut Transform)>) {
     if let Ok((mut snake_head, mut transform)) = snake_head_query.single_mut() {
@@ -8,6 +8,8 @@ pub fn render_snake_head(mut snake_head_query: Query<(&mut SnakeHead, &mut Trans
             transform.translation.x = snake_head.position.to_bevy_x();
             transform.translation.y = snake_head.position.to_bevy_y();
 
+            transform.rotate_z(snake_head.rotate);
+            snake_head.rotate = 0.;
             snake_head.updated = false;
         }
     }
@@ -37,5 +39,13 @@ pub fn render_segment(mut queried_entities: Query<(&mut SnakeSegment, &mut Trans
 pub fn render_debug_text(mut debug_text_query: Query<(&mut DebugText, &mut Text)>) {
     if let Ok((debug_text, mut text)) = debug_text_query.single_mut() {
         *text = Text::new(&debug_text.bird_position);
+    }
+}
+
+pub fn render_points_text(snake_head_query: Query<&SnakeHead>, mut debug_text_query: Query<(&mut PointsText, &mut Text)>) {
+    if let Ok(snake_head) = snake_head_query.single() {
+        if let Ok((_points_text, mut text)) = debug_text_query.single_mut() {
+            *text = Text::new(format!("Moves:{} Points:{}", snake_head.moves, snake_head.points));
+        }
     }
 }

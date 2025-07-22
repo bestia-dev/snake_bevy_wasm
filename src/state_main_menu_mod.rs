@@ -2,8 +2,8 @@
 
 use bevy::prelude::*;
 
-use crate::AppState;
 use crate::state_in_game_mod::SPRITE_HEIGHT;
+use crate::{AppState, VERSION};
 use bevy::color::palettes::css::{GREEN, RED, YELLOW};
 
 pub fn add_main_menu_to_app(app: &mut App) {
@@ -16,34 +16,33 @@ pub fn add_main_menu_to_app(app: &mut App) {
 pub fn on_enter_main_menu(mut commands: Commands) {
     commands.spawn(Camera2d);
     debug!("on_enter_main_menu");
-    commands
-        .spawn((
-            StateScoped(AppState::MainMenu),
-            Node {
-                // Use the CSS Grid algorithm for laying out this node
-                display: Display::Grid,
-                // Make node fill the entirety of its parent (in this case the window)
-                width: Val::Percent(100.0),
-                height: Val::Percent(100.0),
-                // Set the grid to have 3 rows with sizes [20px, auto, 20px]
-                grid_template_rows: vec![GridTrack::vw(33.), GridTrack::vw(33.), GridTrack::vw(33.)],
-                ..default()
-            },
-        ))
-        .with_children(|builder| {
+    // Text with one section
+    let mut grid = commands.spawn((
+        StateScoped(AppState::MainMenu),
+        Node {
+            // Use the CSS Grid algorithm for laying out this node
+            display: Display::Grid,
+            // Make node fill the entirety of its parent (in this case the window)
+            width: Val::Percent(100.0),
+            height: Val::Percent(100.0),
+            // Set the grid to have 3 rows with sizes [20px, auto, 20px]
+            grid_template_rows: vec![GridTrack::vw(33.), GridTrack::vw(33.), GridTrack::vw(33.)],
+            ..default()
+        },
+    ));
+    {
+        grid.with_children(|grid| {
             // Header
-            builder
-                .spawn((Node {
-                    flex_direction: FlexDirection::Column,
-                    align_items: AlignItems::Center,
-                    justify_content: JustifyContent::Center,
-                    //width: Val::Percent(100.),
-                    //height: Val::Percent(100.),
-                    ..default()
-                },))
-                .with_children(|builder| {
+            let mut header_box = grid.spawn((Node {
+                flex_direction: FlexDirection::Column,
+                align_items: AlignItems::Center,
+                justify_content: JustifyContent::Center,
+                ..default()
+            },));
+            {
+                header_box.with_children(|header_box| {
                     // Header
-                    builder.spawn((
+                    header_box.spawn((
                         Text::new("bestia.dev/snake_bevy_wasm"),
                         TextFont {
                             font_size: SPRITE_HEIGHT as f32,
@@ -53,20 +52,19 @@ pub fn on_enter_main_menu(mut commands: Commands) {
                         TextColor::from(GREEN),
                     ));
                 });
+            }
             // middle
-            builder
-                .spawn((Node {
-                    flex_direction: FlexDirection::Column,
-                    align_items: AlignItems::Center,
-                    justify_content: JustifyContent::Center,
-                    //width: Val::Percent(100.),
-                    //height: Val::Percent(100.),
-                    ..default()
-                },))
-                .with_children(|builder| {
+            let mut middle_box = grid.spawn((Node {
+                flex_direction: FlexDirection::Column,
+                align_items: AlignItems::Center,
+                justify_content: JustifyContent::Center,
+                ..default()
+            },));
+            {
+                middle_box.with_children(|middle_box| {
                     // middle
-                    builder.spawn((
-                        Text::new("Bestia.dev tutorial\nRust+Bevy+Wasm"),
+                    middle_box.spawn((
+                        Text::new(format!("Bestia.dev tutorial\nRust+Bevy+Wasm v{VERSION}")),
                         TextFont {
                             font_size: SPRITE_HEIGHT as f32,
                             ..default()
@@ -75,19 +73,18 @@ pub fn on_enter_main_menu(mut commands: Commands) {
                         TextColor::from(YELLOW),
                     ));
                 });
+            }
             // footer
-            builder
-                .spawn((Node {
-                    flex_direction: FlexDirection::Column,
-                    align_items: AlignItems::Center,
-                    justify_content: JustifyContent::Center,
-                    //width: Val::Percent(100.),
-                    //height: Val::Percent(100.),
-                    ..default()
-                },))
-                .with_children(|builder| {
+            let mut footer_box = grid.spawn((Node {
+                flex_direction: FlexDirection::Column,
+                align_items: AlignItems::Center,
+                justify_content: JustifyContent::Center,
+                ..default()
+            },));
+            {
+                footer_box.with_children(|footer_box| {
                     // footer
-                    builder.spawn((
+                    footer_box.spawn((
                         Text::new("Press N to start"),
                         TextFont {
                             font_size: SPRITE_HEIGHT as f32,
@@ -97,7 +94,9 @@ pub fn on_enter_main_menu(mut commands: Commands) {
                         TextColor::from(RED),
                     ));
                 });
+            }
         });
+    }
 }
 
 pub fn handle_main_menu_ui_input(keys: Res<ButtonInput<KeyCode>>, mut next_state: ResMut<NextState<AppState>>) {
