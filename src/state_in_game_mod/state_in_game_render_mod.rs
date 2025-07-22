@@ -1,6 +1,6 @@
 use bevy::prelude::*;
 
-use crate::{AnimatedText, Bird, DebugText, SnakeHead, SnakeSegment};
+use crate::state_in_game_mod::{AnimatedText, Bird, DebugText, SnakeHead, SnakeSegment};
 
 pub fn render_snake_head(mut snake_head_query: Query<(&mut SnakeHead, &mut Transform)>) {
     if let Ok((mut snake_head, mut transform)) = snake_head_query.single_mut() {

@@ -1,6 +1,6 @@
 use bevy::prelude::*;
 
-use crate::{BOARD_HEIGHT, BOARD_WIDTH, Bird, DebugText, Direction, OTHER_Z_LAYER, SnakeHead, SnakeSegment};
+use crate::state_in_game_mod::{BOARD_HEIGHT, BOARD_WIDTH, Bird, DebugText, Direction, OTHER_Z_LAYER, SnakeHead, SnakeSegment};
 
 // fixed time every 0.5 seconds
 pub fn move_snake_head(mut snake_query: Query<&mut SnakeHead>) {

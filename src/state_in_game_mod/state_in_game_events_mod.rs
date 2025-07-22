@@ -1,5 +1,6 @@
-use crate::{Direction, SnakeHead};
 use bevy::prelude::*;
+
+use crate::state_in_game_mod::{Direction, SnakeHead};
 
 pub fn handle_movement_input(keys: Res<ButtonInput<KeyCode>>, mut queried_entities: Query<&mut SnakeHead>) {
     if let Ok(mut snake_head) = queried_entities.single_mut() {

@@ -1,3 +1,5 @@
+// state_in_game_mod.rs
+
 use bevy::prelude::*;
 
 use crate::AppState;
@@ -73,19 +75,38 @@ pub fn add_in_game_to_app(app: &mut App) {
     // Set the Fixed Timestep interval for game logic to 0.x seconds
     app.insert_resource(Time::<Fixed>::from_seconds(STEP_DURATION));
 
-app.add_systems(OnEnter(AppState::InGame), startup_in_game);
-    // game logic is sequential
-    app.add_systems(FixedUpdate, (move_snake_head, eat_bird, move_segments, check_dead).chain());
-    // render frame and react to events
-    app.add_systems(Update, (render_snake_head, render_bird, render_segment, handle_movement_input, render_dead, render_debug_text));
+    app.add_systems(OnEnter(AppState::InGame), on_enter_in_game);
 
-    app.configure_sets(Update, (MainMenuSet.run_if(in_state(AppState::MainMenu)),));
-    // now we can easily add our different systems
-    app.add_systems(Update, handle_main_menu_ui_input.in_set(MainMenuSet));
+    // MUST add all systems to app with run_if in_state InGame
+    app.add_systems(
+        FixedUpdate,
+        (
+            move_snake_head.run_if(in_state(AppState::InGame)),
+            eat_bird.run_if(in_state(AppState::InGame)),
+            move_segments.run_if(in_state(AppState::InGame)),
+            check_dead.run_if(in_state(AppState::InGame)),
+        )
+            // game logic is sequential
+            .chain(),
+    );
+    // render frame and react to events
+    app.add_systems(
+        Update,
+        (
+            render_snake_head.run_if(in_state(AppState::InGame)),
+            render_bird.run_if(in_state(AppState::InGame)),
+            render_segment.run_if(in_state(AppState::InGame)),
+            handle_movement_input.run_if(in_state(AppState::InGame)),
+            render_dead.run_if(in_state(AppState::InGame)),
+            render_debug_text.run_if(in_state(AppState::InGame)),
+        ),
+    );
 }
 
-// run on startup
-fn startup_in_game(mut commands: Commands, mut meshes: ResMut<Assets<Mesh>>, mut materials: ResMut<Assets<ColorMaterial>>) {
+// run on enter in state in_game
+fn on_enter_in_game(mut commands: Commands, mut meshes: ResMut<Assets<Mesh>>, mut materials: ResMut<Assets<ColorMaterial>>) {
+    commands.spawn(Camera2d);
+    debug!("on_enter_in_game");
     // snake head
     let snake_head_position = Position { x: 10, y: 10 };
     commands.spawn((

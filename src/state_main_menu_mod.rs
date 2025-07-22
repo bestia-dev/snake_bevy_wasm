@@ -9,15 +9,14 @@ pub fn add_main_menu_to_app(app: &mut App) {
     app.insert_state(AppState::MainMenu);
 
     app.add_systems(OnEnter(AppState::MainMenu), on_enter_main_menu);
+    app.add_systems(OnExit(AppState::MainMenu), on_exit_main_menu);
 
-    //app.configure_sets(Update, (MainMenuSet.run_if(in_state(AppState::MainMenu)),));
-    // now we can easily add our different systems
+    // MUST add all systems to app with run_if in_state MainMenu
     app.add_systems(Update, handle_main_menu_ui_input.run_if(in_state(AppState::MainMenu)));
 }
 
 pub fn on_enter_main_menu(mut commands: Commands) {
     commands.spawn(Camera2d);
-    // TODO: does this run on startup?
     debug!("on_enter_main_menu");
     // Text with one section
     commands.spawn((
@@ -35,6 +34,14 @@ pub fn on_enter_main_menu(mut commands: Commands) {
             ..default()
         },
     ));
+}
+
+pub fn on_exit_main_menu(mut commands: Commands, query: Query<Entity, Without<Window>>) {
+    // TODO: despawn only entities that I created?!?
+    // despawn all entities, and avoid despawning the window
+    for item in query {
+        //commands.entity(item).despawn();
+    }
 }
 
 pub fn handle_main_menu_ui_input(keys: Res<ButtonInput<KeyCode>>, mut next_state: ResMut<NextState<AppState>>) {

@@ -126,8 +126,8 @@ use wasm_bindgen::prelude::*;
 
 mod web_sys_mod;
 use web_sys_mod as wsm;
+mod state_in_game_mod;
 mod state_main_menu_mod;
-//mod state_in_game_mod;
 
 const CANVAS_WIDTH: i32 = 1000;
 const CANVAS_HEIGHT: i32 = 1000;
@@ -182,8 +182,7 @@ pub fn main() {
     // initial state is MainMenu
     state_main_menu_mod::add_main_menu_to_app(&mut app);
 
-    // TODO: how to add things to app only when in certain state
-    //state_in_game_mod::add_in_game_to_app(&mut app);
+    state_in_game_mod::add_in_game_to_app(&mut app);
 
     app.run();
 }
