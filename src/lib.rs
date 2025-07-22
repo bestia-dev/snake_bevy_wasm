@@ -126,11 +126,12 @@ use wasm_bindgen::prelude::*;
 
 mod web_sys_mod;
 use web_sys_mod as wsm;
+mod state_dead_mod;
 mod state_in_game_mod;
 mod state_main_menu_mod;
 
-const CANVAS_WIDTH: i32 = 1000;
-const CANVAS_HEIGHT: i32 = 1000;
+const CANVAS_WIDTH: i32 = 512;
+const CANVAS_HEIGHT: i32 = 512;
 const VERSION: &str = env!("CARGO_PKG_VERSION");
 
 #[derive(Clone, Copy, PartialEq, Eq, Hash, Debug, States)]
@@ -138,7 +139,6 @@ const VERSION: &str = env!("CARGO_PKG_VERSION");
 enum AppState {
     MainMenu,
     InGame,
-    Paused,
     Dead,
 }
 
@@ -164,7 +164,7 @@ pub fn main() {
                 primary_window: Some(Window {
                     // provide the ID selector string here
                     canvas: Some("#snake_bevy_canvas".into()),
-                    resolution: bevy::window::WindowResolution::new(CANVAS_WIDTH as f32, CANVAS_HEIGHT as f32).with_scale_factor_override(1.0),
+                    resolution: bevy::window::WindowResolution::new(CANVAS_WIDTH as f32, CANVAS_HEIGHT as f32), //.with_scale_factor_override(1.0),
                     resizable: false,
                     // ... any other window properties ...
                     ..default()
@@ -182,17 +182,12 @@ pub fn main() {
 
     // initial state is MainMenu
     app.insert_state(AppState::MainMenu);
-    
+
     state_main_menu_mod::add_main_menu_to_app(&mut app);
 
     state_in_game_mod::add_in_game_to_app(&mut app);
 
+    state_dead_mod::add_dead_to_app(&mut app);
+
     app.run();
 }
-
-/* fn toggle_pause_game(state: Res<State<AppState>>, mut next_state: ResMut<NextState<AppState>>) {
-    match state.get() {
-        AppState::Paused => next_state.set(AppState::InGame),
-        _ => next_state.set(AppState::Paused),
-    }
-} */

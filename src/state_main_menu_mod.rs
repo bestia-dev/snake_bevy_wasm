@@ -3,6 +3,8 @@
 use bevy::prelude::*;
 
 use crate::AppState;
+use crate::state_in_game_mod::SPRITE_HEIGHT;
+use bevy::color::palettes::css::{GREEN, RED, YELLOW};
 
 pub fn add_main_menu_to_app(app: &mut App) {
     app.add_systems(OnEnter(AppState::MainMenu), on_enter_main_menu);
@@ -14,12 +16,92 @@ pub fn add_main_menu_to_app(app: &mut App) {
 pub fn on_enter_main_menu(mut commands: Commands) {
     commands.spawn(Camera2d);
     debug!("on_enter_main_menu");
-    // Text with one section
+    commands
+        .spawn((
+            StateScoped(AppState::MainMenu),
+            Node {
+                // Use the CSS Grid algorithm for laying out this node
+                display: Display::Grid,
+                // Make node fill the entirety of its parent (in this case the window)
+                width: Val::Percent(100.0),
+                height: Val::Percent(100.0),
+                // Set the grid to have 3 rows with sizes [20px, auto, 20px]
+                grid_template_rows: vec![GridTrack::vw(33.), GridTrack::vw(33.), GridTrack::vw(33.)],
+                ..default()
+            },
+        ))
+        .with_children(|builder| {
+            // Header
+            builder
+                .spawn((Node {
+                    flex_direction: FlexDirection::Column,
+                    align_items: AlignItems::Center,
+                    justify_content: JustifyContent::Center,
+                    //width: Val::Percent(100.),
+                    //height: Val::Percent(100.),
+                    ..default()
+                },))
+                .with_children(|builder| {
+                    // Header
+                    builder.spawn((
+                        Text::new("Rust Wasm Bevy"),
+                        TextFont {
+                            font_size: SPRITE_HEIGHT as f32,
+                            ..default()
+                        },
+                        TextColor::from(YELLOW),
+                    ));
+                });
+            // middle
+            builder
+                .spawn((Node {
+                    flex_direction: FlexDirection::Column,
+                    align_items: AlignItems::Center,
+                    justify_content: JustifyContent::Center,
+                    //width: Val::Percent(100.),
+                    //height: Val::Percent(100.),
+                    ..default()
+                },))
+                .with_children(|builder| {
+                    // middle
+                    builder.spawn((
+                        Text::new("Snake Bevy Wasm \n game \n press N to start"),
+                        TextFont {
+                            font_size: SPRITE_HEIGHT as f32,
+                            ..default()
+                        },
+                        TextColor::from(GREEN),
+                    ));
+                });
+            // footer
+            builder
+                .spawn((Node {
+                    flex_direction: FlexDirection::Column,
+                    align_items: AlignItems::Center,
+                    justify_content: JustifyContent::Center,
+                    //width: Val::Percent(100.),
+                    //height: Val::Percent(100.),
+                    ..default()
+                },))
+                .with_children(|builder| {
+                    // footer
+                    builder.spawn((
+                        Text::new("bestia.dev tutorial"),
+                        TextFont {
+                            font_size: SPRITE_HEIGHT as f32,
+                            ..default()
+                        },
+                        TextColor::from(RED),
+                    ));
+                });
+        });
+
+    /*     // Text with one section
     commands.spawn((
         StateScoped(AppState::MainMenu),
         // Accepts a `String` or any type that converts into a `String`, such as `&str`
-        Text::new("Snake Bevy Wasm \n game \n press N to start"),
-        TextFont { font_size: 67.0, ..default() },
+
+        TextFont { font_size: SPRITE_HEIGHT as f32, ..default() },
         TextShadow::default(),
         // Set the justification of the Text
         TextLayout::new_with_justify(JustifyText::Center),
@@ -30,7 +112,7 @@ pub fn on_enter_main_menu(mut commands: Commands) {
             justify_content: JustifyContent::Center,
             ..default()
         },
-    ));
+    )); */
 }
 
 pub fn handle_main_menu_ui_input(keys: Res<ButtonInput<KeyCode>>, mut next_state: ResMut<NextState<AppState>>) {

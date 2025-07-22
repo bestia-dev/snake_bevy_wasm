@@ -1,8 +1,11 @@
 use bevy::prelude::*;
 
-use crate::state_in_game_mod::{Direction, SnakeHead};
+use crate::{
+    AppState,
+    state_in_game_mod::{Direction, SnakeHead},
+};
 
-pub fn handle_movement_input(keys: Res<ButtonInput<KeyCode>>, mut queried_entities: Query<&mut SnakeHead>) {
+pub fn handle_movement_input(keys: Res<ButtonInput<KeyCode>>, mut queried_entities: Query<&mut SnakeHead>, mut next_state: ResMut<NextState<AppState>>) {
     if let Ok(mut snake_head) = queried_entities.single_mut() {
         if keys.pressed(KeyCode::ArrowUp) && snake_head.direction != Direction::Down {
             snake_head.direction = Direction::Up;
@@ -12,6 +15,9 @@ pub fn handle_movement_input(keys: Res<ButtonInput<KeyCode>>, mut queried_entiti
             snake_head.direction = Direction::Left;
         } else if keys.pressed(KeyCode::ArrowRight) && snake_head.direction != Direction::Left {
             snake_head.direction = Direction::Right;
+        } else if keys.pressed(KeyCode::KeyX) {
+            debug!("keys.pressed X");
+            next_state.set(AppState::MainMenu);
         }
     }
 }

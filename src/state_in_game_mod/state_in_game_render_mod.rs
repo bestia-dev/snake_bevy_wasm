@@ -1,6 +1,6 @@
 use bevy::prelude::*;
 
-use crate::state_in_game_mod::{AnimatedText, Bird, DebugText, SnakeHead, SnakeSegment};
+use crate::state_in_game_mod::{Bird, DebugText, SnakeHead, SnakeSegment};
 
 pub fn render_snake_head(mut snake_head_query: Query<(&mut SnakeHead, &mut Transform)>) {
     if let Ok((mut snake_head, mut transform)) = snake_head_query.single_mut() {
@@ -30,18 +30,6 @@ pub fn render_segment(mut queried_entities: Query<(&mut SnakeSegment, &mut Trans
             transform.translation.y = segment.position.to_bevy_y();
 
             segment.updated = false;
-        }
-    }
-}
-
-pub fn render_dead(mut snake_head_query: Query<&mut SnakeHead>, mut text_entities: Query<(&mut AnimatedText, &mut Visibility)>) {
-    if let Ok(snake_head) = snake_head_query.single_mut() {
-        if let Ok((_animated_text, mut visibility)) = text_entities.single_mut() {
-            if snake_head.dead {
-                *visibility = Visibility::Visible;
-            } else {
-                *visibility = Visibility::Hidden;
-            }
         }
     }
 }

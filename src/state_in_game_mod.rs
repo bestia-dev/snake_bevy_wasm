@@ -2,7 +2,7 @@
 
 use bevy::prelude::*;
 
-use crate::AppState;
+use crate::{AppState, CANVAS_HEIGHT, CANVAS_WIDTH};
 mod state_in_game_events_mod;
 use state_in_game_events_mod::*;
 mod state_in_game_logic_mod;
@@ -43,7 +43,6 @@ struct SnakeHead {
     segment_len: usize,
     just_eating: bool,
     updated: bool,
-    dead: bool,
 }
 
 // one component can spawn many entities
@@ -61,9 +60,9 @@ struct AnimatedText;
 const STEP_DURATION: f64 = 0.2;
 const BOARD_WIDTH: i32 = 20;
 const BOARD_HEIGHT: i32 = 20;
-const BOARD_CENTER: i32 = 10;
-const SPRITE_WIDTH: i32 = 50;
-const SPRITE_HEIGHT: i32 = 50;
+const BOARD_CENTER: i32 = BOARD_HEIGHT / 2;
+pub const SPRITE_WIDTH: i32 = CANVAS_WIDTH / BOARD_WIDTH;
+pub const SPRITE_HEIGHT: i32 = CANVAS_HEIGHT / BOARD_HEIGHT;
 
 const SNAKE_Z_LAYER: f32 = 1.0;
 const OTHER_Z_LAYER: f32 = 0.0;
@@ -94,7 +93,6 @@ pub fn add_in_game_to_app(app: &mut App) {
             render_bird.run_if(in_state(AppState::InGame)),
             render_segment.run_if(in_state(AppState::InGame)),
             handle_movement_input.run_if(in_state(AppState::InGame)),
-            render_dead.run_if(in_state(AppState::InGame)),
             render_debug_text.run_if(in_state(AppState::InGame)),
         ),
     );
@@ -108,7 +106,7 @@ fn on_enter_in_game(mut commands: Commands, mut meshes: ResMut<Assets<Mesh>>, mu
     let snake_head_position = Position { x: 10, y: 10 };
     commands.spawn((
         StateScoped(AppState::InGame),
-        Mesh2d(meshes.add(Rectangle::new(50.0, 50.0))),
+        Mesh2d(meshes.add(Rectangle::new(SPRITE_WIDTH as f32, SPRITE_HEIGHT as f32))),
         Transform::from_xyz(snake_head_position.to_bevy_x(), snake_head_position.to_bevy_y(), SNAKE_Z_LAYER),
         MeshMaterial2d(materials.add(Color::hsl(300., 0.95, 0.7))),
         SnakeHead {
@@ -118,7 +116,6 @@ fn on_enter_in_game(mut commands: Commands, mut meshes: ResMut<Assets<Mesh>>, mu
             just_eating: false,
             segment_len: 1,
             updated: false,
-            dead: false,
         },
     ));
 
@@ -126,7 +123,7 @@ fn on_enter_in_game(mut commands: Commands, mut meshes: ResMut<Assets<Mesh>>, mu
     let segment_position = Position { x: 10, y: 9 };
     commands.spawn((
         StateScoped(AppState::InGame),
-        Mesh2d(meshes.add(Rectangle::new(50.0, 50.0))),
+        Mesh2d(meshes.add(Rectangle::new(SPRITE_WIDTH as f32, SPRITE_HEIGHT as f32))),
         Transform::from_xyz(segment_position.to_bevy_x(), segment_position.to_bevy_y(), OTHER_Z_LAYER),
         MeshMaterial2d(materials.add(Color::hsl(250., 0.95, 0.7))),
         SnakeSegment {
@@ -140,33 +137,13 @@ fn on_enter_in_game(mut commands: Commands, mut meshes: ResMut<Assets<Mesh>>, mu
     let bird_position = Position { x: 9, y: 9 };
     commands.spawn((
         StateScoped(AppState::InGame),
-        Mesh2d(meshes.add(Circle::new(25.0))),
+        Mesh2d(meshes.add(Circle::new(SPRITE_HEIGHT as f32 / 2.))),
         MeshMaterial2d(materials.add(Color::hsl(2., 0.95, 0.7))),
         Transform::from_xyz(bird_position.to_bevy_x(), bird_position.to_bevy_y(), OTHER_Z_LAYER),
         Bird {
             position: bird_position.clone(),
             updated: false,
         },
-    ));
-
-    // Text with one section
-    commands.spawn((
-        StateScoped(AppState::InGame),
-        Visibility::Hidden,
-        // Accepts a `String` or any type that converts into a `String`, such as `&str`
-        Text::new("The snake\nis dead!"),
-        TextFont { font_size: 67.0, ..default() },
-        TextShadow::default(),
-        // Set the justification of the Text
-        TextLayout::new_with_justify(JustifyText::Center),
-        // Set the style of the Node itself.
-        Node {
-            position_type: PositionType::Absolute,
-            align_content: AlignContent::Center,
-            justify_content: JustifyContent::Center,
-            ..default()
-        },
-        AnimatedText,
     ));
 
     commands.spawn((

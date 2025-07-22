@@ -48,8 +48,7 @@ Read the releases changelog in a separate md file:
 ## TODO
 
 Some kind of points.  
-Start, pause.  
-Sprite  
+Sprites  
 And code happily ever after...
 
 ## Open-source and free as a beer
