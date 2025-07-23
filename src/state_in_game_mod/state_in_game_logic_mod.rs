@@ -9,6 +9,7 @@ use crate::{
 pub fn move_snake_head(mut snake_query: Query<&mut SnakeHead>) {
     if let Ok(mut snake_head) = snake_query.single_mut() {
         snake_head.last_position = snake_head.position.clone();
+
         match &snake_head.direction {
             Direction::Up => snake_head.position.y -= 1,
             Direction::Down => snake_head.position.y += 1,
@@ -66,11 +67,21 @@ pub fn move_segments(
         // Sort according to `usize index`.
         let sorted_snake_segments = segment_query.iter_mut().sort_by::<&SnakeSegment>(|value_1, value_2| value_1.index.cmp(&value_2.index));
         //move position from segment to segment
-        let mut last_position = snake_head.last_position.clone();
+        let mut position = snake_head.last_position.clone();
+        let mut direction = snake_head.last_direction.clone();
+        // dummy direction will be overwritten
+        let mut last_direction = Direction::Down;
+        let mut last_position;
         for mut snake_segment in sorted_snake_segments {
-            let prev_pos = snake_segment.position.clone();
-            snake_segment.position = last_position;
-            last_position = prev_pos;
+            last_position = snake_segment.position.clone();
+            last_direction = snake_segment.direction.clone();
+
+            snake_segment.position = position;
+            snake_segment.direction = direction;
+            snake_segment.last_direction = last_direction.clone();
+
+            position = last_position;
+            direction = last_direction.clone();
             snake_segment.updated = true;
         }
         // I will use the last_position to spawn the new segment - tail
@@ -80,11 +91,13 @@ pub fn move_segments(
             commands.spawn((
                 StateScoped(AppState::InGame),
                 Mesh2d(meshes.add(Rectangle::new(SPRITE_WIDTH as f32, SPRITE_HEIGHT as f32))),
-                Transform::from_xyz(last_position.to_bevy_x(), last_position.to_bevy_y(), OTHER_Z_LAYER),
+                Transform::from_xyz(position.to_bevy_x(), position.to_bevy_y(), OTHER_Z_LAYER),
                 MeshMaterial2d(materials.add(Color::hsl(250., 0.95, 0.7))),
                 SnakeSegment {
-                    position: last_position.clone(),
+                    position: position.clone(),
                     index: snake_head.segment_len,
+                    direction: direction.clone(),
+                    last_direction: last_direction.clone(),
                     updated: true,
                 },
             ));

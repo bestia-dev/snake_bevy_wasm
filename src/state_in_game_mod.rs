@@ -33,7 +33,7 @@ struct Bird {
     updated: bool,
 }
 
-#[derive(PartialEq)]
+#[derive(PartialEq, Clone)]
 enum Direction {
     Up,
     Down,
@@ -46,7 +46,7 @@ enum Direction {
 struct SnakeHead {
     position: Position,
     direction: Direction,
-    rotate: f32,
+    last_direction: Direction,
     last_position: Position,
     segment_len: usize,
     just_eating: bool,
@@ -60,6 +60,8 @@ struct SnakeHead {
 struct SnakeSegment {
     position: Position,
     index: usize,
+    direction: Direction,
+    last_direction: Direction,
     updated: bool,
 }
 
@@ -119,11 +121,11 @@ fn on_enter_in_game(mut commands: Commands, mut meshes: ResMut<Assets<Mesh>>, mu
     commands.spawn((
         StateScoped(AppState::InGame),
         Sprite::from_image(asset_server.load("snake_head_left.png")),
-        Transform::from_xyz(snake_head_position.to_bevy_x(), snake_head_position.to_bevy_y(), SNAKE_Z_LAYER),
+        Transform::from_xyz(snake_head_position.to_bevy_x(), snake_head_position.to_bevy_y(), SNAKE_Z_LAYER).with_rotation(Quat::from_rotation_z(PI * 0.5)),
         SnakeHead {
             position: snake_head_position.clone(),
             direction: Direction::Down,
-            rotate: PI * 0.5,
+            last_direction: Direction::Down,
             last_position: snake_head_position,
             just_eating: false,
             segment_len: 1,
@@ -143,6 +145,8 @@ fn on_enter_in_game(mut commands: Commands, mut meshes: ResMut<Assets<Mesh>>, mu
         SnakeSegment {
             position: segment_position,
             index: 0,
+            direction: Direction::Down,
+            last_direction: Direction::Down,
             updated: false,
         },
     ));

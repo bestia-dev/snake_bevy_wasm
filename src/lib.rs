@@ -69,8 +69,8 @@ mod state_dead_mod;
 mod state_in_game_mod;
 mod state_main_menu_mod;
 
-const CANVAS_WIDTH: i32 = 512;
-const CANVAS_HEIGHT: i32 = 512;
+const CANVAS_WIDTH: i32 = 600;
+const CANVAS_HEIGHT: i32 = 600;
 const VERSION: &str = env!("CARGO_PKG_VERSION");
 
 #[derive(Clone, Copy, PartialEq, Eq, Hash, Debug, States)]

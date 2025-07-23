@@ -47,8 +47,9 @@ Read the releases changelog in a separate md file:
 
 ## TODO
 
+rotate least and mirror when upside down
 When dead, I want to see the snake.
-Sprites  
+Sprites for segments and tail 
 And code happily ever after...
 
 ## Open-source and free as a beer

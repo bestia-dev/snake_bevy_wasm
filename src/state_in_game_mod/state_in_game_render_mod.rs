@@ -1,6 +1,8 @@
+use std::f32::consts::PI;
+
 use bevy::prelude::*;
 
-use crate::state_in_game_mod::{Bird, DebugText, PointsText, SnakeHead, SnakeSegment};
+use crate::state_in_game_mod::{Bird, DebugText, Direction, PointsText, SnakeHead, SnakeSegment};
 
 pub fn render_snake_head(mut snake_head_query: Query<(&mut SnakeHead, &mut Transform)>) {
     if let Ok((mut snake_head, mut transform)) = snake_head_query.single_mut() {
@@ -8,8 +10,53 @@ pub fn render_snake_head(mut snake_head_query: Query<(&mut SnakeHead, &mut Trans
             transform.translation.x = snake_head.position.to_bevy_x();
             transform.translation.y = snake_head.position.to_bevy_y();
 
-            transform.rotate_z(snake_head.rotate);
-            snake_head.rotate = 0.;
+            // rotate and/or flip head
+            // rotate_x is flip
+            match snake_head.direction {
+                Direction::Up => match snake_head.last_direction {
+                    Direction::Up => (),
+                    Direction::Right => {
+                        transform.rotate_x(PI);
+                        transform.rotate_z(PI * 0.5);
+                    }
+                    Direction::Down => transform.rotate_z(PI),
+                    Direction::Left => transform.rotate_z(-PI * 0.5),
+                },
+                Direction::Right => match snake_head.last_direction {
+                    Direction::Up => {
+                        transform.rotate_z(-PI * 0.5);
+                        transform.rotate_x(PI);
+                    }
+                    Direction::Right => (),
+                    Direction::Down => {
+                        transform.rotate_z(PI * 0.5);
+                        transform.rotate_x(PI);
+                    }
+                    Direction::Left => {
+                        transform.rotate_z(PI);
+                        transform.rotate_x(PI);
+                    }
+                },
+                Direction::Down => match snake_head.last_direction {
+                    Direction::Up => transform.rotate_z(PI),
+                    Direction::Right => {
+                        transform.rotate_x(PI);
+                        transform.rotate_z(-PI * 0.5);
+                    }
+                    Direction::Down => (),
+                    Direction::Left => transform.rotate_z(PI * 0.5),
+                },
+                Direction::Left => match snake_head.last_direction {
+                    Direction::Up => transform.rotate_z(PI * 0.5),
+                    Direction::Right => {
+                        transform.rotate_x(PI);
+                        transform.rotate_z(PI);
+                    }
+                    Direction::Down => transform.rotate_z(-PI * 0.5),
+                    Direction::Left => (),
+                },
+            };
+
             snake_head.updated = false;
         }
     }

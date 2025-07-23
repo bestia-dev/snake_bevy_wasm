@@ -1,5 +1,3 @@
-use std::f32::consts::PI;
-
 use bevy::prelude::*;
 
 use crate::{
@@ -9,44 +7,20 @@ use crate::{
 
 pub fn handle_movement_input(keys: Res<ButtonInput<KeyCode>>, mut queried_entities: Query<&mut SnakeHead>, mut next_state: ResMut<NextState<AppState>>) {
     if let Ok(mut snake_head) = queried_entities.single_mut() {
-        if keys.pressed(KeyCode::ArrowUp) && snake_head.direction != Direction::Down {
-            // old direction
-            match snake_head.direction {
-                Direction::Up => snake_head.rotate = 0.,
-                Direction::Right => snake_head.rotate = PI * 0.5,
-                Direction::Down => snake_head.rotate = PI,
-                Direction::Left => snake_head.rotate = PI * 1.5,
-            }
+        if (keys.pressed(KeyCode::ArrowUp) || keys.pressed(KeyCode::KeyW)) && snake_head.direction != Direction::Down {
+            snake_head.last_direction = snake_head.direction.clone();
             snake_head.direction = Direction::Up;
             snake_head.updated = true;
-        } else if keys.pressed(KeyCode::ArrowRight) && snake_head.direction != Direction::Left {
-            // old direction
-            match snake_head.direction {
-                Direction::Up => snake_head.rotate = PI * 1.5,
-                Direction::Right => snake_head.rotate = 0.,
-                Direction::Down => snake_head.rotate = PI * 0.5,
-                Direction::Left => snake_head.rotate = PI,
-            }
+        } else if (keys.pressed(KeyCode::ArrowRight) || keys.pressed(KeyCode::KeyD)) && snake_head.direction != Direction::Left {
+            snake_head.last_direction = snake_head.direction.clone();
             snake_head.direction = Direction::Right;
             snake_head.updated = true;
-        } else if keys.pressed(KeyCode::ArrowDown) && snake_head.direction != Direction::Up {
-            // old direction
-            match snake_head.direction {
-                Direction::Up => snake_head.rotate = PI,
-                Direction::Right => snake_head.rotate = PI * 1.5,
-                Direction::Down => snake_head.rotate = 0.,
-                Direction::Left => snake_head.rotate = PI * 0.5,
-            }
+        } else if (keys.pressed(KeyCode::ArrowDown) || keys.pressed(KeyCode::KeyS)) && snake_head.direction != Direction::Up {
+            snake_head.last_direction = snake_head.direction.clone();
             snake_head.direction = Direction::Down;
             snake_head.updated = true;
-        } else if keys.pressed(KeyCode::ArrowLeft) && snake_head.direction != Direction::Right {
-            // old direction
-            match snake_head.direction {
-                Direction::Up => snake_head.rotate = PI * 0.5,
-                Direction::Right => snake_head.rotate = PI,
-                Direction::Down => snake_head.rotate = PI * 1.5,
-                Direction::Left => snake_head.rotate = 0.,
-            }
+        } else if (keys.pressed(KeyCode::ArrowLeft) || keys.pressed(KeyCode::KeyA)) && snake_head.direction != Direction::Right {
+            snake_head.last_direction = snake_head.direction.clone();
             snake_head.direction = Direction::Left;
             snake_head.updated = true;
         } else if keys.pressed(KeyCode::KeyX) {
