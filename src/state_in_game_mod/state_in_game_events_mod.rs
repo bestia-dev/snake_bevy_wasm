@@ -24,7 +24,6 @@ pub fn handle_movement_input(keys: Res<ButtonInput<KeyCode>>, mut queried_entiti
             snake_head.direction = Direction::Left;
             snake_head.updated = true;
         } else if keys.pressed(KeyCode::KeyX) {
-            debug!("keys.pressed X");
             next_state.set(AppState::MainMenu);
         }
     }

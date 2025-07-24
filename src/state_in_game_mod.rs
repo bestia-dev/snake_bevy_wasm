@@ -33,7 +33,7 @@ struct Bird {
     updated: bool,
 }
 
-#[derive(PartialEq, Clone)]
+#[derive(PartialEq, Clone, Debug)]
 enum Direction {
     Up,
     Down,
@@ -56,7 +56,7 @@ struct SnakeHead {
 }
 
 // one component can spawn many entities
-#[derive(Component)]
+#[derive(Component, Clone, Debug)]
 struct SnakeSegment {
     position: Position,
     index: usize,
@@ -83,10 +83,8 @@ const OTHER_Z_LAYER: f32 = 0.0;
 pub fn add_in_game_to_app(app: &mut App) {
     // Set the Fixed Timestep interval for game logic to 0.x seconds
     app.insert_resource(Time::<Fixed>::from_seconds(STEP_DURATION));
-
     app.add_systems(OnEnter(AppState::InGame), on_enter_in_game);
 
-    // MUST add all systems to app with run_if in_state InGame
     app.add_systems(
         FixedUpdate,
         (
@@ -95,11 +93,11 @@ pub fn add_in_game_to_app(app: &mut App) {
             move_segments.run_if(in_state(AppState::InGame)),
             check_dead.run_if(in_state(AppState::InGame)),
         )
-            // game logic is sequential
             .chain(),
     );
-    // render frame and react to events
+
     app.add_systems(
+        // render frame and react to events
         Update,
         (
             render_snake_head.run_if(in_state(AppState::InGame)),
@@ -113,9 +111,8 @@ pub fn add_in_game_to_app(app: &mut App) {
 }
 
 // run on enter in state in_game
-fn on_enter_in_game(mut commands: Commands, mut meshes: ResMut<Assets<Mesh>>, mut materials: ResMut<Assets<ColorMaterial>>, asset_server: Res<AssetServer>) {
+fn on_enter_in_game(mut commands: Commands, asset_server: Res<AssetServer>) {
     commands.spawn(Camera2d);
-    debug!("on_enter_in_game");
     // snake head
     let snake_head_position = Position { x: 10, y: 10 };
     commands.spawn((
@@ -139,9 +136,8 @@ fn on_enter_in_game(mut commands: Commands, mut meshes: ResMut<Assets<Mesh>>, mu
     let segment_position = Position { x: 10, y: 9 };
     commands.spawn((
         StateScoped(AppState::InGame),
-        Mesh2d(meshes.add(Rectangle::new(SPRITE_WIDTH as f32, SPRITE_HEIGHT as f32))),
-        Transform::from_xyz(segment_position.to_bevy_x(), segment_position.to_bevy_y(), OTHER_Z_LAYER),
-        MeshMaterial2d(materials.add(Color::hsl(250., 0.95, 0.7))),
+        Sprite::from_image(asset_server.load("segment_horizontal.png")),
+        Transform::from_xyz(segment_position.to_bevy_x(), segment_position.to_bevy_y(), OTHER_Z_LAYER).with_rotation(Quat::from_rotation_z(PI * 0.5)),
         SnakeSegment {
             position: segment_position,
             index: 0,

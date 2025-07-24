@@ -1,3 +1,4 @@
+use core::f32;
 use std::f32::consts::PI;
 
 use bevy::prelude::*;
@@ -10,51 +11,50 @@ pub fn render_snake_head(mut snake_head_query: Query<(&mut SnakeHead, &mut Trans
             transform.translation.x = snake_head.position.to_bevy_x();
             transform.translation.y = snake_head.position.to_bevy_y();
 
+            // TODO: hot to flip using look_at???
             // rotate and/or flip head
-            // rotate_x is flip
             match snake_head.direction {
-                Direction::Up => match snake_head.last_direction {
-                    Direction::Up => (),
-                    Direction::Right => {
-                        transform.rotate_x(PI);
-                        transform.rotate_z(PI * 0.5);
-                    }
-                    Direction::Down => transform.rotate_z(PI),
-                    Direction::Left => transform.rotate_z(-PI * 0.5),
-                },
-                Direction::Right => match snake_head.last_direction {
-                    Direction::Up => {
-                        transform.rotate_z(-PI * 0.5);
-                        transform.rotate_x(PI);
-                    }
-                    Direction::Right => (),
-                    Direction::Down => {
-                        transform.rotate_z(PI * 0.5);
-                        transform.rotate_x(PI);
-                    }
-                    Direction::Left => {
-                        transform.rotate_z(PI);
-                        transform.rotate_x(PI);
-                    }
-                },
-                Direction::Down => match snake_head.last_direction {
-                    Direction::Up => transform.rotate_z(PI),
-                    Direction::Right => {
-                        transform.rotate_x(PI);
-                        transform.rotate_z(-PI * 0.5);
-                    }
-                    Direction::Down => (),
-                    Direction::Left => transform.rotate_z(PI * 0.5),
-                },
-                Direction::Left => match snake_head.last_direction {
-                    Direction::Up => transform.rotate_z(PI * 0.5),
-                    Direction::Right => {
-                        transform.rotate_x(PI);
-                        transform.rotate_z(PI);
-                    }
-                    Direction::Down => transform.rotate_z(-PI * 0.5),
-                    Direction::Left => (),
-                },
+                Direction::Up => {
+                    transform.look_at(
+                        Vec3 {
+                            x: snake_head.position.to_bevy_x(),
+                            y: snake_head.position.to_bevy_y(),
+                            z: f32::INFINITY,
+                        },
+                        Vec3::X,
+                    );
+                }
+                Direction::Right => {
+                    transform.look_at(
+                        Vec3 {
+                            x: snake_head.position.to_bevy_x(),
+                            y: snake_head.position.to_bevy_y(),
+                            z: f32::INFINITY,
+                        },
+                        Vec3 { x: 0.0, y: -1.0, z: 0.0 },
+                    );
+                    transform.rotate_x(PI);
+                }
+                Direction::Down => {
+                    transform.look_at(
+                        Vec3 {
+                            x: snake_head.position.to_bevy_x(),
+                            y: snake_head.position.to_bevy_y(),
+                            z: f32::INFINITY,
+                        },
+                        -Vec3::X,
+                    );
+                }
+                Direction::Left => {
+                    transform.look_at(
+                        Vec3 {
+                            x: snake_head.position.to_bevy_x(),
+                            y: snake_head.position.to_bevy_y(),
+                            z: f32::INFINITY,
+                        },
+                        Vec3::Y,
+                    );
+                }
             };
 
             snake_head.updated = false;
@@ -77,7 +77,48 @@ pub fn render_segment(mut queried_entities: Query<(&mut SnakeSegment, &mut Trans
         if segment.updated {
             transform.translation.x = segment.position.to_bevy_x();
             transform.translation.y = segment.position.to_bevy_y();
-
+            match segment.direction {
+                Direction::Up => {
+                    transform.look_at(
+                        Vec3 {
+                            x: segment.position.to_bevy_x(),
+                            y: segment.position.to_bevy_y(),
+                            z: f32::INFINITY,
+                        },
+                        Vec3::X,
+                    );
+                }
+                Direction::Right => {
+                    transform.look_at(
+                        Vec3 {
+                            x: segment.position.to_bevy_x(),
+                            y: segment.position.to_bevy_y(),
+                            z: f32::INFINITY,
+                        },
+                        Vec3 { x: 0.0, y: -1.0, z: 0.0 },
+                    );
+                }
+                Direction::Down => {
+                    transform.look_at(
+                        Vec3 {
+                            x: segment.position.to_bevy_x(),
+                            y: segment.position.to_bevy_y(),
+                            z: f32::INFINITY,
+                        },
+                        -Vec3::X,
+                    );
+                }
+                Direction::Left => {
+                    transform.look_at(
+                        Vec3 {
+                            x: segment.position.to_bevy_x(),
+                            y: segment.position.to_bevy_y(),
+                            z: f32::INFINITY,
+                        },
+                        Vec3::Y,
+                    );
+                }
+            }
             segment.updated = false;
         }
     }

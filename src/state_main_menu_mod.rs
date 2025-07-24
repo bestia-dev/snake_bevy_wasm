@@ -15,7 +15,6 @@ pub fn add_main_menu_to_app(app: &mut App) {
 
 pub fn on_enter_main_menu(mut commands: Commands) {
     commands.spawn(Camera2d);
-    debug!("on_enter_main_menu");
     // Text with one section
     let mut grid = commands.spawn((
         StateScoped(AppState::MainMenu),
@@ -101,7 +100,6 @@ pub fn on_enter_main_menu(mut commands: Commands) {
 
 pub fn handle_main_menu_ui_input(keys: Res<ButtonInput<KeyCode>>, mut next_state: ResMut<NextState<AppState>>) {
     if keys.pressed(KeyCode::KeyN) {
-        debug!("keys.pressed N");
         next_state.set(AppState::InGame);
     }
 }

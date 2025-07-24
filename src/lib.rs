@@ -114,6 +114,11 @@ pub fn main() {
                 filter: "info,wgpu_core=error,wgpu_hal=error,bevy_render=error,bevy_ecs=error,bevy_winit=error,bevy_core_pipeline=error,bevy_pbr=error,snake_bevy_wasm=debug".into(),
                 level: bevy::log::Level::DEBUG,
                 custom_layer: |_| None,
+            })
+            // don't download meta files for assets
+            .set(AssetPlugin {
+                meta_check: bevy::asset::AssetMetaCheck::Never,
+                ..default()
             }),
     );
 

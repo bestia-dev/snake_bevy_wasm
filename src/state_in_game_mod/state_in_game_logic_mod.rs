@@ -1,8 +1,10 @@
+use std::f32::consts::PI;
+
 use bevy::prelude::*;
 
 use crate::{
     AppState,
-    state_in_game_mod::{BOARD_HEIGHT, BOARD_WIDTH, Bird, DebugText, Direction, OTHER_Z_LAYER, SPRITE_HEIGHT, SPRITE_WIDTH, SnakeHead, SnakeSegment},
+    state_in_game_mod::{BOARD_HEIGHT, BOARD_WIDTH, Bird, DebugText, Direction, OTHER_Z_LAYER, SnakeHead, SnakeSegment},
 };
 
 // fixed time every 0.5 seconds
@@ -56,49 +58,47 @@ pub fn eat_bird(_time: Res<Time>, mut snake_query: Query<&mut SnakeHead>, mut bi
 }
 
 /// first segment is after the snake head
-pub fn move_segments(
-    mut commands: Commands,
-    mut meshes: ResMut<Assets<Mesh>>,
-    mut materials: ResMut<Assets<ColorMaterial>>,
-    mut snake_query: Query<&mut SnakeHead>,
-    mut segment_query: Query<&mut SnakeSegment>,
-) {
+pub fn move_segments(mut commands: Commands, mut snake_query: Query<&mut SnakeHead>, mut segment_query: Query<&mut SnakeSegment>, asset_server: Res<AssetServer>) {
     if let Ok(mut snake_head) = snake_query.single_mut() {
         // Sort according to `usize index`.
-        let sorted_snake_segments = segment_query.iter_mut().sort_by::<&SnakeSegment>(|value_1, value_2| value_1.index.cmp(&value_2.index));
-        //move position from segment to segment
-        let mut position = snake_head.last_position.clone();
-        let mut direction = snake_head.last_direction.clone();
-        // dummy direction will be overwritten
-        let mut last_direction = Direction::Down;
-        let mut last_position;
-        for mut snake_segment in sorted_snake_segments {
-            last_position = snake_segment.position.clone();
-            last_direction = snake_segment.direction.clone();
+        let mut sorted_snake_segments: Vec<_> = segment_query.iter_mut().sort_by::<&SnakeSegment>(|value_1, value_2| value_1.index.cmp(&value_2.index)).collect();
 
-            snake_segment.position = position;
-            snake_segment.direction = direction;
-            snake_segment.last_direction = last_direction.clone();
-
-            position = last_position;
-            direction = last_direction.clone();
-            snake_segment.updated = true;
+        for snake_segment in sorted_snake_segments.iter_mut() {
+            snake_segment.index += 1;
         }
-        // I will use the last_position to spawn the new segment - tail
+
+        // the last segment becomes the first (zero) to avoid new spawn
+        let last_segment = sorted_snake_segments.last_mut().unwrap();
+        // clone the old values, they will be used to make the tail longer if eating
+        let last_segment_clone = last_segment.clone();
+
+        last_segment.index = 0;
+        last_segment.position = snake_head.last_position.clone();
+        last_segment.direction = snake_head.last_direction.clone();
+        last_segment.last_direction = snake_head.last_direction.clone();
+        last_segment.updated = true;
+
+        // I will use the last segment to spawn the new segment, index is snake_head.segment_len
         if snake_head.just_eating {
             snake_head.just_eating = false;
 
+            let rotation = match last_segment.direction {
+                Direction::Up => Quat::from_rotation_z(PI * 0.5),
+                Direction::Right => Quat::from_rotation_z(0.),
+                Direction::Down => Quat::from_rotation_z(PI * 0.5),
+                Direction::Left => Quat::from_rotation_z(0.),
+            };
+
             commands.spawn((
                 StateScoped(AppState::InGame),
-                Mesh2d(meshes.add(Rectangle::new(SPRITE_WIDTH as f32, SPRITE_HEIGHT as f32))),
-                Transform::from_xyz(position.to_bevy_x(), position.to_bevy_y(), OTHER_Z_LAYER),
-                MeshMaterial2d(materials.add(Color::hsl(250., 0.95, 0.7))),
+                Sprite::from_image(asset_server.load("segment_horizontal.png")),
+                Transform::from_xyz(last_segment_clone.position.to_bevy_x(), last_segment_clone.position.to_bevy_y(), OTHER_Z_LAYER).with_rotation(rotation),
                 SnakeSegment {
-                    position: position.clone(),
+                    position: last_segment_clone.position.clone(),
                     index: snake_head.segment_len,
-                    direction: direction.clone(),
-                    last_direction: last_direction.clone(),
-                    updated: true,
+                    direction: last_segment_clone.direction.clone(),
+                    last_direction: last_segment.last_direction.clone(),
+                    updated: false,
                 },
             ));
             snake_head.segment_len += 1;
