@@ -1,5 +1,3 @@
-use std::f32::consts::PI;
-
 use bevy::prelude::*;
 
 use crate::{
@@ -10,6 +8,9 @@ use crate::{
 // fixed time every 0.5 seconds
 pub fn move_snake_head(mut snake_query: Query<&mut SnakeHead>) {
     if let Ok(mut snake_head) = snake_query.single_mut() {
+        snake_head.last_direction = snake_head.direction.clone();
+        snake_head.direction = snake_head.new_direction.clone();
+
         snake_head.last_position = snake_head.position.clone();
 
         match &snake_head.direction {
@@ -60,6 +61,8 @@ pub fn eat_bird(_time: Res<Time>, mut snake_query: Query<&mut SnakeHead>, mut bi
 /// first segment is after the snake head
 pub fn move_segments(mut commands: Commands, mut snake_query: Query<&mut SnakeHead>, mut segment_query: Query<&mut SnakeSegment>, asset_server: Res<AssetServer>) {
     if let Ok(mut snake_head) = snake_query.single_mut() {
+        let segment_len = segment_query.iter().len();
+
         // Sort according to `usize index`.
         let mut sorted_snake_segments: Vec<_> = segment_query.iter_mut().sort_by::<&SnakeSegment>(|value_1, value_2| value_1.index.cmp(&value_2.index)).collect();
 
@@ -67,41 +70,34 @@ pub fn move_segments(mut commands: Commands, mut snake_query: Query<&mut SnakeHe
             snake_segment.index += 1;
         }
 
-        // the last segment becomes the first (zero) to avoid new spawn
-        let last_segment = sorted_snake_segments.last_mut().unwrap();
+        // the last segment becomes the first (zero) to avoid new spawn()
+        let new_first_segment = sorted_snake_segments.last_mut().unwrap();
         // clone the old values, they will be used to make the tail longer if eating
-        let last_segment_clone = last_segment.clone();
+        let last_segment_clone = new_first_segment.clone();
 
-        last_segment.index = 0;
-        last_segment.position = snake_head.last_position.clone();
-        last_segment.direction = snake_head.last_direction.clone();
-        last_segment.last_direction = snake_head.last_direction.clone();
-        last_segment.updated = true;
+        new_first_segment.index = 0;
+        new_first_segment.position = snake_head.last_position.clone();
+        new_first_segment.direction = snake_head.direction.clone();
+        new_first_segment.last_direction = snake_head.last_direction.clone();
 
-        // I will use the last segment to spawn the new segment, index is snake_head.segment_len
+        new_first_segment.updated = true;
+
+        // I will use the last_segment_clone to spawn the new segment, index is segment_len
         if snake_head.just_eating {
             snake_head.just_eating = false;
 
-            let rotation = match last_segment.direction {
-                Direction::Up => Quat::from_rotation_z(PI * 0.5),
-                Direction::Right => Quat::from_rotation_z(0.),
-                Direction::Down => Quat::from_rotation_z(PI * 0.5),
-                Direction::Left => Quat::from_rotation_z(0.),
-            };
-
             commands.spawn((
                 StateScoped(AppState::InGame),
-                Sprite::from_image(asset_server.load("segment_horizontal.png")),
-                Transform::from_xyz(last_segment_clone.position.to_bevy_x(), last_segment_clone.position.to_bevy_y(), OTHER_Z_LAYER).with_rotation(rotation),
+                Sprite::from_image(asset_server.load("segment_tail.png")),
+                Transform::from_xyz(last_segment_clone.position.to_bevy_x(), last_segment_clone.position.to_bevy_y(), OTHER_Z_LAYER),
                 SnakeSegment {
                     position: last_segment_clone.position.clone(),
-                    index: snake_head.segment_len,
+                    index: segment_len,
                     direction: last_segment_clone.direction.clone(),
-                    last_direction: last_segment.last_direction.clone(),
+                    last_direction: last_segment_clone.last_direction.clone(),
                     updated: false,
                 },
             ));
-            snake_head.segment_len += 1;
         }
     }
 }

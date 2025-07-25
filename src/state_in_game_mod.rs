@@ -46,9 +46,10 @@ enum Direction {
 struct SnakeHead {
     position: Position,
     direction: Direction,
+    // keyboard events are too often to have game logic inside
+    new_direction: Direction,
     last_direction: Direction,
     last_position: Position,
-    segment_len: usize,
     just_eating: bool,
     updated: bool,
     moves: i32,
@@ -69,7 +70,7 @@ struct SnakeSegment {
 #[derive(Component)]
 struct AnimatedText;
 
-const STEP_DURATION: f64 = 0.2;
+const STEP_DURATION: f64 = 0.5;
 const BOARD_WIDTH: i32 = 20;
 const BOARD_HEIGHT: i32 = 20;
 const BOARD_CENTER: i32 = BOARD_HEIGHT / 2;
@@ -122,10 +123,10 @@ fn on_enter_in_game(mut commands: Commands, asset_server: Res<AssetServer>) {
         SnakeHead {
             position: snake_head_position.clone(),
             direction: Direction::Down,
+            new_direction: Direction::Down,
             last_direction: Direction::Down,
             last_position: snake_head_position,
             just_eating: false,
-            segment_len: 1,
             updated: false,
             moves: 0,
             points: 0,

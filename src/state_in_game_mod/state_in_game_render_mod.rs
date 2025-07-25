@@ -72,9 +72,20 @@ pub fn render_bird(mut queried_entities: Query<(&mut Bird, &mut Transform)>) {
     }
 }
 
-pub fn render_segment(mut queried_entities: Query<(&mut SnakeSegment, &mut Transform)>) {
-    for (mut segment, mut transform) in queried_entities.iter_mut() {
+pub fn render_segment(mut segment_query: Query<(&mut SnakeSegment, &mut Transform, &mut Sprite)>, asset_server: Res<AssetServer>) {
+    let segment_len = segment_query.iter().len();
+    for (mut segment, mut transform, mut sprite) in segment_query.iter_mut() {
+        // how to change sprite if direction!=last_direction
+        if segment.index == segment_len - 1 {
+            sprite.image = asset_server.load("segment_tail.png");
+        }
         if segment.updated {
+            if segment.direction != segment.last_direction {
+                sprite.image = asset_server.load("segment_corner.png");
+            } else {
+                sprite.image = asset_server.load("segment_horizontal.png");
+            }
+
             transform.translation.x = segment.position.to_bevy_x();
             transform.translation.y = segment.position.to_bevy_y();
             match segment.direction {
