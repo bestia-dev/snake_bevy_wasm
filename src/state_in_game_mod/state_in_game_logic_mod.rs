@@ -1,3 +1,5 @@
+use std::f32::consts::PI;
+
 use bevy::prelude::*;
 
 use crate::{
@@ -86,10 +88,16 @@ pub fn move_segments(mut commands: Commands, mut snake_query: Query<&mut SnakeHe
         if snake_head.just_eating {
             snake_head.just_eating = false;
 
+            let rotation = match last_segment_clone.direction {
+                Direction::Up => Quat::from_rotation_z(-PI * 0.5),
+                Direction::Right => Quat::from_rotation_z(PI),
+                Direction::Down => Quat::from_rotation_z(PI * 0.5),
+                Direction::Left => Quat::from_rotation_z(0.),
+            };
             commands.spawn((
                 StateScoped(AppState::InGame),
                 Sprite::from_image(asset_server.load("segment_tail.png")),
-                Transform::from_xyz(last_segment_clone.position.to_bevy_x(), last_segment_clone.position.to_bevy_y(), OTHER_Z_LAYER),
+                Transform::from_xyz(last_segment_clone.position.to_bevy_x(), last_segment_clone.position.to_bevy_y(), OTHER_Z_LAYER).with_rotation(rotation),
                 SnakeSegment {
                     position: last_segment_clone.position.clone(),
                     index: segment_len,

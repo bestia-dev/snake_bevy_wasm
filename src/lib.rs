@@ -4,7 +4,7 @@
 //! # snake_bevy_wasm
 //!
 //! **Simple snake game with Bevy, Rust and Wasm**  
-//! ***version: 1.0.26 date: 2025-07-22 author: [bestia.dev](https://bestia.dev) repository: [GitHub](https://github.com/bestia-dev/snake_bevy_wasm)***
+//! ***version: 1.0.129 date: 2025-07-25 author: [bestia.dev](https://bestia.dev) repository: [GitHub](https://github.com/bestia-dev/snake_bevy_wasm)***
 //!
 //!  ![maintained](https://img.shields.io/badge/maintained-green)
 //!  ![work-in-progress](https://img.shields.io/badge/work_in_progress-yellow)
@@ -14,9 +14,9 @@
 //!  [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/bestia-dev/snake_bevy_wasm/blob/master/LICENSE)
 //!  ![snake_bevy_wasm](https://bestia.dev/webpage_hit_counter/get_svg_image/1481465721.svg)
 //!
-//! [![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-685-green.svg)](https://github.com/bestia-dev/snake_bevy_wasm/)
+//! [![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-766-green.svg)](https://github.com/bestia-dev/snake_bevy_wasm/)
 //! [![Lines in Doc comments](https://img.shields.io/badge/Lines_in_Doc_comments-73-blue.svg)](https://github.com/bestia-dev/snake_bevy_wasm/)
-//! [![Lines in Comments](https://img.shields.io/badge/Lines_in_comments-71-purple.svg)](https://github.com/bestia-dev/snake_bevy_wasm/)
+//! [![Lines in Comments](https://img.shields.io/badge/Lines_in_comments-76-purple.svg)](https://github.com/bestia-dev/snake_bevy_wasm/)
 //! [![Lines in examples](https://img.shields.io/badge/Lines_in_examples-0-yellow.svg)](https://github.com/bestia-dev/snake_bevy_wasm/)
 //! [![Lines in tests](https://img.shields.io/badge/Lines_in_tests-0-orange.svg)](https://github.com/bestia-dev/snake_bevy_wasm/)
 //!
@@ -40,8 +40,9 @@
 //!
 //! ## TODO
 //!
+//! rotate least and mirror when upside down
 //! When dead, I want to see the snake.
-//! Sprites  
+//! Sprites for segments and tail
 //! And code happily ever after...
 //!
 //! ## Open-source and free as a beer

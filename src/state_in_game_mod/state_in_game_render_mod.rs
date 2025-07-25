@@ -75,62 +75,61 @@ pub fn render_bird(mut queried_entities: Query<(&mut Bird, &mut Transform)>) {
 pub fn render_segment(mut segment_query: Query<(&mut SnakeSegment, &mut Transform, &mut Sprite)>, asset_server: Res<AssetServer>) {
     let segment_len = segment_query.iter().len();
     for (mut segment, mut transform, mut sprite) in segment_query.iter_mut() {
-        // how to change sprite if direction!=last_direction
+        // the last segment is the tail
         if segment.index == segment_len - 1 {
             sprite.image = asset_server.load("segment_tail.png");
         }
         if segment.updated {
+            transform.translation.x = segment.position.to_bevy_x();
+            transform.translation.y = segment.position.to_bevy_y();
+
             if segment.direction != segment.last_direction {
                 sprite.image = asset_server.load("segment_corner.png");
             } else {
                 sprite.image = asset_server.load("segment_horizontal.png");
             }
-
-            transform.translation.x = segment.position.to_bevy_x();
-            transform.translation.y = segment.position.to_bevy_y();
-            match segment.direction {
-                Direction::Up => {
-                    transform.look_at(
-                        Vec3 {
-                            x: segment.position.to_bevy_x(),
-                            y: segment.position.to_bevy_y(),
-                            z: f32::INFINITY,
-                        },
-                        Vec3::X,
-                    );
-                }
-                Direction::Right => {
-                    transform.look_at(
-                        Vec3 {
-                            x: segment.position.to_bevy_x(),
-                            y: segment.position.to_bevy_y(),
-                            z: f32::INFINITY,
-                        },
-                        Vec3 { x: 0.0, y: -1.0, z: 0.0 },
-                    );
-                }
-                Direction::Down => {
-                    transform.look_at(
-                        Vec3 {
-                            x: segment.position.to_bevy_x(),
-                            y: segment.position.to_bevy_y(),
-                            z: f32::INFINITY,
-                        },
-                        -Vec3::X,
-                    );
-                }
-                Direction::Left => {
-                    transform.look_at(
-                        Vec3 {
-                            x: segment.position.to_bevy_x(),
-                            y: segment.position.to_bevy_y(),
-                            z: f32::INFINITY,
-                        },
-                        Vec3::Y,
-                    );
-                }
-            }
+            rotate_segment(&segment, transform);
             segment.updated = false;
+        }
+    }
+}
+
+// corner can be clockwise and counterclockwise
+fn rotate_segment(segment: &Mut<'_, SnakeSegment>, mut transform: Mut<'_, Transform>) {
+    let forward = Vec3 {
+        x: segment.position.to_bevy_x(),
+        y: segment.position.to_bevy_y(),
+        z: f32::INFINITY,
+    };
+
+    match segment.direction {
+        Direction::Up => {
+            transform.look_at(forward, Vec3::X);
+            // if anti-clockwise
+            if segment.last_direction == Direction::Right {
+                transform.rotate_y(PI);
+            }
+        }
+        Direction::Right => {
+            transform.look_at(forward, -Vec3::Y);
+            // if anti-clockwise
+            if segment.last_direction == Direction::Down {
+                transform.rotate_x(PI);
+            }
+        }
+        Direction::Down => {
+            transform.look_at(forward, -Vec3::X);
+            // if anti-clockwise
+            if segment.last_direction == Direction::Left {
+                transform.rotate_y(PI);
+            }
+        }
+        Direction::Left => {
+            transform.look_at(forward, Vec3::Y);
+            // if anti-clockwise
+            if segment.last_direction == Direction::Up {
+                transform.rotate_x(PI);
+            }
         }
     }
 }

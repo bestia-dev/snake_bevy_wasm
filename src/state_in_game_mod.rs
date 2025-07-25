@@ -70,7 +70,7 @@ struct SnakeSegment {
 #[derive(Component)]
 struct AnimatedText;
 
-const STEP_DURATION: f64 = 0.5;
+const STEP_DURATION: f64 = 0.2;
 const BOARD_WIDTH: i32 = 20;
 const BOARD_HEIGHT: i32 = 20;
 const BOARD_CENTER: i32 = BOARD_HEIGHT / 2;
