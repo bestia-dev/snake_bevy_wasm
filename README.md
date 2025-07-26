@@ -35,7 +35,7 @@ My projects on GitHub are more like a tutorial than a finished product: [bestia-
 Everybody knows this game. This is an educational example.  
 In this project I explore the Bevy game engine, wasm and Rust.  
 
-https://github.com/user-attachments/assets/05340382-904b-4489-8352-682474748eee
+<video width="600" height="650" src="https://github.com/user-attachments/assets/05340382-904b-4489-8352-682474748eee"></video>
 
 ## Development details
 
