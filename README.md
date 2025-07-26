@@ -6,7 +6,7 @@
 [//]: # (auto_cargo_toml_to_md start)
 
 **Simple snake game with Bevy, Rust and Wasm**  
-***version: 1.0.129 date: 2025-07-25 author: [bestia.dev](https://bestia.dev) repository: [GitHub](https://github.com/bestia-dev/snake_bevy_wasm)***
+***version: 1.0.130 date: 2025-07-26 author: [bestia.dev](https://bestia.dev) repository: [GitHub](https://github.com/bestia-dev/snake_bevy_wasm)***
 
  ![maintained](https://img.shields.io/badge/maintained-green)
  ![work-in-progress](https://img.shields.io/badge/work_in_progress-yellow)
@@ -20,7 +20,7 @@
 
 [//]: # (auto_lines_of_code start)
 [![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-766-green.svg)](https://github.com/bestia-dev/snake_bevy_wasm/)
-[![Lines in Doc comments](https://img.shields.io/badge/Lines_in_Doc_comments-73-blue.svg)](https://github.com/bestia-dev/snake_bevy_wasm/)
+[![Lines in Doc comments](https://img.shields.io/badge/Lines_in_Doc_comments-74-blue.svg)](https://github.com/bestia-dev/snake_bevy_wasm/)
 [![Lines in Comments](https://img.shields.io/badge/Lines_in_comments-76-purple.svg)](https://github.com/bestia-dev/snake_bevy_wasm/)
 [![Lines in examples](https://img.shields.io/badge/Lines_in_examples-0-yellow.svg)](https://github.com/bestia-dev/snake_bevy_wasm/)
 [![Lines in tests](https://img.shields.io/badge/Lines_in_tests-0-orange.svg)](https://github.com/bestia-dev/snake_bevy_wasm/)
@@ -34,6 +34,7 @@ My projects on GitHub are more like a tutorial than a finished product: [bestia-
 
 Everybody knows this game. This is an educational example.  
 In this project I explore the Bevy game engine, wasm and Rust.  
+Try it here: <https://bestia.dev/snake_bevy_wasm/>  
 
 <video width="600" height="650" src="https://github.com/user-attachments/assets/05340382-904b-4489-8352-682474748eee"></video>
 
