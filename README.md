@@ -35,6 +35,8 @@ My projects on GitHub are more like a tutorial than a finished product: [bestia-
 Everybody knows this game. This is an educational example.  
 In this project I explore the Bevy game engine, wasm and Rust.  
 
+[Demo](web_server_folder/snake_bevy_wasm/assets/snake.mp4)
+
 ## Development details
 
 Read the development details in a separate md file:
