@@ -10,10 +10,11 @@ The TODO section is part of the [README.md](https://github.com/automation-tasks-
 
 ## Unreleased
 
+## Version 1.0.147 (2025-07-27)
+
 - upload
 - snake sprite
 - snake skin
-
 - audio
 
 ## Version 0.0.74 (2025-07-20)
