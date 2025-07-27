@@ -1,6 +1,7 @@
 use std::f32::consts::PI;
 
 use bevy::prelude::*;
+use bevy_kira_audio::AudioControl;
 
 use crate::{
     AppState,
@@ -27,24 +28,41 @@ pub fn move_snake_head(mut snake_query: Query<&mut SnakeHead>) {
 }
 
 // this is executed after snake_head_move
-pub fn check_dead(mut snake_query: Query<&mut SnakeHead>, segment_query: Query<&mut SnakeSegment>, mut next_state: ResMut<NextState<AppState>>) {
+pub fn check_dead(
+    mut snake_query: Query<&mut SnakeHead>,
+    segment_query: Query<&mut SnakeSegment>,
+    mut next_state: ResMut<NextState<AppState>>,
+    asset_server: Res<AssetServer>,
+    audio: Res<bevy_kira_audio::Audio>,
+) {
     if let Ok(snake_head) = snake_query.single_mut() {
         if snake_head.position.x < 0 || snake_head.position.y < 0 || snake_head.position.x >= BOARD_WIDTH || snake_head.position.y >= BOARD_HEIGHT {
             next_state.set(AppState::Dead);
+            audio.play(asset_server.load("game_over.mp3"));
         }
         for segment in segment_query {
             if segment.position == snake_head.position {
                 next_state.set(AppState::Dead);
+                audio.play(asset_server.load("game_over.mp3"));
                 break;
             }
         }
     }
 }
 
-pub fn eat_bird(_time: Res<Time>, mut snake_query: Query<&mut SnakeHead>, mut bird_query: Query<&mut Bird>, mut debug_text_query: Query<&mut DebugText>) {
+pub fn eat_bird(
+    _time: Res<Time>,
+    mut snake_query: Query<&mut SnakeHead>,
+    mut bird_query: Query<&mut Bird>,
+    mut debug_text_query: Query<&mut DebugText>,
+    asset_server: Res<AssetServer>,
+    audio: Res<bevy_kira_audio::Audio>,
+) {
     if let Ok(mut snake_head) = snake_query.single_mut() {
         if let Ok(mut bird) = bird_query.single_mut() {
             if snake_head.position == bird.position {
+                audio.play(asset_server.load("bird_chirp.mp3"));
+
                 snake_head.just_eating = true;
                 snake_head.points += 1;
                 // food: point, longer body

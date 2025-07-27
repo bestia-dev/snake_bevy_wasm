@@ -3,6 +3,7 @@
 use std::f32::consts::PI;
 
 use bevy::prelude::*;
+use bevy_kira_audio::{AudioControl, AudioInstance, AudioTween};
 
 use crate::{AppState, CANVAS_HEIGHT, CANVAS_WIDTH};
 mod state_in_game_events_mod;
@@ -66,9 +67,16 @@ struct SnakeSegment {
     updated: bool,
 }
 
+// Component to identify the audio entity
+#[derive(Component)]
+struct Music;
+
 // Marker struct to help identify the color-changing Text component
 #[derive(Component)]
 struct AnimatedText;
+
+#[derive(Resource)]
+struct InstanceHandle(Handle<AudioInstance>);
 
 const STEP_DURATION: f64 = 0.2;
 const BOARD_WIDTH: i32 = 20;
@@ -85,7 +93,7 @@ pub fn add_in_game_to_app(app: &mut App) {
     // Set the Fixed Timestep interval for game logic to 0.x seconds
     app.insert_resource(Time::<Fixed>::from_seconds(STEP_DURATION));
     app.add_systems(OnEnter(AppState::InGame), on_enter_in_game);
-
+    app.add_systems(OnExit(AppState::InGame), on_exit_in_game);
     app.add_systems(
         FixedUpdate,
         (
@@ -112,8 +120,12 @@ pub fn add_in_game_to_app(app: &mut App) {
 }
 
 // run on enter in state in_game
-fn on_enter_in_game(mut commands: Commands, asset_server: Res<AssetServer>) {
+fn on_enter_in_game(mut commands: Commands, asset_server: Res<AssetServer>, audio: Res<bevy_kira_audio::Audio>) {
+    let handle = audio.play(asset_server.load("snake_hiss.mp3")).looped().handle();
+    commands.insert_resource(InstanceHandle(handle));
+
     commands.spawn(Camera2d);
+
     // snake head
     let snake_head_position = Position { x: 10, y: 10 };
     commands.spawn((
@@ -187,6 +199,13 @@ fn on_enter_in_game(mut commands: Commands, asset_server: Res<AssetServer>) {
             bird_position: format!("{:?}", &bird_position),
         },
     ));
+}
+
+fn on_exit_in_game(handle: Res<InstanceHandle>, mut audio_instances: ResMut<Assets<AudioInstance>>) {
+    // stop only the music, not the other sound effects
+    if let Some(instance) = audio_instances.get_mut(&handle.0) {
+        instance.stop(AudioTween::default());
+    }
 }
 
 impl Position {

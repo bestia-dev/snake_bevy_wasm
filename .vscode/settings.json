@@ -20,6 +20,10 @@
     "rust-analyzer.cargo.extraEnv": {
         "RUSTFLAGS": "-Clink-arg=-B/home/rustdevuser/.cargo/bin/mold"
     },
+"terminal.integrated.commandsToSkipShell": [
+		// Ensure the toggle sidebar visibility ctrl+b keybinding skips the shell
+		"workbench.action.toggleSidebarVisibility",
+	],
     "cSpell.words": [
         "Alla",
         "alloc",
@@ -33,6 +37,7 @@
         "camino",
         "cdylib",
         "chrono",
+        "codegen",
         "commitish",
         "CRUSTDE",
         "Decryptor",
@@ -41,6 +46,7 @@
         "Encryptor",
         "endregion",
         "keygen",
+        "kira",
         "libasound",
         "libudev",
         "Nazdravlje",
