@@ -31,7 +31,6 @@ struct Position {
 #[derive(Component)]
 struct Bird {
     position: Position,
-    updated: bool,
 }
 
 #[derive(PartialEq, Clone, Debug)]
@@ -52,7 +51,6 @@ struct SnakeHead {
     last_direction: Direction,
     last_position: Position,
     just_eating: bool,
-    updated: bool,
     moves: i32,
     points: i32,
 }
@@ -61,10 +59,14 @@ struct SnakeHead {
 #[derive(Component, Clone, Debug)]
 struct SnakeSegment {
     position: Position,
-    index: usize,
     direction: Direction,
     last_direction: Direction,
-    updated: bool,
+    is_tail: bool,
+}
+
+#[derive(Component, Clone, Debug)]
+struct SnakeSegmentIndex {
+    index: usize,
 }
 
 // Component to identify the audio entity
@@ -139,13 +141,12 @@ fn on_enter_in_game(mut commands: Commands, asset_server: Res<AssetServer>, audi
             last_direction: Direction::Down,
             last_position: snake_head_position,
             just_eating: false,
-            updated: false,
             moves: 0,
             points: 0,
         },
     ));
 
-    // first and only segment
+    // first (zero) segment
     let segment_position = Position { x: 10, y: 9 };
     commands.spawn((
         StateScoped(AppState::InGame),
@@ -153,11 +154,26 @@ fn on_enter_in_game(mut commands: Commands, asset_server: Res<AssetServer>, audi
         Transform::from_xyz(segment_position.to_bevy_x(), segment_position.to_bevy_y(), OTHER_Z_LAYER).with_rotation(Quat::from_rotation_z(PI * 0.5)),
         SnakeSegment {
             position: segment_position,
-            index: 0,
             direction: Direction::Down,
             last_direction: Direction::Down,
-            updated: false,
+            is_tail: false,
         },
+        SnakeSegmentIndex { index: 0 },
+    ));
+
+    // last (1) segment
+    let segment_position = Position { x: 10, y: 8 };
+    commands.spawn((
+        StateScoped(AppState::InGame),
+        Sprite::from_image(asset_server.load("segment_tail.png")),
+        Transform::from_xyz(segment_position.to_bevy_x(), segment_position.to_bevy_y(), OTHER_Z_LAYER).with_rotation(Quat::from_rotation_z(PI * 0.5)),
+        SnakeSegment {
+            position: segment_position,
+            direction: Direction::Down,
+            last_direction: Direction::Down,
+            is_tail: true,
+        },
+        SnakeSegmentIndex { index: 1 },
     ));
 
     // spawn entity bird
@@ -166,10 +182,7 @@ fn on_enter_in_game(mut commands: Commands, asset_server: Res<AssetServer>, audi
         StateScoped(AppState::InGame),
         Sprite::from_image(asset_server.load("bird.png")),
         Transform::from_xyz(bird_position.to_bevy_x(), bird_position.to_bevy_y(), BIRD_Z_LAYER),
-        Bird {
-            position: bird_position.clone(),
-            updated: false,
-        },
+        Bird { position: bird_position.clone() },
     ));
 
     commands.spawn((

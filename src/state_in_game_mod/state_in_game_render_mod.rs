@@ -5,92 +5,80 @@ use bevy::prelude::*;
 
 use crate::state_in_game_mod::{Bird, DebugText, Direction, PointsText, SnakeHead, SnakeSegment};
 
-pub fn render_snake_head(mut snake_head_query: Query<(&mut SnakeHead, &mut Transform)>) {
-    if let Ok((mut snake_head, mut transform)) = snake_head_query.single_mut() {
-        if snake_head.updated {
-            transform.translation.x = snake_head.position.to_bevy_x();
-            transform.translation.y = snake_head.position.to_bevy_y();
+pub fn render_snake_head(mut snake_head_query: Query<(&mut SnakeHead, &mut Transform), Changed<SnakeHead>>) {
+    if let Ok((snake_head, mut transform)) = snake_head_query.single_mut() {
+        transform.translation.x = snake_head.position.to_bevy_x();
+        transform.translation.y = snake_head.position.to_bevy_y();
 
-            // TODO: hot to flip using look_at???
-            // rotate and/or flip head
-            match snake_head.direction {
-                Direction::Up => {
-                    transform.look_at(
-                        Vec3 {
-                            x: snake_head.position.to_bevy_x(),
-                            y: snake_head.position.to_bevy_y(),
-                            z: f32::INFINITY,
-                        },
-                        Vec3::X,
-                    );
-                }
-                Direction::Right => {
-                    transform.look_at(
-                        Vec3 {
-                            x: snake_head.position.to_bevy_x(),
-                            y: snake_head.position.to_bevy_y(),
-                            z: f32::INFINITY,
-                        },
-                        Vec3 { x: 0.0, y: -1.0, z: 0.0 },
-                    );
-                    transform.rotate_x(PI);
-                }
-                Direction::Down => {
-                    transform.look_at(
-                        Vec3 {
-                            x: snake_head.position.to_bevy_x(),
-                            y: snake_head.position.to_bevy_y(),
-                            z: f32::INFINITY,
-                        },
-                        -Vec3::X,
-                    );
-                }
-                Direction::Left => {
-                    transform.look_at(
-                        Vec3 {
-                            x: snake_head.position.to_bevy_x(),
-                            y: snake_head.position.to_bevy_y(),
-                            z: f32::INFINITY,
-                        },
-                        Vec3::Y,
-                    );
-                }
-            };
-
-            snake_head.updated = false;
-        }
-    }
-}
-pub fn render_bird(mut queried_entities: Query<(&mut Bird, &mut Transform)>) {
-    if let Ok((mut bird, mut transform)) = queried_entities.single_mut() {
-        if bird.updated {
-            transform.translation.x = bird.position.to_bevy_x();
-            transform.translation.y = bird.position.to_bevy_y();
-
-            bird.updated = false;
-        }
-    }
-}
-
-pub fn render_segment(mut segment_query: Query<(&mut SnakeSegment, &mut Transform, &mut Sprite)>, asset_server: Res<AssetServer>) {
-    let segment_len = segment_query.iter().len();
-    for (mut segment, mut transform, mut sprite) in segment_query.iter_mut() {
-        // the last segment is the tail
-        if segment.index == segment_len - 1 {
-            sprite.image = asset_server.load("segment_tail.png");
-        }
-        if segment.updated {
-            transform.translation.x = segment.position.to_bevy_x();
-            transform.translation.y = segment.position.to_bevy_y();
-
-            if segment.direction != segment.last_direction {
-                sprite.image = asset_server.load("segment_corner.png");
-            } else {
-                sprite.image = asset_server.load("segment_horizontal.png");
+        // TODO: hot to flip using look_at???
+        // rotate and/or flip head
+        match snake_head.direction {
+            Direction::Up => {
+                transform.look_at(
+                    Vec3 {
+                        x: snake_head.position.to_bevy_x(),
+                        y: snake_head.position.to_bevy_y(),
+                        z: f32::INFINITY,
+                    },
+                    Vec3::X,
+                );
             }
-            rotate_segment(&segment, transform);
-            segment.updated = false;
+            Direction::Right => {
+                transform.look_at(
+                    Vec3 {
+                        x: snake_head.position.to_bevy_x(),
+                        y: snake_head.position.to_bevy_y(),
+                        z: f32::INFINITY,
+                    },
+                    Vec3 { x: 0.0, y: -1.0, z: 0.0 },
+                );
+                transform.rotate_x(PI);
+            }
+            Direction::Down => {
+                transform.look_at(
+                    Vec3 {
+                        x: snake_head.position.to_bevy_x(),
+                        y: snake_head.position.to_bevy_y(),
+                        z: f32::INFINITY,
+                    },
+                    -Vec3::X,
+                );
+            }
+            Direction::Left => {
+                transform.look_at(
+                    Vec3 {
+                        x: snake_head.position.to_bevy_x(),
+                        y: snake_head.position.to_bevy_y(),
+                        z: f32::INFINITY,
+                    },
+                    Vec3::Y,
+                );
+            }
+        };
+    }
+}
+pub fn render_bird(mut queried_entities: Query<(&mut Bird, &mut Transform), Changed<Bird>>) {
+    if let Ok((bird, mut transform)) = queried_entities.single_mut() {
+        transform.translation.x = bird.position.to_bevy_x();
+        transform.translation.y = bird.position.to_bevy_y();
+    }
+}
+
+#[allow(clippy::type_complexity)]
+pub fn render_segment(mut segment_query: Query<(&mut SnakeSegment, &mut Transform, &mut Sprite), Or<(Changed<SnakeSegment>, Added<SnakeSegment>)>>, asset_server: Res<AssetServer>) {
+    for (segment, mut transform, mut sprite) in segment_query.iter_mut() {
+        transform.translation.x = segment.position.to_bevy_x();
+        transform.translation.y = segment.position.to_bevy_y();
+
+        // the last segment is the tail
+        if segment.is_tail {
+            sprite.image = asset_server.load("segment_tail.png");
+        } else if segment.direction != segment.last_direction {
+            sprite.image = asset_server.load("segment_corner.png");
+        } else {
+            sprite.image = asset_server.load("segment_horizontal.png");
         }
+        rotate_segment(&segment, transform);
     }
 }
 

@@ -36,6 +36,7 @@ pub fn on_enter_main_menu(mut commands: Commands) {
                 flex_direction: FlexDirection::Column,
                 align_items: AlignItems::Center,
                 justify_content: JustifyContent::Center,
+
                 ..default()
             },));
             {

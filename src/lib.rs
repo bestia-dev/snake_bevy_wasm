@@ -4,7 +4,7 @@
 //! # snake_bevy_wasm
 //!
 //! **Simple snake game with Bevy, Rust and Wasm**  
-//! ***version: 1.0.147 date: 2025-07-27 author: [bestia.dev](https://bestia.dev) repository: [GitHub](https://github.com/bestia-dev/snake_bevy_wasm)***
+//! ***version: 1.0.160 date: 2025-07-30 author: [bestia.dev](https://bestia.dev) repository: [GitHub](https://github.com/bestia-dev/snake_bevy_wasm)***
 //!
 //!  ![maintained](https://img.shields.io/badge/maintained-green)
 //!  ![work-in-progress](https://img.shields.io/badge/work_in_progress-yellow)
@@ -14,9 +14,9 @@
 //!  [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/bestia-dev/snake_bevy_wasm/blob/master/LICENSE)
 //!  ![snake_bevy_wasm](https://bestia.dev/webpage_hit_counter/get_svg_image/1481465721.svg)
 //!
-//! [![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-802-green.svg)](https://github.com/bestia-dev/snake_bevy_wasm/)
-//! [![Lines in Doc comments](https://img.shields.io/badge/Lines_in_Doc_comments-74-blue.svg)](https://github.com/bestia-dev/snake_bevy_wasm/)
-//! [![Lines in Comments](https://img.shields.io/badge/Lines_in_comments-78-purple.svg)](https://github.com/bestia-dev/snake_bevy_wasm/)
+//! [![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-792-green.svg)](https://github.com/bestia-dev/snake_bevy_wasm/)
+//! [![Lines in Doc comments](https://img.shields.io/badge/Lines_in_Doc_comments-78-blue.svg)](https://github.com/bestia-dev/snake_bevy_wasm/)
+//! [![Lines in Comments](https://img.shields.io/badge/Lines_in_comments-81-purple.svg)](https://github.com/bestia-dev/snake_bevy_wasm/)
 //! [![Lines in examples](https://img.shields.io/badge/Lines_in_examples-0-yellow.svg)](https://github.com/bestia-dev/snake_bevy_wasm/)
 //! [![Lines in tests](https://img.shields.io/badge/Lines_in_tests-0-orange.svg)](https://github.com/bestia-dev/snake_bevy_wasm/)
 //!
