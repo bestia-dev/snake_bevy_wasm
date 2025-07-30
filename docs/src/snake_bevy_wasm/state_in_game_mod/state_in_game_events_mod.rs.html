@@ -9,18 +9,14 @@
 <a href=#9 id=9 data-nosnippet>9</a>    <span class="kw">if let </span><span class="prelude-val">Ok</span>(<span class="kw-2">mut </span>snake_head) = queried_entities.single_mut() {
 <a href=#10 id=10 data-nosnippet>10</a>        <span class="kw">if </span>(keys.pressed(KeyCode::ArrowUp) || keys.pressed(KeyCode::KeyW)) &amp;&amp; snake_head.direction != Direction::Down {
 <a href=#11 id=11 data-nosnippet>11</a>            snake_head.new_direction = Direction::Up;
-<a href=#12 id=12 data-nosnippet>12</a>            snake_head.updated = <span class="bool-val">true</span>;
-<a href=#13 id=13 data-nosnippet>13</a>        } <span class="kw">else if </span>(keys.pressed(KeyCode::ArrowRight) || keys.pressed(KeyCode::KeyD)) &amp;&amp; snake_head.direction != Direction::Left {
-<a href=#14 id=14 data-nosnippet>14</a>            snake_head.new_direction = Direction::Right;
-<a href=#15 id=15 data-nosnippet>15</a>            snake_head.updated = <span class="bool-val">true</span>;
-<a href=#16 id=16 data-nosnippet>16</a>        } <span class="kw">else if </span>(keys.pressed(KeyCode::ArrowDown) || keys.pressed(KeyCode::KeyS)) &amp;&amp; snake_head.direction != Direction::Up {
-<a href=#17 id=17 data-nosnippet>17</a>            snake_head.new_direction = Direction::Down;
-<a href=#18 id=18 data-nosnippet>18</a>            snake_head.updated = <span class="bool-val">true</span>;
-<a href=#19 id=19 data-nosnippet>19</a>        } <span class="kw">else if </span>(keys.pressed(KeyCode::ArrowLeft) || keys.pressed(KeyCode::KeyA)) &amp;&amp; snake_head.direction != Direction::Right {
-<a href=#20 id=20 data-nosnippet>20</a>            snake_head.new_direction = Direction::Left;
-<a href=#21 id=21 data-nosnippet>21</a>            snake_head.updated = <span class="bool-val">true</span>;
-<a href=#22 id=22 data-nosnippet>22</a>        } <span class="kw">else if </span>keys.pressed(KeyCode::KeyX) {
-<a href=#23 id=23 data-nosnippet>23</a>            next_state.set(AppState::MainMenu);
-<a href=#24 id=24 data-nosnippet>24</a>        }
-<a href=#25 id=25 data-nosnippet>25</a>    }
-<a href=#26 id=26 data-nosnippet>26</a>}</code></pre></div></section></main></body></html>
+<a href=#12 id=12 data-nosnippet>12</a>        } <span class="kw">else if </span>(keys.pressed(KeyCode::ArrowRight) || keys.pressed(KeyCode::KeyD)) &amp;&amp; snake_head.direction != Direction::Left {
+<a href=#13 id=13 data-nosnippet>13</a>            snake_head.new_direction = Direction::Right;
+<a href=#14 id=14 data-nosnippet>14</a>        } <span class="kw">else if </span>(keys.pressed(KeyCode::ArrowDown) || keys.pressed(KeyCode::KeyS)) &amp;&amp; snake_head.direction != Direction::Up {
+<a href=#15 id=15 data-nosnippet>15</a>            snake_head.new_direction = Direction::Down;
+<a href=#16 id=16 data-nosnippet>16</a>        } <span class="kw">else if </span>(keys.pressed(KeyCode::ArrowLeft) || keys.pressed(KeyCode::KeyA)) &amp;&amp; snake_head.direction != Direction::Right {
+<a href=#17 id=17 data-nosnippet>17</a>            snake_head.new_direction = Direction::Left;
+<a href=#18 id=18 data-nosnippet>18</a>        } <span class="kw">else if </span>keys.pressed(KeyCode::KeyX) {
+<a href=#19 id=19 data-nosnippet>19</a>            next_state.set(AppState::MainMenu);
+<a href=#20 id=20 data-nosnippet>20</a>        }
+<a href=#21 id=21 data-nosnippet>21</a>    }
+<a href=#22 id=22 data-nosnippet>22</a>}</code></pre></div></section></main></body></html>
