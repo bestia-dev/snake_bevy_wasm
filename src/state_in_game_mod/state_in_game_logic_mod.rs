@@ -2,8 +2,8 @@ use bevy::prelude::*;
 use bevy_kira_audio::AudioControl;
 
 use crate::{
-    AppState,
-    state_in_game_mod::{BOARD_HEIGHT, BOARD_WIDTH, Bird, DebugText, Direction, OTHER_Z_LAYER, SnakeHead, SnakeSegment, SnakeSegmentIndex},
+    AppState, BOARD_HEIGHT, BOARD_WIDTH, GameBoardCanvas,
+    state_in_game_mod::{Bird, DebugText, Direction, OTHER_Z_LAYER, SnakeHead, SnakeSegment, SnakeSegmentIndex},
 };
 
 // fixed time every 0.5 seconds
@@ -76,7 +76,13 @@ pub fn eat_bird(
 }
 
 /// first segment is after the snake head
-pub fn move_segments(mut commands: Commands, mut snake_query: Query<&mut SnakeHead>, mut segment_query: Query<(&mut SnakeSegment, &mut SnakeSegmentIndex)>, asset_server: Res<AssetServer>) {
+pub fn move_segments(
+    mut commands: Commands,
+    mut snake_query: Query<&mut SnakeHead>,
+    mut segment_query: Query<(&mut SnakeSegment, &mut SnakeSegmentIndex)>,
+    asset_server: Res<AssetServer>,
+    game_board_canvas: Res<GameBoardCanvas>,
+) {
     if let Ok(mut snake_head) = snake_query.single_mut() {
         // Sort according to `usize index`.
         let mut sorted_snake_segments: Vec<_> = segment_query
@@ -95,7 +101,11 @@ pub fn move_segments(mut commands: Commands, mut snake_query: Query<&mut SnakeHe
             commands.spawn((
                 StateScoped(AppState::InGame),
                 Sprite::from_image(asset_server.load("segment_horizontal.png")),
-                Transform::from_xyz(snake_head.last_position.to_bevy_x(), snake_head.last_position.to_bevy_y(), OTHER_Z_LAYER),
+                Transform::from_xyz(
+                    snake_head.last_position.to_bevy_x(game_board_canvas.sprite_width),
+                    snake_head.last_position.to_bevy_y(game_board_canvas.sprite_height),
+                    OTHER_Z_LAYER,
+                ),
                 SnakeSegment {
                     position: snake_head.last_position.clone(),
                     direction: snake_head.direction.clone(),

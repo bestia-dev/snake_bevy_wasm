@@ -2,8 +2,7 @@
 
 use bevy::prelude::*;
 
-use crate::state_in_game_mod::SPRITE_HEIGHT;
-use crate::{AppState, VERSION};
+use crate::{AppState, GameBoardCanvas, VERSION};
 use bevy::color::palettes::css::{GREEN, RED, YELLOW};
 
 pub fn add_main_menu_to_app(app: &mut App) {
@@ -13,7 +12,7 @@ pub fn add_main_menu_to_app(app: &mut App) {
     app.add_systems(Update, handle_main_menu_ui_input.run_if(in_state(AppState::MainMenu)));
 }
 
-pub fn on_enter_main_menu(mut commands: Commands) {
+pub fn on_enter_main_menu(mut commands: Commands, game_board_canvas: Res<GameBoardCanvas>) {
     commands.spawn(Camera2d);
     // Text with one section
     let mut grid = commands.spawn((
@@ -45,7 +44,7 @@ pub fn on_enter_main_menu(mut commands: Commands) {
                     header_box.spawn((
                         Text::new("bestia.dev/snake_bevy_wasm"),
                         TextFont {
-                            font_size: SPRITE_HEIGHT as f32,
+                            font_size: game_board_canvas.sprite_height,
                             ..default()
                         },
                         TextLayout::new_with_justify(JustifyText::Center),
@@ -66,7 +65,7 @@ pub fn on_enter_main_menu(mut commands: Commands) {
                     middle_box.spawn((
                         Text::new(format!("Bestia.dev tutorial\nRust+Bevy+Wasm v{VERSION}")),
                         TextFont {
-                            font_size: SPRITE_HEIGHT as f32,
+                            font_size: game_board_canvas.sprite_height,
                             ..default()
                         },
                         TextLayout::new_with_justify(JustifyText::Center),
@@ -87,7 +86,7 @@ pub fn on_enter_main_menu(mut commands: Commands) {
                     footer_box.spawn((
                         Text::new("Press N to start"),
                         TextFont {
-                            font_size: SPRITE_HEIGHT as f32,
+                            font_size: game_board_canvas.sprite_height,
                             ..default()
                         },
                         TextLayout::new_with_justify(JustifyText::Center),

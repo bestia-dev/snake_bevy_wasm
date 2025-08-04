@@ -5,7 +5,7 @@
 #![allow(dead_code)]
 
 // region: use
-// the macro unwrap! shows the TRUE location where the error has ocurred.
+// the macro unwrap! shows the TRUE location where the error has occurred.
 use unwrap::unwrap;
 use wasm_bindgen::prelude::*;
 use wasm_bindgen::{JsCast, JsValue};
@@ -78,4 +78,24 @@ pub fn set_html_element_inner_html(element_id: &str, inner_html: &str) {
 // open URL in new tab
 pub fn open_url_in_new_tab(url: &str) {
     window().open_with_url_and_target(url, "_blank").unwrap();
+}
+
+// get the width of the viewport
+pub fn get_viewport_width() -> i32 {
+    web_sys::window()
+        .expect("There should be a window")
+        .inner_width()
+        .expect("The window should have Some width")
+        .as_f64()
+        .expect("The width should be a number") as i32
+}
+
+// get the height of the viewport
+pub fn get_viewport_height() -> i32 {
+    web_sys::window()
+        .expect("There should be a window")
+        .inner_height()
+        .expect("The window should have Some height")
+        .as_f64()
+        .expect("The height should be a number") as i32
 }

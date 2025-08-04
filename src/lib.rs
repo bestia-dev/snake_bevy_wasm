@@ -74,9 +74,9 @@ mod state_dead_mod;
 mod state_in_game_mod;
 mod state_main_menu_mod;
 
-const CANVAS_WIDTH: i32 = 600;
-const CANVAS_HEIGHT: i32 = 600;
 const VERSION: &str = env!("CARGO_PKG_VERSION");
+const BOARD_WIDTH: i32 = 20;
+const BOARD_HEIGHT: i32 = 20;
 
 #[derive(Clone, Copy, PartialEq, Eq, Hash, Debug, States)]
 #[states(scoped_entities)]
@@ -86,13 +86,44 @@ enum AppState {
     Dead,
 }
 
+#[derive(Resource)]
+struct GameBoardCanvas {
+    //canvas_width: i32,
+    //canvas_height: i32,
+    sprite_width: f32,
+    sprite_height: f32,
+}
+
 #[wasm_bindgen]
 pub fn main() {
+    // check viewport and define sizes
+    let viewport_width = wsm::get_viewport_width();
+    let viewport_height = wsm::get_viewport_height();
+    wsm::debug_write(&format!("{viewport_width} x {viewport_height}"));
+
+    // landscape for PC monitor viewport is around 1280 x 712px
+    let game_board_canvas = if viewport_width > viewport_height {
+        GameBoardCanvas {
+            //canvas_width: viewport_height,
+            //canvas_height: viewport_height,
+            sprite_width: viewport_height as f32 / BOARD_WIDTH as f32,
+            sprite_height: viewport_height as f32 / BOARD_HEIGHT as f32,
+        }
+    } else {
+        // portrait for mobile phone it is around 360px x 649px
+        GameBoardCanvas {
+            //canvas_width: viewport_width,
+            //canvas_height: viewport_width,
+            sprite_width: viewport_width as f32 / BOARD_WIDTH as f32,
+            sprite_height: viewport_width as f32 / BOARD_HEIGHT as f32,
+        }
+    };
+
     // rust has `Raw string literals` that are great!
     // just add r# before the starting double quotes and # after the ending double quotes.
     let html = format!(
         r#"
-<canvas id="snake_bevy_canvas" width="{CANVAS_WIDTH}" height="{CANVAS_HEIGHT}"></canvas>
+<canvas id="snake_bevy_canvas" width="{viewport_width}" height="{viewport_height}"></canvas>
 "#
     );
 
@@ -108,7 +139,7 @@ pub fn main() {
                 primary_window: Some(Window {
                     // provide the ID selector string here
                     canvas: Some("#snake_bevy_canvas".into()),
-                    resolution: bevy::window::WindowResolution::new(CANVAS_WIDTH as f32, CANVAS_HEIGHT as f32), //.with_scale_factor_override(1.0),
+                    resolution: bevy::window::WindowResolution::new(viewport_width as f32, viewport_height as f32), //.with_scale_factor_override(1.0),
                     resizable: false,
                     // ... any other window properties ...
                     ..default()
@@ -133,6 +164,7 @@ pub fn main() {
     // initial state is MainMenu
     app.insert_state(AppState::MainMenu);
 
+    app.insert_resource(game_board_canvas);
     state_main_menu_mod::add_main_menu_to_app(&mut app);
 
     state_in_game_mod::add_in_game_to_app(&mut app);
