@@ -10,6 +10,8 @@ html {
 body {
     margin: 0;
     padding: 0;
+    /* Forbid the scrolling, game is not scrollable */
+    overflow: hidden;
 }
 
 /* Only one canvas (the whole screen) for the entire game*/
@@ -17,5 +19,4 @@ canvas {
     display: block;
     height: 100%;
     width: 100%;
-    border: 1px solid black;
 }

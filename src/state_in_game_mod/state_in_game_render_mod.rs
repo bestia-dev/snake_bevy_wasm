@@ -10,8 +10,8 @@ use crate::{
 
 pub fn render_snake_head(mut snake_head_query: Query<(&mut SnakeHead, &mut Transform), Changed<SnakeHead>>, game_board_canvas: Res<GameBoardCanvas>) {
     if let Ok((snake_head, mut transform)) = snake_head_query.single_mut() {
-        transform.translation.x = snake_head.position.to_bevy_x(game_board_canvas.sprite_width);
-        transform.translation.y = snake_head.position.to_bevy_y(game_board_canvas.sprite_height);
+        transform.translation.x = snake_head.position.to_bevy_x(&game_board_canvas);
+        transform.translation.y = snake_head.position.to_bevy_y(&game_board_canvas);
 
         // TODO: hot to flip using look_at???
         // rotate and/or flip head
@@ -19,8 +19,8 @@ pub fn render_snake_head(mut snake_head_query: Query<(&mut SnakeHead, &mut Trans
             Direction::Up => {
                 transform.look_at(
                     Vec3 {
-                        x: snake_head.position.to_bevy_x(game_board_canvas.sprite_width),
-                        y: snake_head.position.to_bevy_y(game_board_canvas.sprite_height),
+                        x: snake_head.position.to_bevy_x(&game_board_canvas),
+                        y: snake_head.position.to_bevy_y(&game_board_canvas),
                         z: f32::INFINITY,
                     },
                     Vec3::X,
@@ -29,8 +29,8 @@ pub fn render_snake_head(mut snake_head_query: Query<(&mut SnakeHead, &mut Trans
             Direction::Right => {
                 transform.look_at(
                     Vec3 {
-                        x: snake_head.position.to_bevy_x(game_board_canvas.sprite_width),
-                        y: snake_head.position.to_bevy_y(game_board_canvas.sprite_height),
+                        x: snake_head.position.to_bevy_x(&game_board_canvas),
+                        y: snake_head.position.to_bevy_y(&game_board_canvas),
                         z: f32::INFINITY,
                     },
                     Vec3 { x: 0.0, y: -1.0, z: 0.0 },
@@ -40,8 +40,8 @@ pub fn render_snake_head(mut snake_head_query: Query<(&mut SnakeHead, &mut Trans
             Direction::Down => {
                 transform.look_at(
                     Vec3 {
-                        x: snake_head.position.to_bevy_x(game_board_canvas.sprite_width),
-                        y: snake_head.position.to_bevy_y(game_board_canvas.sprite_height),
+                        x: snake_head.position.to_bevy_x(&game_board_canvas),
+                        y: snake_head.position.to_bevy_y(&game_board_canvas),
                         z: f32::INFINITY,
                     },
                     -Vec3::X,
@@ -50,8 +50,8 @@ pub fn render_snake_head(mut snake_head_query: Query<(&mut SnakeHead, &mut Trans
             Direction::Left => {
                 transform.look_at(
                     Vec3 {
-                        x: snake_head.position.to_bevy_x(game_board_canvas.sprite_width),
-                        y: snake_head.position.to_bevy_y(game_board_canvas.sprite_height),
+                        x: snake_head.position.to_bevy_x(&game_board_canvas),
+                        y: snake_head.position.to_bevy_y(&game_board_canvas),
                         z: f32::INFINITY,
                     },
                     Vec3::Y,
@@ -62,8 +62,8 @@ pub fn render_snake_head(mut snake_head_query: Query<(&mut SnakeHead, &mut Trans
 }
 pub fn render_bird(mut queried_entities: Query<(&mut Bird, &mut Transform), Changed<Bird>>, game_board_canvas: Res<GameBoardCanvas>) {
     if let Ok((bird, mut transform)) = queried_entities.single_mut() {
-        transform.translation.x = bird.position.to_bevy_x(game_board_canvas.sprite_width);
-        transform.translation.y = bird.position.to_bevy_y(game_board_canvas.sprite_height);
+        transform.translation.x = bird.position.to_bevy_x(&game_board_canvas);
+        transform.translation.y = bird.position.to_bevy_y(&game_board_canvas);
     }
 }
 
@@ -74,8 +74,8 @@ pub fn render_segment(
     game_board_canvas: Res<GameBoardCanvas>,
 ) {
     for (segment, mut transform, mut sprite) in segment_query.iter_mut() {
-        transform.translation.x = segment.position.to_bevy_x(game_board_canvas.sprite_width);
-        transform.translation.y = segment.position.to_bevy_y(game_board_canvas.sprite_height);
+        transform.translation.x = segment.position.to_bevy_x(&game_board_canvas);
+        transform.translation.y = segment.position.to_bevy_y(&game_board_canvas);
 
         // the last segment is the tail
         if segment.is_tail {
@@ -92,8 +92,8 @@ pub fn render_segment(
 // corner can be clockwise and counterclockwise
 fn rotate_segment(segment: &Mut<'_, SnakeSegment>, mut transform: Mut<'_, Transform>, game_board_canvas: &Res<GameBoardCanvas>) {
     let forward = Vec3 {
-        x: segment.position.to_bevy_x(game_board_canvas.sprite_width),
-        y: segment.position.to_bevy_y(game_board_canvas.sprite_height),
+        x: segment.position.to_bevy_x(game_board_canvas),
+        y: segment.position.to_bevy_y(game_board_canvas),
         z: f32::INFINITY,
     };
 

@@ -81,21 +81,23 @@ pub fn open_url_in_new_tab(url: &str) {
 }
 
 // get the width of the viewport
-pub fn get_viewport_width() -> i32 {
+pub fn get_client_width() -> i32 {
     web_sys::window()
         .expect("There should be a window")
-        .inner_width()
-        .expect("The window should have Some width")
-        .as_f64()
-        .expect("The width should be a number") as i32
+        .document()
+        .expect("There should be a document")
+        .document_element()
+        .expect("There should be a document_element")
+        .client_width()
 }
 
 // get the height of the viewport
-pub fn get_viewport_height() -> i32 {
+pub fn get_client_height() -> i32 {
     web_sys::window()
         .expect("There should be a window")
-        .inner_height()
-        .expect("The window should have Some height")
-        .as_f64()
-        .expect("The height should be a number") as i32
+        .document()
+        .expect("There should be a document")
+        .document_element()
+        .expect("There should be a document_element")
+        .client_height()
 }

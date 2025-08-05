@@ -102,8 +102,8 @@ pub fn move_segments(
                 StateScoped(AppState::InGame),
                 Sprite::from_image(asset_server.load("segment_horizontal.png")),
                 Transform::from_xyz(
-                    snake_head.last_position.to_bevy_x(game_board_canvas.sprite_width),
-                    snake_head.last_position.to_bevy_y(game_board_canvas.sprite_height),
+                    snake_head.last_position.to_bevy_x(&game_board_canvas),
+                    snake_head.last_position.to_bevy_y(&game_board_canvas),
                     OTHER_Z_LAYER,
                 ),
                 SnakeSegment {

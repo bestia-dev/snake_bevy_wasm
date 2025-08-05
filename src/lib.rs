@@ -88,8 +88,10 @@ enum AppState {
 
 #[derive(Resource)]
 struct GameBoardCanvas {
-    //canvas_width: i32,
-    //canvas_height: i32,
+    client_width: i32,
+    client_height: i32,
+    board_canvas_width: i32,
+    board_canvas_height: i32,
     sprite_width: f32,
     sprite_height: f32,
 }
@@ -97,39 +99,41 @@ struct GameBoardCanvas {
 #[wasm_bindgen]
 pub fn main() {
     // check viewport and define sizes
-    let viewport_width = wsm::get_viewport_width();
-    let viewport_height = wsm::get_viewport_height();
-    wsm::debug_write(&format!("{viewport_width} x {viewport_height}"));
+    let client_width = wsm::get_client_width();
+    let client_height = wsm::get_client_height();
+    wsm::debug_write(&format!("{client_width} x {client_height}"));
 
     // landscape for PC monitor viewport is around 1280 x 712px
-    let game_board_canvas = if viewport_width > viewport_height {
+    let game_board_canvas = if client_width > client_height {
         GameBoardCanvas {
-            //canvas_width: viewport_height,
-            //canvas_height: viewport_height,
-            sprite_width: viewport_height as f32 / BOARD_WIDTH as f32,
-            sprite_height: viewport_height as f32 / BOARD_HEIGHT as f32,
+            client_width,
+            client_height,
+            board_canvas_width: client_height,
+            board_canvas_height: client_height,
+            sprite_width: client_height as f32 / BOARD_WIDTH as f32,
+            sprite_height: client_height as f32 / BOARD_HEIGHT as f32,
         }
     } else {
         // portrait for mobile phone it is around 360px x 649px
         GameBoardCanvas {
-            //canvas_width: viewport_width,
-            //canvas_height: viewport_width,
-            sprite_width: viewport_width as f32 / BOARD_WIDTH as f32,
-            sprite_height: viewport_width as f32 / BOARD_HEIGHT as f32,
+            client_width,
+            client_height,
+            board_canvas_width: client_width,
+            board_canvas_height: client_width,
+            sprite_width: client_width as f32 / BOARD_WIDTH as f32,
+            sprite_height: client_width as f32 / BOARD_HEIGHT as f32,
         }
     };
 
     // rust has `Raw string literals` that are great!
     // just add r# before the starting double quotes and # after the ending double quotes.
-    let html = format!(
-        r#"
-<canvas id="snake_bevy_canvas" width="{viewport_width}" height="{viewport_height}"></canvas>
-"#
-    );
+    let html = r#"
+<canvas id="snake_bevy_canvas"></canvas>
+"#;
 
     // WARNING for HTML INJECTION! Never put user provided strings in set_html_element_inner_html.
     // Only correctly html encoded strings can use this function.
-    wsm::set_html_element_inner_html("div_for_wasm_html_injecting", &html);
+    wsm::set_html_element_inner_html("div_for_wasm_html_injecting", html);
 
     // bevy initiation
     let mut app = bevy::app::App::new();
@@ -139,7 +143,8 @@ pub fn main() {
                 primary_window: Some(Window {
                     // provide the ID selector string here
                     canvas: Some("#snake_bevy_canvas".into()),
-                    resolution: bevy::window::WindowResolution::new(viewport_width as f32, viewport_height as f32), //.with_scale_factor_override(1.0),
+                    // all client area
+                    resolution: bevy::window::WindowResolution::new(client_width as f32, client_height as f32), //.with_scale_factor_override(1.0),
                     resizable: false,
                     // ... any other window properties ...
                     ..default()

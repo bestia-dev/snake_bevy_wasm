@@ -81,7 +81,6 @@ struct AnimatedText;
 struct InstanceHandle(Handle<AudioInstance>);
 
 const STEP_DURATION: f64 = 0.2;
-const BOARD_CENTER: i32 = crate::BOARD_HEIGHT / 2;
 
 const SNAKE_Z_LAYER: f32 = 2.0;
 const BIRD_Z_LAYER: f32 = 1.0;
@@ -118,23 +117,38 @@ pub fn add_in_game_to_app(app: &mut App) {
 }
 
 // run on enter in state in_game
-fn on_enter_in_game(mut commands: Commands, asset_server: Res<AssetServer>, audio: Res<bevy_kira_audio::Audio>, game_board_canvas: Res<GameBoardCanvas>) {
+fn on_enter_in_game(
+    mut commands: Commands,
+    asset_server: Res<AssetServer>,
+    audio: Res<bevy_kira_audio::Audio>,
+    game_board_canvas: Res<GameBoardCanvas>,
+    mut meshes: ResMut<Assets<Mesh>>,
+    mut materials: ResMut<Assets<ColorMaterial>>,
+) {
     let handle = audio.play(asset_server.load("snake_hiss.mp3")).looped().handle();
     commands.insert_resource(InstanceHandle(handle));
 
     commands.spawn(Camera2d);
+
+    // render board border
+    commands.spawn((
+        Mesh2d(meshes.add(Rectangle::new(game_board_canvas.board_canvas_width as f32, game_board_canvas.board_canvas_height as f32))),
+        MeshMaterial2d(materials.add(ColorMaterial::from_color(LinearRgba::BLACK))),
+        // the center of the shape is rendered in the center of the screen.
+        // I will move it to the top left corner.
+        Transform::from_xyz(
+            -(game_board_canvas.client_width as f32 / 2.0 - game_board_canvas.board_canvas_width as f32 / 2.0),
+            -(game_board_canvas.client_height as f32 / 2.0 - game_board_canvas.board_canvas_height as f32 / 2.0),
+            0.0,
+        ),
+    ));
 
     // snake head
     let snake_head_position = Position { x: 10, y: 10 };
     commands.spawn((
         StateScoped(AppState::InGame),
         Sprite::from_image(asset_server.load("snake_head_left.png")),
-        Transform::from_xyz(
-            snake_head_position.to_bevy_x(game_board_canvas.sprite_width),
-            snake_head_position.to_bevy_y(game_board_canvas.sprite_height),
-            SNAKE_Z_LAYER,
-        )
-        .with_rotation(Quat::from_rotation_z(PI * 0.5)),
+        Transform::from_xyz(snake_head_position.to_bevy_x(&game_board_canvas), snake_head_position.to_bevy_y(&game_board_canvas), SNAKE_Z_LAYER).with_rotation(Quat::from_rotation_z(PI * 0.5)),
         SnakeHead {
             position: snake_head_position.clone(),
             direction: Direction::Down,
@@ -152,12 +166,7 @@ fn on_enter_in_game(mut commands: Commands, asset_server: Res<AssetServer>, audi
     commands.spawn((
         StateScoped(AppState::InGame),
         Sprite::from_image(asset_server.load("segment_horizontal.png")),
-        Transform::from_xyz(
-            segment_position.to_bevy_x(game_board_canvas.sprite_width),
-            segment_position.to_bevy_y(game_board_canvas.sprite_height),
-            OTHER_Z_LAYER,
-        )
-        .with_rotation(Quat::from_rotation_z(PI * 0.5)),
+        Transform::from_xyz(segment_position.to_bevy_x(&game_board_canvas), segment_position.to_bevy_y(&game_board_canvas), OTHER_Z_LAYER).with_rotation(Quat::from_rotation_z(PI * 0.5)),
         SnakeSegment {
             position: segment_position,
             direction: Direction::Down,
@@ -172,12 +181,7 @@ fn on_enter_in_game(mut commands: Commands, asset_server: Res<AssetServer>, audi
     commands.spawn((
         StateScoped(AppState::InGame),
         Sprite::from_image(asset_server.load("segment_tail.png")),
-        Transform::from_xyz(
-            segment_position.to_bevy_x(game_board_canvas.sprite_width),
-            segment_position.to_bevy_y(game_board_canvas.sprite_height),
-            OTHER_Z_LAYER,
-        )
-        .with_rotation(Quat::from_rotation_z(PI * 0.5)),
+        Transform::from_xyz(segment_position.to_bevy_x(&game_board_canvas), segment_position.to_bevy_y(&game_board_canvas), OTHER_Z_LAYER).with_rotation(Quat::from_rotation_z(PI * 0.5)),
         SnakeSegment {
             position: segment_position,
             direction: Direction::Down,
@@ -192,11 +196,7 @@ fn on_enter_in_game(mut commands: Commands, asset_server: Res<AssetServer>, audi
     commands.spawn((
         StateScoped(AppState::InGame),
         Sprite::from_image(asset_server.load("bird.png")),
-        Transform::from_xyz(
-            bird_position.to_bevy_x(game_board_canvas.sprite_width),
-            bird_position.to_bevy_y(game_board_canvas.sprite_height),
-            BIRD_Z_LAYER,
-        ),
+        Transform::from_xyz(bird_position.to_bevy_x(&game_board_canvas), bird_position.to_bevy_y(&game_board_canvas), BIRD_Z_LAYER),
         Bird { position: bird_position.clone() },
     ));
 
@@ -238,11 +238,11 @@ fn on_exit_in_game(handle: Res<InstanceHandle>, mut audio_instances: ResMut<Asse
 
 impl Position {
     /// transform GameCoordinates to BevyCoordinates
-    pub fn to_bevy_x(&self, sprite_width: f32) -> f32 {
-        self.x as f32 * sprite_width - (BOARD_CENTER as f32 * sprite_width) + (sprite_width / 2.)
+    pub fn to_bevy_x(&self, game_board_canvas: &GameBoardCanvas) -> f32 {
+        self.x as f32 * game_board_canvas.sprite_width - (game_board_canvas.client_width as f32 / 2.0) + (game_board_canvas.sprite_width / 2.)
     }
     /// transform GameCoordinates to BevyCoordinates. Strange because it goes in the opposite direction.
-    pub fn to_bevy_y(&self, sprite_height: f32) -> f32 {
-        -(self.y as f32) * sprite_height + (BOARD_CENTER as f32 * sprite_height) - (sprite_height / 2.)
+    pub fn to_bevy_y(&self, game_board_canvas: &GameBoardCanvas) -> f32 {
+        -(self.y as f32) * game_board_canvas.sprite_height + (game_board_canvas.client_height as f32 / 2.0) - (game_board_canvas.sprite_height / 2.)
     }
 }
