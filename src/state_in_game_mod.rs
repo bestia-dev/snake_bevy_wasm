@@ -106,6 +106,8 @@ pub fn add_in_game_to_app(app: &mut App) {
         // render frame and react to events
         Update,
         (
+            crate::handle_browser_resize.run_if(in_state(AppState::InGame)),
+            // draw_axis.run_if(in_state(AppState::InGame)),
             render_snake_head.run_if(in_state(AppState::InGame)),
             render_bird.run_if(in_state(AppState::InGame)),
             render_segment.run_if(in_state(AppState::InGame)),
@@ -117,31 +119,33 @@ pub fn add_in_game_to_app(app: &mut App) {
 }
 
 // run on enter in state in_game
-fn on_enter_in_game(
-    mut commands: Commands,
-    asset_server: Res<AssetServer>,
-    audio: Res<bevy_kira_audio::Audio>,
-    game_board_canvas: Res<GameBoardCanvas>,
-    mut meshes: ResMut<Assets<Mesh>>,
-    mut materials: ResMut<Assets<ColorMaterial>>,
-) {
+fn on_enter_in_game(mut commands: Commands, asset_server: Res<AssetServer>, audio: Res<bevy_kira_audio::Audio>, game_board_canvas: Res<GameBoardCanvas>) {
     let handle = audio.play(asset_server.load("snake_hiss.mp3")).looped().handle();
     commands.insert_resource(InstanceHandle(handle));
 
     commands.spawn(Camera2d);
 
-    // render board border
-    commands.spawn((
-        Mesh2d(meshes.add(Rectangle::new(game_board_canvas.board_canvas_width as f32, game_board_canvas.board_canvas_height as f32))),
-        MeshMaterial2d(materials.add(ColorMaterial::from_color(LinearRgba::BLACK))),
-        // the center of the shape is rendered in the center of the screen.
-        // I will move it to the top left corner.
-        Transform::from_xyz(
-            -(game_board_canvas.client_width as f32 / 2.0 - game_board_canvas.board_canvas_width as f32 / 2.0),
-            -(game_board_canvas.client_height as f32 / 2.0 - game_board_canvas.board_canvas_height as f32 / 2.0),
-            0.0,
-        ),
-    ));
+    let mut client = if game_board_canvas.client_width > game_board_canvas.client_height {
+        commands.spawn((StateScoped(AppState::InGame), crate::landscape(&game_board_canvas)))
+    } else {
+        commands.spawn((StateScoped(AppState::InGame), crate::portrait(&game_board_canvas)))
+    };
+
+    client.with_children(|client| {
+        client.spawn((
+            Node {
+                // Make node fill the entirety of its parent (in this case the window)
+                width: Val::Percent(100.0),
+                height: Val::Percent(100.0),
+                ..default()
+            },
+            Outline {
+                width: Val::Px(2.),
+                offset: Val::Px(-1.),
+                color: Color::BLACK,
+            },
+        ));
+    });
 
     // snake head
     let snake_head_position = Position { x: 10, y: 10 };

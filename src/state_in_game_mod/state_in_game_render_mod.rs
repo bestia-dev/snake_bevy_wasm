@@ -8,6 +8,14 @@ use crate::{
     state_in_game_mod::{Bird, DebugText, Direction, PointsText, SnakeHead, SnakeSegment},
 };
 
+/*
+pub fn draw_axis(mut gizmos: Gizmos) {
+    // gizmos.axes_2d(transform, 300);
+    gizmos.arrow_2d(Vec2::ZERO, Vec2::X * 300., bevy::color::palettes::css::GREEN);
+    gizmos.arrow_2d(Vec2::ZERO, Vec2::Y * 300., bevy::color::palettes::css::RED);
+}
+*/
+
 pub fn render_snake_head(mut snake_head_query: Query<(&mut SnakeHead, &mut Transform), Changed<SnakeHead>>, game_board_canvas: Res<GameBoardCanvas>) {
     if let Ok((snake_head, mut transform)) = snake_head_query.single_mut() {
         transform.translation.x = snake_head.position.to_bevy_x(&game_board_canvas);

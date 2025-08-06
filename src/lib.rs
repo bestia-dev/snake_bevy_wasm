@@ -87,7 +87,7 @@ enum AppState {
 }
 
 #[derive(Resource)]
-struct GameBoardCanvas {
+pub struct GameBoardCanvas {
     client_width: i32,
     client_height: i32,
     board_canvas_width: i32,
@@ -101,7 +101,6 @@ pub fn main() {
     // check viewport and define sizes
     let client_width = wsm::get_client_width();
     let client_height = wsm::get_client_height();
-    wsm::debug_write(&format!("{client_width} x {client_height}"));
 
     // landscape for PC monitor viewport is around 1280 x 712px
     let game_board_canvas = if client_width > client_height {
@@ -127,16 +126,20 @@ pub fn main() {
 
     // rust has `Raw string literals` that are great!
     // just add r# before the starting double quotes and # after the ending double quotes.
-    let html = r#"
-<canvas id="snake_bevy_canvas"></canvas>
-"#;
+    let html = format!(
+        r#"
+<canvas id="snake_bevy_canvas" width="{client_width}" height="{client_height}" ></canvas>
+"#,
+    );
 
     // WARNING for HTML INJECTION! Never put user provided strings in set_html_element_inner_html.
     // Only correctly html encoded strings can use this function.
-    wsm::set_html_element_inner_html("div_for_wasm_html_injecting", html);
+    wsm::set_html_element_inner_html("div_for_wasm_html_injecting", &html);
 
     // bevy initiation
     let mut app = bevy::app::App::new();
+    let bevy_window = bevy::window::WindowResolution::new(client_width as f32, client_height as f32);
+
     app.add_plugins((
         DefaultPlugins
             .set(WindowPlugin {
@@ -144,8 +147,8 @@ pub fn main() {
                     // provide the ID selector string here
                     canvas: Some("#snake_bevy_canvas".into()),
                     // all client area
-                    resolution: bevy::window::WindowResolution::new(client_width as f32, client_height as f32), //.with_scale_factor_override(1.0),
-                    resizable: false,
+                    resolution: bevy_window,
+                    fit_canvas_to_parent: true,
                     // ... any other window properties ...
                     ..default()
                 }),
@@ -177,4 +180,60 @@ pub fn main() {
     state_dead_mod::add_dead_to_app(&mut app);
 
     app.run();
+}
+
+/// Bevy 0.16 is not setting the correct width and height for the canvas element.
+/// I don't know why. The css style is correct, but the attributes of the html element are wrong.
+/// I must check this and correct this size frequently.
+pub fn handle_browser_resize(mut primary_query: bevy::ecs::system::Query<&mut bevy::window::Window, bevy::ecs::query::With<bevy::window::PrimaryWindow>>) {
+    let Some(wasm_window) = web_sys::window() else {
+        return;
+    };
+    let Ok(inner_width) = wasm_window.inner_width() else {
+        return;
+    };
+    let Ok(inner_height) = wasm_window.inner_height() else {
+        return;
+    };
+    let Some(target_width) = inner_width.as_f64() else {
+        return;
+    };
+    let Some(target_height) = inner_height.as_f64() else {
+        return;
+    };
+    for mut window in &mut primary_query {
+        if window.resolution.width() != (target_width as f32) || window.resolution.height() != (target_height as f32) {
+            window.resolution.set(target_width as f32, target_height as f32);
+        }
+    }
+}
+
+/// Portrait: left-top will be the square canvas, bottom is the remaining
+pub fn portrait(game_board_canvas: &Res<'_, GameBoardCanvas>) -> Node {
+    Node {
+        // Use the CSS Grid algorithm for laying out this node
+        display: Display::Grid,
+        // Make node fill the entirety of its parent (in this case the window)
+        width: Val::Percent(100.0),
+        height: Val::Percent(100.0),
+        // Set the grid to have 2 rows
+        // flex(1) means the remaining space
+        grid_template_rows: vec![GridTrack::px(game_board_canvas.board_canvas_height as f32), GridTrack::flex(1.0)],
+        ..default()
+    }
+}
+
+/// Landscape: left-top will be the square canvas, left is the remaining
+pub fn landscape(game_board_canvas: &Res<'_, GameBoardCanvas>) -> Node {
+    Node {
+        // Use the CSS Grid algorithm for laying out this node
+        display: Display::Grid,
+        // Make node fill the entirety of its parent (in this case the window)
+        width: Val::Percent(100.0),
+        height: Val::Percent(100.0),
+        // Set the grid to have 2 columns
+        // flex(1) means the remaining space
+        grid_template_columns: vec![GridTrack::px(game_board_canvas.board_canvas_width as f32), GridTrack::flex(1.0)],
+        ..default()
+    }
 }

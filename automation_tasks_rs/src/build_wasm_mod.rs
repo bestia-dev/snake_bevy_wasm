@@ -14,13 +14,17 @@ use cargo_auto_lib::ShellCommandLimitedDoubleQuotesSanitizerTrait;
 use cl::{BLUE, GREEN, RED, RESET, YELLOW};
 
 #[allow(dead_code)]
-/// wasm-pack build --profiling
+/// wasm-pack build --dev
 pub fn task_build() -> cl::CargoToml {
 
     let cargo_toml = cl::CargoToml::read();
     cl::auto_version_increment_semver_or_date();
     cl::run_shell_command_static("cargo fmt").unwrap_or_else(|e| panic!("{e}"));
     cl::run_shell_command_static("cargo clippy --no-deps").unwrap_or_else(|e| panic!("{e}"));
+    // wasm-pack makes enormous wasm in dev profile. Therefore I will use --profiling and --release
+    // both profiles use the cargo --release profile. But I want to config --release to be optimized.
+    // I will replace/toggle the title [profile.release] into [profile.dev]
+    cl::run_shell_command_static(r#"sed -i 's/\[profile\.release\]/[profile.dev]/' Cargo.toml"#).unwrap_or_else(|e| panic!("{e}"));
     cl::run_shell_command_static("wasm-pack build --target web --profiling").unwrap_or_else(|e| panic!("{e}"));
 
     cl::ShellCommandLimitedDoubleQuotesSanitizer::new(r#"rsync -a --delete-after pkg/ "web_server_folder/{package_name}/pkg/" "#).unwrap_or_else(|e| panic!("{e}"))
@@ -40,6 +44,10 @@ pub fn task_release() -> cl::CargoToml {
 
     cl::run_shell_command_static("cargo fmt").unwrap_or_else(|e| panic!("{e}"));
     cl::run_shell_command_static("cargo clippy --no-deps").unwrap_or_else(|e| panic!("{e}"));
+    // wasm-pack makes enormous wasm in dev profile. Therefore I will use --profiling and --release
+    // both profiles use the cargo --release profile. But I want to config --release to be optimized.
+    // I will replace/toggle the title [profile.dev] into [profile.release]
+    cl::run_shell_command_static(r#"sed -i 's/\[profile\.dev\]/[profile.release]/' Cargo.toml"#).unwrap_or_else(|e| panic!("{e}"));
     cl::run_shell_command_static("wasm-pack build --target web --release").unwrap_or_else(|e| panic!("{e}"));
 
     cl::ShellCommandLimitedDoubleQuotesSanitizer::new(r#"rsync -a --delete-after pkg/ "web_server_folder/{package_name}/pkg/" "#).unwrap_or_else(|e| panic!("{e}"))

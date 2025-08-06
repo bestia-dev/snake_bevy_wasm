@@ -1,7 +1,7 @@
 [package]
 name = "snake_bevy_wasm"
 # binary executable does not need to be SemVer, because nobody depends on it
-version = "1.1.17"
+version = "1.1.73"
 authors = ["bestia.dev"]
 homepage = "https://bestia.dev"
 edition = "2024"
@@ -47,6 +47,7 @@ features = [
   "Document",
   "Element",
   "ErrorEvent",
+  "HtmlCanvasElement",
   "HtmlElement",
   "HtmlInputElement",
   "Location",
@@ -56,13 +57,25 @@ features = [
 # [dev-dependencies]
 # wasm-bindgen-test = "0.3.36"
 
-#[package.metadata.wasm-pack.profile.release]
+[package.metadata.wasm-pack.profile.dev]
+# for faster builds. It builds using the --dev profile
+wasm-opt = false
+
+[profile.release]
+# dev makes the wasm big 170MB. Too Much. Release is only 17MB.
+# in automation_rs I will toggle this segment between .dev and .release
+# This way profile will use release without optimization and
+# release will use release with optimization
 panic = "abort"
-## for smaller wasm
+# for smaller wasm
 opt-level = 'z'
 lto = true
 codegen-units = 1
 
 [package.metadata.wasm-pack.profile.profiling]
-# for faster builds
+# for faster builds. It builds using the --release profile
 wasm-opt = false
+
+[package.metadata.wasm-pack.profile.release]
+#It builds using the --release profile
+wasm-opt = true
