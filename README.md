@@ -51,9 +51,10 @@ Read the releases changelog in a separate md file:
 
 ## TODO
 
-rotate least and mirror when upside down
-When dead, I want to see the snake.
-Sprites for segments and tail  
+loading image center of screen and black background
+preload assets
+When dead, I want to see the snake slowly disappearing.
+
 And code happily ever after...
 
 ## Open-source and free as a beer

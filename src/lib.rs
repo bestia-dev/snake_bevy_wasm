@@ -98,47 +98,19 @@ pub struct GameBoardCanvas {
 
 #[wasm_bindgen]
 pub fn main() {
-    // check viewport and define sizes
-    let client_width = wsm::get_client_width();
-    let client_height = wsm::get_client_height();
-
-    // landscape for PC monitor viewport is around 1280 x 712px
-    let game_board_canvas = if client_width > client_height {
-        GameBoardCanvas {
-            client_width,
-            client_height,
-            board_canvas_width: client_height,
-            board_canvas_height: client_height,
-            sprite_width: client_height as f32 / BOARD_WIDTH as f32,
-            sprite_height: client_height as f32 / BOARD_HEIGHT as f32,
-        }
-    } else {
-        // portrait for mobile phone it is around 360px x 649px
-        GameBoardCanvas {
-            client_width,
-            client_height,
-            board_canvas_width: client_width,
-            board_canvas_height: client_width,
-            sprite_width: client_width as f32 / BOARD_WIDTH as f32,
-            sprite_height: client_width as f32 / BOARD_HEIGHT as f32,
-        }
-    };
-
     // rust has `Raw string literals` that are great!
     // just add r# before the starting double quotes and # after the ending double quotes.
-    let html = format!(
-        r#"
-<canvas id="snake_bevy_canvas" width="{client_width}" height="{client_height}" ></canvas>
-"#,
-    );
+    let html = r#"
+<canvas id="snake_bevy_canvas" ></canvas>
+"#;
 
     // WARNING for HTML INJECTION! Never put user provided strings in set_html_element_inner_html.
     // Only correctly html encoded strings can use this function.
-    wsm::set_html_element_inner_html("div_for_wasm_html_injecting", &html);
+    wsm::set_html_element_inner_html("div_for_wasm_html_injecting", html);
 
     // bevy initiation
     let mut app = bevy::app::App::new();
-    let bevy_window = bevy::window::WindowResolution::new(client_width as f32, client_height as f32);
+    let game_board_canvas = get_game_board_canvas();
 
     app.add_plugins((
         DefaultPlugins
@@ -147,7 +119,7 @@ pub fn main() {
                     // provide the ID selector string here
                     canvas: Some("#snake_bevy_canvas".into()),
                     // all client area
-                    resolution: bevy_window,
+                    resolution: bevy::window::WindowResolution::new(game_board_canvas.client_width as f32, game_board_canvas.client_height as f32),
                     fit_canvas_to_parent: true,
                     // ... any other window properties ...
                     ..default()
@@ -182,29 +154,48 @@ pub fn main() {
     app.run();
 }
 
+// setup fit to window size on startup
+fn get_game_board_canvas() -> GameBoardCanvas {
+    // check viewport and define sizes
+    let client_width = wsm::get_client_width();
+    let client_height = wsm::get_client_height();
+
+    // landscape for PC monitor viewport is around 1280 x 712px
+    // portrait for mobile phone it is around 360px x 649px
+    // choose the smaller square to fit the window
+    let game_square_width = if client_width > client_height { client_height } else { client_width };
+    // return
+    GameBoardCanvas {
+        client_width,
+        client_height,
+        board_canvas_width: game_square_width,
+        board_canvas_height: game_square_width,
+        sprite_width: game_square_width as f32 / BOARD_WIDTH as f32,
+        sprite_height: game_square_width as f32 / BOARD_HEIGHT as f32,
+    }
+}
+
 /// Bevy 0.16 is not setting the correct width and height for the canvas element.
 /// I don't know why. The css style is correct, but the attributes of the html element are wrong.
 /// I must check this and correct this size frequently.
-pub fn handle_browser_resize(mut primary_query: bevy::ecs::system::Query<&mut bevy::window::Window, bevy::ecs::query::With<bevy::window::PrimaryWindow>>) {
-    let Some(wasm_window) = web_sys::window() else {
-        return;
-    };
-    let Ok(inner_width) = wasm_window.inner_width() else {
-        return;
-    };
-    let Ok(inner_height) = wasm_window.inner_height() else {
-        return;
-    };
-    let Some(target_width) = inner_width.as_f64() else {
-        return;
-    };
-    let Some(target_height) = inner_height.as_f64() else {
-        return;
-    };
-    for mut window in &mut primary_query {
-        if window.resolution.width() != (target_width as f32) || window.resolution.height() != (target_height as f32) {
-            window.resolution.set(target_width as f32, target_height as f32);
-        }
+pub fn handle_browser_resize(mut game_board_canvas: ResMut<GameBoardCanvas>, mut window: bevy::ecs::system::Single<&mut bevy::window::Window, bevy::ecs::query::With<bevy::window::PrimaryWindow>>) {
+    let client_width = wsm::get_client_width();
+    let client_height = wsm::get_client_height();
+
+    if (window.resolution.width() as i32) != client_width || (window.resolution.height() as i32) != client_height {
+        // debug!("handle_browser_resize {client_width} {client_height}");
+        game_board_canvas.client_width = client_width;
+        game_board_canvas.client_height = client_height;
+        // landscape for PC monitor viewport is around 1280 x 712px
+        // portrait for mobile phone it is around 360px x 649px
+        // choose the smaller square to fit the window
+        let game_square_width = if client_width > client_height { client_height } else { client_width };
+        game_board_canvas.board_canvas_width = game_square_width;
+        game_board_canvas.board_canvas_height = game_square_width;
+        game_board_canvas.sprite_width = game_square_width as f32 / BOARD_WIDTH as f32;
+        game_board_canvas.sprite_height = game_square_width as f32 / BOARD_HEIGHT as f32;
+
+        window.resolution.set(client_width as f32, client_height as f32);
     }
 }
 
