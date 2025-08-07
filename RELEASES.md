@@ -13,6 +13,9 @@ The TODO section is part of the [README.md](https://github.com/automation-tasks-
 - viewport
 - width, height
 - full screen
+- buttons arrows
+
+- touchscreen
 
 ## Version 1.0.160 (2025-07-30)
 
