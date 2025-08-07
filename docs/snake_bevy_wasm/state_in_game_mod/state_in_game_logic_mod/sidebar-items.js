@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"fn":["check_dead","eat_bird","move_segments","move_snake_head"]};
+window.SIDEBAR_ITEMS = {"constant":["BIRD_COLORS"],"fn":["check_dead","eat_bird","move_segments","move_snake_head"]};

@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":["ButtonEnum"],"fn":["add_dead_to_app","button_interaction_system","handle_dead_ui_input","on_enter_dead"]};
+window.SIDEBAR_ITEMS = {"enum":["ButtonEnum"],"fn":["add_dead_to_app","button_interaction_system","handle_dead_ui_input","on_enter_dead","on_exit_dead"]};
