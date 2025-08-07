@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"fn":["handle_movement_input"]};
+window.SIDEBAR_ITEMS = {"fn":["button_interaction_system","handle_movement_input"]};

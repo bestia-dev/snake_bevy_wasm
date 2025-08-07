@@ -2,8 +2,8 @@
 <a href=#2 id=2 data-nosnippet>2</a><span class="kw">use </span>bevy_kira_audio::AudioControl;
 <a href=#3 id=3 data-nosnippet>3</a>
 <a href=#4 id=4 data-nosnippet>4</a><span class="kw">use crate</span>::{
-<a href=#5 id=5 data-nosnippet>5</a>    AppState,
-<a href=#6 id=6 data-nosnippet>6</a>    state_in_game_mod::{BOARD_HEIGHT, BOARD_WIDTH, Bird, DebugText, Direction, OTHER_Z_LAYER, SnakeHead, SnakeSegment, SnakeSegmentIndex},
+<a href=#5 id=5 data-nosnippet>5</a>    AppState, BOARD_HEIGHT, BOARD_WIDTH, GameBoardCanvas,
+<a href=#6 id=6 data-nosnippet>6</a>    state_in_game_mod::{Bird, DebugText, Direction, OTHER_Z_LAYER, SnakeHead, SnakeSegment, SnakeSegmentIndex},
 <a href=#7 id=7 data-nosnippet>7</a>};
 <a href=#8 id=8 data-nosnippet>8</a>
 <a href=#9 id=9 data-nosnippet>9</a><span class="comment">// fixed time every 0.5 seconds
@@ -76,49 +76,59 @@
 <a href=#76 id=76 data-nosnippet>76</a>}
 <a href=#77 id=77 data-nosnippet>77</a>
 <a href=#78 id=78 data-nosnippet>78</a><span class="doccomment">/// first segment is after the snake head
-<a href=#79 id=79 data-nosnippet>79</a></span><span class="kw">pub fn </span>move_segments(<span class="kw-2">mut </span>commands: Commands, <span class="kw-2">mut </span>snake_query: Query&lt;<span class="kw-2">&amp;mut </span>SnakeHead&gt;, <span class="kw-2">mut </span>segment_query: Query&lt;(<span class="kw-2">&amp;mut </span>SnakeSegment, <span class="kw-2">&amp;mut </span>SnakeSegmentIndex)&gt;, asset_server: Res&lt;AssetServer&gt;) {
-<a href=#80 id=80 data-nosnippet>80</a>    <span class="kw">if let </span><span class="prelude-val">Ok</span>(<span class="kw-2">mut </span>snake_head) = snake_query.single_mut() {
-<a href=#81 id=81 data-nosnippet>81</a>        <span class="comment">// Sort according to `usize index`.
-<a href=#82 id=82 data-nosnippet>82</a>        </span><span class="kw">let </span><span class="kw-2">mut </span>sorted_snake_segments: Vec&lt;<span class="kw">_</span>&gt; = segment_query
-<a href=#83 id=83 data-nosnippet>83</a>            .iter_mut()
-<a href=#84 id=84 data-nosnippet>84</a>            .sort_by::&lt;(<span class="kw-2">&amp;</span>SnakeSegment, <span class="kw-2">&amp;</span>SnakeSegmentIndex)&gt;(|value_1, value_2| value_1.<span class="number">1</span>.index.cmp(<span class="kw-2">&amp;</span>value_2.<span class="number">1</span>.index))
-<a href=#85 id=85 data-nosnippet>85</a>            .collect();
-<a href=#86 id=86 data-nosnippet>86</a>
-<a href=#87 id=87 data-nosnippet>87</a>        <span class="kw">for </span>snake_segment <span class="kw">in </span>sorted_snake_segments.iter_mut() {
-<a href=#88 id=88 data-nosnippet>88</a>            snake_segment.<span class="number">1</span>.index += <span class="number">1</span>;
-<a href=#89 id=89 data-nosnippet>89</a>        }
-<a href=#90 id=90 data-nosnippet>90</a>
-<a href=#91 id=91 data-nosnippet>91</a>        <span class="comment">// if eating, spawn the new index zero, all rest of segments remain equal
-<a href=#92 id=92 data-nosnippet>92</a>        </span><span class="kw">if </span>snake_head.just_eating {
-<a href=#93 id=93 data-nosnippet>93</a>            snake_head.just_eating = <span class="bool-val">false</span>;
-<a href=#94 id=94 data-nosnippet>94</a>
-<a href=#95 id=95 data-nosnippet>95</a>            commands.spawn((
-<a href=#96 id=96 data-nosnippet>96</a>                StateScoped(AppState::InGame),
-<a href=#97 id=97 data-nosnippet>97</a>                Sprite::from_image(asset_server.load(<span class="string">"segment_horizontal.png"</span>)),
-<a href=#98 id=98 data-nosnippet>98</a>                Transform::from_xyz(snake_head.last_position.to_bevy_x(), snake_head.last_position.to_bevy_y(), OTHER_Z_LAYER),
-<a href=#99 id=99 data-nosnippet>99</a>                SnakeSegment {
-<a href=#100 id=100 data-nosnippet>100</a>                    position: snake_head.last_position.clone(),
-<a href=#101 id=101 data-nosnippet>101</a>                    direction: snake_head.direction.clone(),
-<a href=#102 id=102 data-nosnippet>102</a>                    last_direction: snake_head.last_direction.clone(),
-<a href=#103 id=103 data-nosnippet>103</a>                    is_tail: <span class="bool-val">false</span>,
-<a href=#104 id=104 data-nosnippet>104</a>                },
-<a href=#105 id=105 data-nosnippet>105</a>                SnakeSegmentIndex { index: <span class="number">0 </span>},
-<a href=#106 id=106 data-nosnippet>106</a>            ));
-<a href=#107 id=107 data-nosnippet>107</a>        } <span class="kw">else </span>{
-<a href=#108 id=108 data-nosnippet>108</a>            <span class="comment">// the last segment becomes the first (zero) to avoid new spawn()
-<a href=#109 id=109 data-nosnippet>109</a>            </span><span class="kw">let </span>new_first_segment = sorted_snake_segments.last_mut().unwrap();
-<a href=#110 id=110 data-nosnippet>110</a>            <span class="comment">// new values for the new first segment
-<a href=#111 id=111 data-nosnippet>111</a>            </span>new_first_segment.<span class="number">1</span>.index = <span class="number">0</span>;
-<a href=#112 id=112 data-nosnippet>112</a>            new_first_segment.<span class="number">0</span>.position = snake_head.last_position.clone();
-<a href=#113 id=113 data-nosnippet>113</a>            new_first_segment.<span class="number">0</span>.direction = snake_head.direction.clone();
-<a href=#114 id=114 data-nosnippet>114</a>            new_first_segment.<span class="number">0</span>.last_direction = snake_head.last_direction.clone();
-<a href=#115 id=115 data-nosnippet>115</a>            new_first_segment.<span class="number">0</span>.is_tail = <span class="bool-val">false</span>;
-<a href=#116 id=116 data-nosnippet>116</a>
-<a href=#117 id=117 data-nosnippet>117</a>            <span class="comment">// the new last segment becomes the tail
-<a href=#118 id=118 data-nosnippet>118</a>            // The segments are always at least 2 elements.
-<a href=#119 id=119 data-nosnippet>119</a>            </span><span class="kw">let </span>segment_len = sorted_snake_segments.len();
-<a href=#120 id=120 data-nosnippet>120</a>            <span class="kw">let </span>new_last_segment = sorted_snake_segments.get_mut(segment_len - <span class="number">2</span>).unwrap();
-<a href=#121 id=121 data-nosnippet>121</a>            new_last_segment.<span class="number">0</span>.is_tail = <span class="bool-val">true</span>;
-<a href=#122 id=122 data-nosnippet>122</a>        }
-<a href=#123 id=123 data-nosnippet>123</a>    }
-<a href=#124 id=124 data-nosnippet>124</a>}</code></pre></div></section></main></body></html>
+<a href=#79 id=79 data-nosnippet>79</a></span><span class="kw">pub fn </span>move_segments(
+<a href=#80 id=80 data-nosnippet>80</a>    <span class="kw-2">mut </span>commands: Commands,
+<a href=#81 id=81 data-nosnippet>81</a>    <span class="kw-2">mut </span>snake_query: Query&lt;<span class="kw-2">&amp;mut </span>SnakeHead&gt;,
+<a href=#82 id=82 data-nosnippet>82</a>    <span class="kw-2">mut </span>segment_query: Query&lt;(<span class="kw-2">&amp;mut </span>SnakeSegment, <span class="kw-2">&amp;mut </span>SnakeSegmentIndex)&gt;,
+<a href=#83 id=83 data-nosnippet>83</a>    asset_server: Res&lt;AssetServer&gt;,
+<a href=#84 id=84 data-nosnippet>84</a>    game_board_canvas: Res&lt;GameBoardCanvas&gt;,
+<a href=#85 id=85 data-nosnippet>85</a>) {
+<a href=#86 id=86 data-nosnippet>86</a>    <span class="kw">if let </span><span class="prelude-val">Ok</span>(<span class="kw-2">mut </span>snake_head) = snake_query.single_mut() {
+<a href=#87 id=87 data-nosnippet>87</a>        <span class="comment">// Sort according to `usize index`.
+<a href=#88 id=88 data-nosnippet>88</a>        </span><span class="kw">let </span><span class="kw-2">mut </span>sorted_snake_segments: Vec&lt;<span class="kw">_</span>&gt; = segment_query
+<a href=#89 id=89 data-nosnippet>89</a>            .iter_mut()
+<a href=#90 id=90 data-nosnippet>90</a>            .sort_by::&lt;(<span class="kw-2">&amp;</span>SnakeSegment, <span class="kw-2">&amp;</span>SnakeSegmentIndex)&gt;(|value_1, value_2| value_1.<span class="number">1</span>.index.cmp(<span class="kw-2">&amp;</span>value_2.<span class="number">1</span>.index))
+<a href=#91 id=91 data-nosnippet>91</a>            .collect();
+<a href=#92 id=92 data-nosnippet>92</a>
+<a href=#93 id=93 data-nosnippet>93</a>        <span class="kw">for </span>snake_segment <span class="kw">in </span>sorted_snake_segments.iter_mut() {
+<a href=#94 id=94 data-nosnippet>94</a>            snake_segment.<span class="number">1</span>.index += <span class="number">1</span>;
+<a href=#95 id=95 data-nosnippet>95</a>        }
+<a href=#96 id=96 data-nosnippet>96</a>
+<a href=#97 id=97 data-nosnippet>97</a>        <span class="comment">// if eating, spawn the new index zero, all rest of segments remain equal
+<a href=#98 id=98 data-nosnippet>98</a>        </span><span class="kw">if </span>snake_head.just_eating {
+<a href=#99 id=99 data-nosnippet>99</a>            snake_head.just_eating = <span class="bool-val">false</span>;
+<a href=#100 id=100 data-nosnippet>100</a>
+<a href=#101 id=101 data-nosnippet>101</a>            commands.spawn((
+<a href=#102 id=102 data-nosnippet>102</a>                StateScoped(AppState::InGame),
+<a href=#103 id=103 data-nosnippet>103</a>                Sprite::from_image(asset_server.load(<span class="string">"segment_horizontal.png"</span>)),
+<a href=#104 id=104 data-nosnippet>104</a>                Transform::from_xyz(
+<a href=#105 id=105 data-nosnippet>105</a>                    snake_head.last_position.to_bevy_x(<span class="kw-2">&amp;</span>game_board_canvas),
+<a href=#106 id=106 data-nosnippet>106</a>                    snake_head.last_position.to_bevy_y(<span class="kw-2">&amp;</span>game_board_canvas),
+<a href=#107 id=107 data-nosnippet>107</a>                    OTHER_Z_LAYER,
+<a href=#108 id=108 data-nosnippet>108</a>                ),
+<a href=#109 id=109 data-nosnippet>109</a>                SnakeSegment {
+<a href=#110 id=110 data-nosnippet>110</a>                    position: snake_head.last_position.clone(),
+<a href=#111 id=111 data-nosnippet>111</a>                    direction: snake_head.direction.clone(),
+<a href=#112 id=112 data-nosnippet>112</a>                    last_direction: snake_head.last_direction.clone(),
+<a href=#113 id=113 data-nosnippet>113</a>                    is_tail: <span class="bool-val">false</span>,
+<a href=#114 id=114 data-nosnippet>114</a>                },
+<a href=#115 id=115 data-nosnippet>115</a>                SnakeSegmentIndex { index: <span class="number">0 </span>},
+<a href=#116 id=116 data-nosnippet>116</a>            ));
+<a href=#117 id=117 data-nosnippet>117</a>        } <span class="kw">else </span>{
+<a href=#118 id=118 data-nosnippet>118</a>            <span class="comment">// the last segment becomes the first (zero) to avoid new spawn()
+<a href=#119 id=119 data-nosnippet>119</a>            </span><span class="kw">let </span>new_first_segment = sorted_snake_segments.last_mut().unwrap();
+<a href=#120 id=120 data-nosnippet>120</a>            <span class="comment">// new values for the new first segment
+<a href=#121 id=121 data-nosnippet>121</a>            </span>new_first_segment.<span class="number">1</span>.index = <span class="number">0</span>;
+<a href=#122 id=122 data-nosnippet>122</a>            new_first_segment.<span class="number">0</span>.position = snake_head.last_position.clone();
+<a href=#123 id=123 data-nosnippet>123</a>            new_first_segment.<span class="number">0</span>.direction = snake_head.direction.clone();
+<a href=#124 id=124 data-nosnippet>124</a>            new_first_segment.<span class="number">0</span>.last_direction = snake_head.last_direction.clone();
+<a href=#125 id=125 data-nosnippet>125</a>            new_first_segment.<span class="number">0</span>.is_tail = <span class="bool-val">false</span>;
+<a href=#126 id=126 data-nosnippet>126</a>
+<a href=#127 id=127 data-nosnippet>127</a>            <span class="comment">// the new last segment becomes the tail
+<a href=#128 id=128 data-nosnippet>128</a>            // The segments are always at least 2 elements.
+<a href=#129 id=129 data-nosnippet>129</a>            </span><span class="kw">let </span>segment_len = sorted_snake_segments.len();
+<a href=#130 id=130 data-nosnippet>130</a>            <span class="kw">let </span>new_last_segment = sorted_snake_segments.get_mut(segment_len - <span class="number">2</span>).unwrap();
+<a href=#131 id=131 data-nosnippet>131</a>            new_last_segment.<span class="number">0</span>.is_tail = <span class="bool-val">true</span>;
+<a href=#132 id=132 data-nosnippet>132</a>        }
+<a href=#133 id=133 data-nosnippet>133</a>    }
+<a href=#134 id=134 data-nosnippet>134</a>}</code></pre></div></section></main></body></html>
