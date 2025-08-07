@@ -2,8 +2,13 @@
 
 use bevy::prelude::*;
 
-use crate::{AppState, GameBoardCanvas, VERSION};
+use crate::{AppState, GameBoardCanvas, Orientation, VERSION};
 use bevy::color::palettes::css::{GREEN, RED, YELLOW};
+
+#[derive(Component, PartialEq)]
+enum ButtonEnum {
+    KeyN,
+}
 
 pub fn add_main_menu_to_app(app: &mut App) {
     app.add_systems(OnEnter(AppState::MainMenu), on_enter_main_menu);
@@ -14,14 +19,15 @@ pub fn add_main_menu_to_app(app: &mut App) {
         (
             handle_main_menu_ui_input.run_if(in_state(AppState::MainMenu)),
             crate::handle_browser_resize.run_if(in_state(AppState::MainMenu)),
+            button_interaction_system.run_if(in_state(AppState::MainMenu)),
         ),
     );
 }
 
-pub fn on_enter_main_menu(mut commands: Commands, game_board_canvas: Res<GameBoardCanvas>) {
+pub fn on_enter_main_menu(mut commands: Commands, game_board_canvas: Res<GameBoardCanvas>, asset_server: Res<AssetServer>) {
     commands.spawn(Camera2d);
 
-    let mut client = if game_board_canvas.client_width > game_board_canvas.client_height {
+    let mut client = if game_board_canvas.orientation == Orientation::Landscape {
         commands.spawn((StateScoped(AppState::MainMenu), crate::landscape(&game_board_canvas)))
     } else {
         commands.spawn((StateScoped(AppState::MainMenu), crate::portrait(&game_board_canvas)))
@@ -45,74 +51,114 @@ pub fn on_enter_main_menu(mut commands: Commands, game_board_canvas: Res<GameBoa
                 color: Color::WHITE,
             },
         ));
-        {
-            grid.with_children(|grid| {
-                // Header
-                let mut header_box = grid.spawn((Node {
-                    flex_direction: FlexDirection::Column,
-                    align_items: AlignItems::Center,
-                    justify_content: JustifyContent::Center,
 
-                    ..default()
-                },));
-                {
-                    header_box.with_children(|header_box| {
-                        // Header
-                        header_box.spawn((
-                            Text::new("bestia.dev/snake_bevy_wasm"),
-                            TextFont {
-                                font_size: game_board_canvas.sprite_height,
-                                ..default()
-                            },
-                            TextLayout::new_with_justify(JustifyText::Center),
-                            TextColor::from(GREEN),
-                        ));
-                        // debug line to see where is the coordinating system
-                        header_box.spawn(());
-                    });
-                }
-                // middle
-                let mut middle_box = grid.spawn((Node {
-                    flex_direction: FlexDirection::Column,
+        grid.with_children(|grid| {
+            // Header
+            let mut header_box = grid.spawn((Node {
+                flex_direction: FlexDirection::Column,
+                align_items: AlignItems::Center,
+                justify_content: JustifyContent::Center,
+
+                ..default()
+            },));
+            {
+                header_box.with_children(|header_box| {
+                    // Header
+                    header_box.spawn((
+                        Text::new("bestia.dev/snake_bevy_wasm"),
+                        TextFont {
+                            font_size: game_board_canvas.sprite_height,
+                            ..default()
+                        },
+                        TextLayout::new_with_justify(JustifyText::Center),
+                        TextColor::from(GREEN),
+                    ));
+                    // debug line to see where is the coordinating system
+                    header_box.spawn(());
+                });
+            }
+            // middle
+            let mut middle_box = grid.spawn((Node {
+                flex_direction: FlexDirection::Column,
+                align_items: AlignItems::Center,
+                justify_content: JustifyContent::Center,
+                ..default()
+            },));
+            {
+                middle_box.with_children(|middle_box| {
+                    // middle
+                    middle_box.spawn((
+                        Text::new(format!("Bestia.dev tutorial\nRust+Bevy+Wasm v{VERSION}")),
+                        TextFont {
+                            font_size: game_board_canvas.sprite_height,
+                            ..default()
+                        },
+                        TextLayout::new_with_justify(JustifyText::Center),
+                        TextColor::from(YELLOW),
+                    ));
+                });
+            }
+            // footer
+            let mut footer_box = grid.spawn((Node {
+                flex_direction: FlexDirection::Column,
+                align_items: AlignItems::Center,
+                justify_content: JustifyContent::Center,
+                ..default()
+            },));
+            {
+                footer_box.with_children(|footer_box| {
+                    // footer
+                    footer_box.spawn((
+                        Text::new("Press N to start"),
+                        TextFont {
+                            font_size: game_board_canvas.sprite_height,
+                            ..default()
+                        },
+                        TextLayout::new_with_justify(JustifyText::Center),
+                        TextColor::from(RED),
+                    ));
+                });
+            }
+        });
+
+        if game_board_canvas.orientation == Orientation::Portrait {
+            let mut keys = client.spawn((
+                Node {
+                    // Use the CSS Grid algorithm for laying out this node
+                    display: Display::Grid,
+                    // Make node fill the entirety of its parent (in this case the window)
+                    width: Val::Percent(100.0),
+                    height: Val::Percent(100.0),
                     align_items: AlignItems::Center,
                     justify_content: JustifyContent::Center,
                     ..default()
-                },));
-                {
-                    middle_box.with_children(|middle_box| {
-                        // middle
-                        middle_box.spawn((
-                            Text::new(format!("Bestia.dev tutorial\nRust+Bevy+Wasm v{VERSION}")),
-                            TextFont {
-                                font_size: game_board_canvas.sprite_height,
-                                ..default()
-                            },
-                            TextLayout::new_with_justify(JustifyText::Center),
-                            TextColor::from(YELLOW),
-                        ));
-                    });
-                }
-                // footer
-                let mut footer_box = grid.spawn((Node {
-                    flex_direction: FlexDirection::Column,
-                    align_items: AlignItems::Center,
-                    justify_content: JustifyContent::Center,
-                    ..default()
-                },));
-                {
-                    footer_box.with_children(|footer_box| {
-                        // footer
-                        footer_box.spawn((
-                            Text::new("Press N to start"),
-                            TextFont {
-                                font_size: game_board_canvas.sprite_height,
-                                ..default()
-                            },
-                            TextLayout::new_with_justify(JustifyText::Center),
-                            TextColor::from(RED),
-                        ));
-                    });
-                }
+                },
+                Outline {
+                    width: Val::Px(1.),
+                    offset: Val::Px(-2.),
+                    color: Color::from(RED),
+                },
+            ));
+            keys.with_children(|keys| {
+                keys.spawn((
+                    Button,
+                    ButtonEnum::KeyN,
+                    ImageNode {
+                        image: asset_server.load("key_n.png"),
+                        ..default()
+                    },
+                    Interaction::None,
+                    Node {
+                        width: Val::Px(80.),
+                        height: Val::Px(80.),
+                        // horizontally center child text
+                        justify_content: JustifyContent::Center,
+                        // vertically center child text
+                        align_items: AlignItems::Center,
+                        margin: UiRect::all(Val::Px(20.0)),
+                        ..default()
+                    },
+                ));
             });
         }
     });
@@ -121,5 +167,14 @@ pub fn on_enter_main_menu(mut commands: Commands, game_board_canvas: Res<GameBoa
 pub fn handle_main_menu_ui_input(keys: Res<ButtonInput<KeyCode>>, mut next_state: ResMut<NextState<AppState>>) {
     if keys.pressed(KeyCode::KeyN) {
         next_state.set(AppState::InGame);
+    }
+}
+
+#[allow(clippy::type_complexity)]
+fn button_interaction_system(interaction_query: Query<(&ButtonEnum, &Interaction), (Changed<Interaction>, With<Button>)>, mut next_state: ResMut<NextState<AppState>>) {
+    for interaction in interaction_query {
+        if *interaction.0 == ButtonEnum::KeyN && *interaction.1 == Interaction::Pressed {
+            next_state.set(AppState::InGame);
+        }
     }
 }

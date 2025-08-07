@@ -86,10 +86,17 @@ enum AppState {
     Dead,
 }
 
+#[derive(PartialEq)]
+pub enum Orientation {
+    Landscape,
+    Portrait,
+}
+
 #[derive(Resource)]
 pub struct GameBoardCanvas {
     client_width: i32,
     client_height: i32,
+    orientation: Orientation,
     board_canvas_width: i32,
     board_canvas_height: i32,
     sprite_width: f32,
@@ -163,11 +170,16 @@ fn get_game_board_canvas() -> GameBoardCanvas {
     // landscape for PC monitor viewport is around 1280 x 712px
     // portrait for mobile phone it is around 360px x 649px
     // choose the smaller square to fit the window
-    let game_square_width = if client_width > client_height { client_height } else { client_width };
+    let (game_square_width, orientation) = if client_width > client_height {
+        (client_height, Orientation::Landscape)
+    } else {
+        (client_width, Orientation::Portrait)
+    };
     // return
     GameBoardCanvas {
         client_width,
         client_height,
+        orientation,
         board_canvas_width: game_square_width,
         board_canvas_height: game_square_width,
         sprite_width: game_square_width as f32 / BOARD_WIDTH as f32,
@@ -189,7 +201,12 @@ pub fn handle_browser_resize(mut game_board_canvas: ResMut<GameBoardCanvas>, mut
         // landscape for PC monitor viewport is around 1280 x 712px
         // portrait for mobile phone it is around 360px x 649px
         // choose the smaller square to fit the window
-        let game_square_width = if client_width > client_height { client_height } else { client_width };
+        let (game_square_width, orientation) = if client_width > client_height {
+            (client_height, Orientation::Landscape)
+        } else {
+            (client_width, Orientation::Portrait)
+        };
+        game_board_canvas.orientation = orientation;
         game_board_canvas.board_canvas_width = game_square_width;
         game_board_canvas.board_canvas_height = game_square_width;
         game_board_canvas.sprite_width = game_square_width as f32 / BOARD_WIDTH as f32;

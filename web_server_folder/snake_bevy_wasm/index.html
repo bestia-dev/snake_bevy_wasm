@@ -50,12 +50,9 @@
 
     <!-- display an image while waiting for wasm download. 
     The content of this div will change from the wasm code.-->
-    <div id="div_for_wasm_html_injecting">
-        <div
-            style="max-width: 512px; display: grid;grid-template-columns: 512px; grid-auto-rows: 512px; border: solid;">
-            <img src="assets/loading.jpg"></img>
-            </canvas>
-        </div>
+    <div id="div_for_wasm_html_injecting" style="width:100%; height:100%;">
+        <img src="assets/loading.jpg"
+            style="object-fit:contain;max-width: 100%; max-height: 100%; width: 100%; height: 100%;"></img>
     </div>
 
     <div class="fc_red" id="div_for_errors"></div>

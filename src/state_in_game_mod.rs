@@ -5,7 +5,7 @@ use std::f32::consts::PI;
 use bevy::prelude::*;
 use bevy_kira_audio::{AudioControl, AudioInstance, AudioTween};
 
-use crate::{AppState, GameBoardCanvas};
+use crate::{AppState, GameBoardCanvas, Orientation};
 mod state_in_game_events_mod;
 use state_in_game_events_mod::*;
 mod state_in_game_logic_mod;
@@ -125,7 +125,7 @@ fn on_enter_in_game(mut commands: Commands, asset_server: Res<AssetServer>, audi
 
     commands.spawn(Camera2d);
 
-    let mut client = if game_board_canvas.client_width > game_board_canvas.client_height {
+    let mut client = if game_board_canvas.orientation == Orientation::Landscape {
         commands.spawn((StateScoped(AppState::InGame), crate::landscape(&game_board_canvas)))
     } else {
         commands.spawn((StateScoped(AppState::InGame), crate::portrait(&game_board_canvas)))

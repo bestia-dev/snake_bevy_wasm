@@ -8,10 +8,13 @@ html {
 }
 
 body {
+    height: 100%;
+    width: 100%;
     margin: 0;
     padding: 0;
     /* Forbid the scrolling, game is not scrollable */
     overflow: hidden;
+    background-color:rgb(35, 49, 35);
 }
 
 /* Only one canvas (the whole screen) for the entire game*/
