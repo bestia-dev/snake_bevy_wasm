@@ -2,7 +2,7 @@
 
 use std::f32::consts::PI;
 
-use bevy::prelude::*;
+use bevy::{color::palettes::css::RED, prelude::*};
 use bevy_kira_audio::{AudioControl, AudioInstance, AudioTween};
 
 use crate::{AppState, GameBoardCanvas, Orientation};
@@ -80,6 +80,15 @@ struct AnimatedText;
 #[derive(Resource)]
 struct InstanceHandle(Handle<AudioInstance>);
 
+#[derive(Component, PartialEq)]
+enum ButtonEnum {
+    KeyUp,
+    KeyRight,
+    KeyDown,
+    KeyLeft,
+    KeyX,
+}
+
 const STEP_DURATION: f64 = 0.2;
 
 const SNAKE_Z_LAYER: f32 = 2.0;
@@ -107,6 +116,7 @@ pub fn add_in_game_to_app(app: &mut App) {
         Update,
         (
             crate::handle_browser_resize.run_if(in_state(AppState::InGame)),
+            button_interaction_system.run_if(in_state(AppState::InGame)),
             // draw_axis.run_if(in_state(AppState::InGame)),
             render_snake_head.run_if(in_state(AppState::InGame)),
             render_bird.run_if(in_state(AppState::InGame)),
@@ -135,8 +145,10 @@ fn on_enter_in_game(mut commands: Commands, asset_server: Res<AssetServer>, audi
         client.spawn((
             Node {
                 // Make node fill the entirety of its parent (in this case the window)
+                display: Display::Grid,
                 width: Val::Percent(100.0),
                 height: Val::Percent(100.0),
+                grid_template_rows: vec![GridTrack::percent(33.), GridTrack::percent(33.), GridTrack::percent(34.)],
                 ..default()
             },
             Outline {
@@ -145,6 +157,139 @@ fn on_enter_in_game(mut commands: Commands, asset_server: Res<AssetServer>, audi
                 color: Color::BLACK,
             },
         ));
+        // second cell
+        if game_board_canvas.orientation == Orientation::Portrait {
+            let mut keys = client.spawn((
+                Node {
+                    // Use the CSS Grid algorithm for laying out this node
+                    display: Display::Grid,
+                    // Make node fill the entirety of its parent (in this case the window)
+                    width: Val::Percent(100.0),
+                    height: Val::Percent(100.0),
+                    align_items: AlignItems::Center,
+                    justify_content: JustifyContent::Center,
+                    // grid 5 col x 4 rows
+                    grid_template_columns: vec![
+                        GridTrack::percent(20.),
+                        GridTrack::percent(20.),
+                        GridTrack::percent(20.),
+                        GridTrack::percent(20.),
+                        GridTrack::percent(20.),
+                    ],
+                    grid_template_rows: vec![GridTrack::percent(25.), GridTrack::percent(25.), GridTrack::percent(25.), GridTrack::percent(25.)],
+                    ..default()
+                },
+                Outline {
+                    width: Val::Px(1.),
+                    offset: Val::Px(-2.),
+                    color: Color::from(RED),
+                },
+            ));
+
+            keys.with_children(|keys| {
+                keys.spawn((Node {
+                    display: Display::Grid,
+                    // Make this node span 5 grid columns so that it takes up the entire top row
+                    grid_column: GridPlacement::span(5),
+                    ..default()
+                },));
+                keys.spawn((Node {
+                    display: Display::Grid,
+                    // Make this node span 1 grid columns so that it takes up half row
+                    grid_column: GridPlacement::span(2),
+                    ..default()
+                },));
+                keys.spawn((
+                    Button,
+                    ButtonEnum::KeyUp,
+                    ImageNode {
+                        image: asset_server.load("key_up.png"),
+                        ..default()
+                    },
+                    Interaction::None,
+                    Node {
+                        width: Val::Px(80.),
+                        height: Val::Px(80.),
+                        // horizontally center child text
+                        justify_content: JustifyContent::Center,
+                        // vertically center child text
+                        align_items: AlignItems::Center,
+                        ..default()
+                    },
+                ));
+
+                keys.spawn((Node {
+                    display: Display::Grid,
+                    // Make this node span 1 grid columns so that it takes up the second half row
+                    grid_column: GridPlacement::span(2),
+                    ..default()
+                },));
+
+                keys.spawn((Node {
+                    display: Display::Grid,
+                    // Make this node span 1 grid columns so that it takes up one column
+                    grid_column: GridPlacement::span(1),
+                    ..default()
+                },));
+
+                keys.spawn((
+                    Button,
+                    ButtonEnum::KeyLeft,
+                    ImageNode {
+                        image: asset_server.load("key_left.png"),
+                        ..default()
+                    },
+                    Interaction::None,
+                    Node {
+                        width: Val::Px(80.),
+                        height: Val::Px(80.),
+                        // horizontally center child text
+                        justify_content: JustifyContent::Center,
+                        // vertically center child text
+                        align_items: AlignItems::Center,
+                        ..default()
+                    },
+                ));
+
+                keys.spawn((
+                    Button,
+                    ButtonEnum::KeyDown,
+                    ImageNode {
+                        image: asset_server.load("key_down.png"),
+                        ..default()
+                    },
+                    Interaction::None,
+                    Node {
+                        width: Val::Px(80.),
+                        height: Val::Px(80.),
+                        // horizontally center child text
+                        justify_content: JustifyContent::Center,
+                        // vertically center child text
+                        align_items: AlignItems::Center,
+                        ..default()
+                    },
+                ));
+
+                keys.spawn((
+                    Button,
+                    ButtonEnum::KeyRight,
+                    ImageNode {
+                        image: asset_server.load("key_right.png"),
+                        ..default()
+                    },
+                    Interaction::None,
+                    Node {
+                        width: Val::Px(80.),
+                        height: Val::Px(80.),
+                        // horizontally center child text
+                        justify_content: JustifyContent::Center,
+                        // vertically center child text
+                        align_items: AlignItems::Center,
+                        ..default()
+                    },
+                ));
+            });
+        }
     });
 
     // snake head

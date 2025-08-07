@@ -127,6 +127,15 @@ pub fn on_enter_dead(mut commands: Commands, game_board_canvas: Res<GameBoardCan
                     height: Val::Percent(100.0),
                     align_items: AlignItems::Center,
                     justify_content: JustifyContent::Center,
+                    // grid 5 col x 4 rows
+                    grid_template_columns: vec![
+                        GridTrack::percent(20.),
+                        GridTrack::percent(20.),
+                        GridTrack::percent(20.),
+                        GridTrack::percent(20.),
+                        GridTrack::percent(20.),
+                    ],
+                    grid_template_rows: vec![GridTrack::percent(25.), GridTrack::percent(25.), GridTrack::percent(25.), GridTrack::percent(25.)],
                     ..default()
                 },
                 Outline {
@@ -136,6 +145,18 @@ pub fn on_enter_dead(mut commands: Commands, game_board_canvas: Res<GameBoardCan
                 },
             ));
             keys.with_children(|keys| {
+                keys.spawn((Node {
+                    display: Display::Grid,
+                    // Make this node span 5 grid columns so that it takes up the entire top row
+                    grid_column: GridPlacement::span(5),
+                    ..default()
+                },));
+                keys.spawn((Node {
+                    display: Display::Grid,
+                    // Make this node span 2 grid columns so that it takes up half row
+                    grid_column: GridPlacement::span(2),
+                    ..default()
+                },));
                 keys.spawn((
                     Button,
                     ButtonEnum::KeyN,
@@ -151,7 +172,6 @@ pub fn on_enter_dead(mut commands: Commands, game_board_canvas: Res<GameBoardCan
                         justify_content: JustifyContent::Center,
                         // vertically center child text
                         align_items: AlignItems::Center,
-                        margin: UiRect::all(Val::Px(20.0)),
                         ..default()
                     },
                 ));
