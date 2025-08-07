@@ -1,7 +1,7 @@
 // state_dead_mod.rs
 
 use bevy::color::palettes::css::{GREEN, RED, YELLOW};
-use bevy::prelude::*;
+use bevy::{color, prelude::*};
 
 use crate::{AppState, GameBoardCanvas, Orientation};
 
@@ -12,7 +12,7 @@ enum ButtonEnum {
 
 pub fn add_dead_to_app(app: &mut App) {
     app.add_systems(OnEnter(AppState::Dead), on_enter_dead);
-
+    app.add_systems(OnExit(AppState::Dead), on_exit_dead);
     // MUST add all systems to app with run_if in_state Dead
     app.add_systems(
         Update,
@@ -28,9 +28,9 @@ pub fn on_enter_dead(mut commands: Commands, game_board_canvas: Res<GameBoardCan
     commands.spawn(Camera2d);
 
     let mut client = if game_board_canvas.orientation == Orientation::Landscape {
-        commands.spawn((StateScoped(AppState::Dead), crate::landscape(&game_board_canvas)))
+        commands.spawn(crate::landscape(&game_board_canvas))
     } else {
-        commands.spawn((StateScoped(AppState::Dead), crate::portrait(&game_board_canvas)))
+        commands.spawn(crate::portrait(&game_board_canvas))
     };
 
     client.with_children(|client| {
@@ -43,6 +43,7 @@ pub fn on_enter_dead(mut commands: Commands, game_board_canvas: Res<GameBoardCan
                 height: Val::Percent(100.0),
                 // Set the grid to have 3 rows with sizes
                 grid_template_rows: vec![GridTrack::percent(33.), GridTrack::percent(33.), GridTrack::percent(34.)],
+
                 ..default()
             },
             Outline {
@@ -70,7 +71,7 @@ pub fn on_enter_dead(mut commands: Commands, game_board_canvas: Res<GameBoardCan
                             ..default()
                         },
                         TextLayout::new_with_justify(JustifyText::Center),
-                        TextColor::from(GREEN),
+                        TextColor::from(color::Color::Srgba(GREEN).with_alpha(0.7)),
                     ));
                 });
             }
@@ -91,7 +92,7 @@ pub fn on_enter_dead(mut commands: Commands, game_board_canvas: Res<GameBoardCan
                             ..default()
                         },
                         TextLayout::new_with_justify(JustifyText::Center),
-                        TextColor::from(YELLOW),
+                        TextColor::from(color::Color::Srgba(YELLOW).with_alpha(0.7)),
                     ));
                 });
             }
@@ -112,7 +113,7 @@ pub fn on_enter_dead(mut commands: Commands, game_board_canvas: Res<GameBoardCan
                             ..default()
                         },
                         TextLayout::new_with_justify(JustifyText::Center),
-                        TextColor::from(RED),
+                        TextColor::from(color::Color::Srgba(RED).with_alpha(0.7)),
                     ));
                 });
             }
@@ -178,6 +179,13 @@ pub fn on_enter_dead(mut commands: Commands, game_board_canvas: Res<GameBoardCan
             });
         }
     });
+}
+
+// despawn all entities
+pub fn on_exit_dead(mut commands: Commands, entities: Query<Entity, With<Visibility>>) {
+    for entity in entities {
+        commands.entity(entity).despawn();
+    }
 }
 
 pub fn handle_dead_ui_input(keys: Res<ButtonInput<KeyCode>>, mut next_state: ResMut<NextState<AppState>>) {

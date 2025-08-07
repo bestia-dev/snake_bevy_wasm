@@ -68,10 +68,11 @@ pub fn render_snake_head(mut snake_head_query: Query<(&mut SnakeHead, &mut Trans
         };
     }
 }
-pub fn render_bird(mut queried_entities: Query<(&mut Bird, &mut Transform), Changed<Bird>>, game_board_canvas: Res<GameBoardCanvas>) {
-    if let Ok((bird, mut transform)) = queried_entities.single_mut() {
+pub fn render_bird(mut queried_entities: Query<(&mut Bird, &mut Transform, &mut Sprite), Changed<Bird>>, game_board_canvas: Res<GameBoardCanvas>) {
+    if let Ok((bird, mut transform, mut sprite)) = queried_entities.single_mut() {
         transform.translation.x = bird.position.to_bevy_x(&game_board_canvas);
         transform.translation.y = bird.position.to_bevy_y(&game_board_canvas);
+        sprite.color = bird.color;
     }
 }
 

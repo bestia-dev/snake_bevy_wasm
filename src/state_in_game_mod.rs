@@ -2,7 +2,10 @@
 
 use std::f32::consts::PI;
 
-use bevy::{color::palettes::css::RED, prelude::*};
+use bevy::{
+    color::palettes::css::{RED, WHITE},
+    prelude::*,
+};
 use bevy_kira_audio::{AudioControl, AudioInstance, AudioTween};
 
 use crate::{AppState, GameBoardCanvas, Orientation};
@@ -31,6 +34,7 @@ struct Position {
 #[derive(Component)]
 struct Bird {
     position: Position,
+    color: Color,
 }
 
 #[derive(PartialEq, Clone, Debug)]
@@ -107,6 +111,8 @@ pub fn add_in_game_to_app(app: &mut App) {
             eat_bird.run_if(in_state(AppState::InGame)),
             move_segments.run_if(in_state(AppState::InGame)),
             check_dead.run_if(in_state(AppState::InGame)),
+            render_snake_head.run_if(in_state(AppState::InGame)),
+            render_segment.run_if(in_state(AppState::InGame)),
         )
             .chain(),
     );
@@ -118,9 +124,7 @@ pub fn add_in_game_to_app(app: &mut App) {
             crate::handle_browser_resize.run_if(in_state(AppState::InGame)),
             button_interaction_system.run_if(in_state(AppState::InGame)),
             // draw_axis.run_if(in_state(AppState::InGame)),
-            render_snake_head.run_if(in_state(AppState::InGame)),
             render_bird.run_if(in_state(AppState::InGame)),
-            render_segment.run_if(in_state(AppState::InGame)),
             handle_movement_input.run_if(in_state(AppState::InGame)),
             render_points_text.run_if(in_state(AppState::InGame)),
             render_debug_text.run_if(in_state(AppState::InGame)),
@@ -136,9 +140,9 @@ fn on_enter_in_game(mut commands: Commands, asset_server: Res<AssetServer>, audi
     commands.spawn(Camera2d);
 
     let mut client = if game_board_canvas.orientation == Orientation::Landscape {
-        commands.spawn((StateScoped(AppState::InGame), crate::landscape(&game_board_canvas)))
+        commands.spawn(crate::landscape(&game_board_canvas))
     } else {
-        commands.spawn((StateScoped(AppState::InGame), crate::portrait(&game_board_canvas)))
+        commands.spawn(crate::portrait(&game_board_canvas))
     };
 
     client.with_children(|client| {
@@ -160,6 +164,9 @@ fn on_enter_in_game(mut commands: Commands, asset_server: Res<AssetServer>, audi
         // second cell
         if game_board_canvas.orientation == Orientation::Portrait {
             let mut keys = client.spawn((
+                // the UI buttons will despawn, but the rest of the game
+                // will remain in the background after death
+                StateScoped(AppState::InGame),
                 Node {
                     // Use the CSS Grid algorithm for laying out this node
                     display: Display::Grid,
@@ -295,7 +302,6 @@ fn on_enter_in_game(mut commands: Commands, asset_server: Res<AssetServer>, audi
     // snake head
     let snake_head_position = Position { x: 10, y: 10 };
     commands.spawn((
-        StateScoped(AppState::InGame),
         Sprite::from_image(asset_server.load("snake_head_left.png")),
         Transform::from_xyz(snake_head_position.to_bevy_x(&game_board_canvas), snake_head_position.to_bevy_y(&game_board_canvas), SNAKE_Z_LAYER).with_rotation(Quat::from_rotation_z(PI * 0.5)),
         SnakeHead {
@@ -313,7 +319,6 @@ fn on_enter_in_game(mut commands: Commands, asset_server: Res<AssetServer>, audi
     // first (zero) segment
     let segment_position = Position { x: 10, y: 9 };
     commands.spawn((
-        StateScoped(AppState::InGame),
         Sprite::from_image(asset_server.load("segment_horizontal.png")),
         Transform::from_xyz(segment_position.to_bevy_x(&game_board_canvas), segment_position.to_bevy_y(&game_board_canvas), OTHER_Z_LAYER).with_rotation(Quat::from_rotation_z(PI * 0.5)),
         SnakeSegment {
@@ -328,7 +333,6 @@ fn on_enter_in_game(mut commands: Commands, asset_server: Res<AssetServer>, audi
     // last (1) segment
     let segment_position = Position { x: 10, y: 8 };
     commands.spawn((
-        StateScoped(AppState::InGame),
         Sprite::from_image(asset_server.load("segment_tail.png")),
         Transform::from_xyz(segment_position.to_bevy_x(&game_board_canvas), segment_position.to_bevy_y(&game_board_canvas), OTHER_Z_LAYER).with_rotation(Quat::from_rotation_z(PI * 0.5)),
         SnakeSegment {
@@ -343,14 +347,15 @@ fn on_enter_in_game(mut commands: Commands, asset_server: Res<AssetServer>, audi
     // spawn entity bird
     let bird_position = Position { x: 9, y: 9 };
     commands.spawn((
-        StateScoped(AppState::InGame),
         Sprite::from_image(asset_server.load("bird.png")),
         Transform::from_xyz(bird_position.to_bevy_x(&game_board_canvas), bird_position.to_bevy_y(&game_board_canvas), BIRD_Z_LAYER),
-        Bird { position: bird_position.clone() },
+        Bird {
+            position: bird_position.clone(),
+            color: WHITE.into(),
+        },
     ));
 
     commands.spawn((
-        StateScoped(AppState::InGame),
         Text::new(""),
         Node {
             position_type: PositionType::Absolute,
@@ -363,7 +368,6 @@ fn on_enter_in_game(mut commands: Commands, asset_server: Res<AssetServer>, audi
 
     // DebugText
     commands.spawn((
-        StateScoped(AppState::InGame),
         Visibility::Hidden,
         Text::new("Debug text: "),
         Node {

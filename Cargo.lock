@@ -3879,7 +3879,7 @@ dependencies = [
 
 [[package]]
 name = "snake_bevy_wasm"
-version = "1.1.117"
+version = "1.1.132"
 dependencies = [
  "anyhow",
  "bevy",

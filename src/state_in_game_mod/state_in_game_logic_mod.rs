@@ -1,10 +1,15 @@
-use bevy::prelude::*;
+use bevy::{
+    color::palettes::css::{GREEN, RED, WHITE, WHITE_SMOKE},
+    prelude::*,
+};
 use bevy_kira_audio::AudioControl;
 
 use crate::{
     AppState, BOARD_HEIGHT, BOARD_WIDTH, GameBoardCanvas,
     state_in_game_mod::{Bird, DebugText, Direction, OTHER_Z_LAYER, SnakeHead, SnakeSegment, SnakeSegmentIndex},
 };
+
+const BIRD_COLORS: [Srgba; 4] = [RED, GREEN, WHITE_SMOKE, WHITE];
 
 // fixed time every 0.5 seconds
 pub fn move_snake_head(mut snake_query: Query<&mut SnakeHead>) {
@@ -66,6 +71,8 @@ pub fn eat_bird(
                 // new random position
                 bird.position.x = ops::floor(js_sys::Math::random() as f32 * BOARD_WIDTH as f32) as i32;
                 bird.position.y = ops::floor(js_sys::Math::random() as f32 * BOARD_HEIGHT as f32) as i32;
+                let random_color = ops::floor(js_sys::Math::random() as f32 * BIRD_COLORS.len() as f32) as usize;
+                bird.color = BIRD_COLORS[random_color].into();
 
                 if let Ok(mut debug_text) = debug_text_query.single_mut() {
                     debug_text.bird_position = format!("{:?}", &bird.position);

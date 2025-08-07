@@ -12,7 +12,7 @@ enum ButtonEnum {
 
 pub fn add_main_menu_to_app(app: &mut App) {
     app.add_systems(OnEnter(AppState::MainMenu), on_enter_main_menu);
-
+    app.add_systems(OnExit(AppState::MainMenu), on_exit_dead);
     // MUST add all systems to app with run_if in_state MainMenu
     app.add_systems(
         Update,
@@ -28,9 +28,9 @@ pub fn on_enter_main_menu(mut commands: Commands, game_board_canvas: Res<GameBoa
     commands.spawn(Camera2d);
 
     let mut client = if game_board_canvas.orientation == Orientation::Landscape {
-        commands.spawn((StateScoped(AppState::MainMenu), crate::landscape(&game_board_canvas)))
+        commands.spawn(crate::landscape(&game_board_canvas))
     } else {
-        commands.spawn((StateScoped(AppState::MainMenu), crate::portrait(&game_board_canvas)))
+        commands.spawn(crate::portrait(&game_board_canvas))
     };
 
     client.with_children(|client| {
@@ -180,6 +180,13 @@ pub fn on_enter_main_menu(mut commands: Commands, game_board_canvas: Res<GameBoa
             });
         }
     });
+}
+
+// despawn all entities
+pub fn on_exit_dead(mut commands: Commands, entities: Query<Entity, With<Visibility>>) {
+    for entity in entities {
+        commands.entity(entity).despawn();
+    }
 }
 
 pub fn handle_main_menu_ui_input(keys: Res<ButtonInput<KeyCode>>, mut next_state: ResMut<NextState<AppState>>) {

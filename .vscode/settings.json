@@ -64,6 +64,7 @@
         "rustprojects",
         "sccache",
         "serde",
+        "Srgba",
         "struct",
         "subsecond",
         "substack",
