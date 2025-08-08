@@ -1,4 +1,4 @@
-#import bevy_sprite::mesh2d_functions
+#import bevy_sprite::mesh2d_functions::{get_world_from_local,mesh2d_position_local_to_clip}
 
 //struct CustomMaterial {
 //    color: vec4<f32>,
@@ -24,11 +24,10 @@ struct VertexOutput {
 fn vertex(vertex: Vertex) -> VertexOutput {
     var out: VertexOutput;
     // Project the world position of the mesh into screen position
-    let model = mesh2d_functions::get_world_from_local(vertex.instance_index);
-    out.clip_position = mesh2d_functions::mesh2d_position_local_to_clip(model, vec4<f32>(vertex.position, 1.0));
+    let model = get_world_from_local(vertex.instance_index);
+    out.clip_position = mesh2d_position_local_to_clip(model, vec4<f32>(vertex.position, 1.0));
     // Unpack the `u32` from the vertex buffer into the `vec4<f32>` used by the fragment shader
     out.color = vec4<f32>((vec4<u32>(vertex.color) >> vec4<u32>(0u, 8u, 16u, 24u)) & vec4<u32>(255u)) / 255.0;
-    //out.color = vec4<f32>(vertex.color);
     return out;
 }
 
