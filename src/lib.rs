@@ -65,6 +65,9 @@
 // endregion: auto_md_to_doc_comments include README.md A //!
 
 use bevy::prelude::*;
+use bevy::reflect::TypePath;
+use bevy::render::render_resource::{AsBindGroup, ShaderRef};
+use bevy::sprite::{Material2d, Material2dPlugin};
 use wasm_bindgen::prelude::*;
 
 mod web_sys_mod;
@@ -100,6 +103,24 @@ pub struct GameBoardCanvas {
     board_canvas_height: i32,
     sprite_width: f32,
     sprite_height: f32,
+}
+
+// This struct defines the data that will be passed to your shader
+#[derive(Asset, TypePath, AsBindGroup, Debug, Clone)]
+struct CustomMaterial {
+    #[uniform(0)]
+    color: LinearRgba,
+}
+
+/// The Material trait is very configurable, but comes with sensible defaults for all methods.
+/// You only need to implement functions for features that need non-default behavior. See the Material api docs for details!
+impl Material2d for CustomMaterial {
+    fn vertex_shader() -> ShaderRef {
+        "custom_material.wgsl".into()
+    }
+    fn fragment_shader() -> ShaderRef {
+        "custom_material.wgsl".into()
+    }
 }
 
 #[wasm_bindgen]
@@ -144,6 +165,7 @@ pub fn main() {
             })
             .set(ImagePlugin::default_nearest()),
         bevy_kira_audio::AudioPlugin,
+        Material2dPlugin::<CustomMaterial>::default(),
     ));
 
     info!("started snake_bevy_wasm {}", VERSION);

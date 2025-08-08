@@ -6,7 +6,7 @@
 [//]: # (auto_cargo_toml_to_md start)
 
 **Simple snake game with Bevy, Rust and Wasm**  
-***version: 1.2.7 date: 2025-08-08 author: [bestia.dev](https://bestia.dev) repository: [GitHub](https://github.com/bestia-dev/snake_bevy_wasm)***
+***version: 1.3.1 date: 2025-08-08 author: [bestia.dev](https://bestia.dev) repository: [GitHub](https://github.com/bestia-dev/snake_bevy_wasm)***
 
  ![maintained](https://img.shields.io/badge/maintained-green)
  ![work-in-progress](https://img.shields.io/badge/work_in_progress-yellow)
@@ -19,8 +19,8 @@
  ![snake_bevy_wasm](https://bestia.dev/webpage_hit_counter/get_svg_image/1481465721.svg)
 
 [//]: # (auto_lines_of_code start)
-[![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-1278-green.svg)](https://github.com/bestia-dev/snake_bevy_wasm/)
-[![Lines in Doc comments](https://img.shields.io/badge/Lines_in_Doc_comments-81-blue.svg)](https://github.com/bestia-dev/snake_bevy_wasm/)
+[![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-1290-green.svg)](https://github.com/bestia-dev/snake_bevy_wasm/)
+[![Lines in Doc comments](https://img.shields.io/badge/Lines_in_Doc_comments-82-blue.svg)](https://github.com/bestia-dev/snake_bevy_wasm/)
 [![Lines in Comments](https://img.shields.io/badge/Lines_in_comments-135-purple.svg)](https://github.com/bestia-dev/snake_bevy_wasm/)
 [![Lines in examples](https://img.shields.io/badge/Lines_in_examples-0-yellow.svg)](https://github.com/bestia-dev/snake_bevy_wasm/)
 [![Lines in tests](https://img.shields.io/badge/Lines_in_tests-0-orange.svg)](https://github.com/bestia-dev/snake_bevy_wasm/)
@@ -51,8 +51,6 @@ Read the releases changelog in a separate md file:
 
 ## TODO
 
-3 birds from 3 bevy birds (little rotated)
-buttons a little space in between (padding)
 And code happily ever after...
 
 ## Open-source and free as a beer

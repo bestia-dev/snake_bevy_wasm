@@ -2,7 +2,10 @@
 
 use std::f32::consts::PI;
 
-use bevy::{color::palettes::css::WHITE, prelude::*};
+use bevy::{
+    color::palettes::css::{GREEN, RED, WHITE},
+    prelude::*,
+};
 use bevy_kira_audio::{AudioControl, AudioInstance, AudioTween};
 
 use crate::{AppState, GameBoardCanvas, Orientation};
@@ -29,7 +32,7 @@ struct Position {
 
 // only one bird at any time
 #[derive(Component)]
-struct Bird {
+pub struct Bird {
     position: Position,
     color: Color,
 }
@@ -358,14 +361,34 @@ fn on_enter_in_game(mut commands: Commands, asset_server: Res<AssetServer>, audi
         SnakeSegmentIndex { index: 1 },
     ));
 
-    // spawn entity bird
-    let bird_position = Position { x: 9, y: 9 };
+    // spawn 3 entity bird
+    let bird_position = Position { x: 2, y: 3 };
     commands.spawn((
         Sprite::from_image(asset_server.load("bird.png")),
         Transform::from_xyz(bird_position.to_bevy_x(&game_board_canvas), bird_position.to_bevy_y(&game_board_canvas), BIRD_Z_LAYER),
         Bird {
             position: bird_position.clone(),
+            color: RED.into(),
+        },
+    ));
+
+    let bird_position = Position { x: 9, y: 9 };
+    commands.spawn((
+        Sprite::from_image(asset_server.load("bird.png")),
+        Transform::from_xyz(bird_position.to_bevy_x(&game_board_canvas), bird_position.to_bevy_y(&game_board_canvas), BIRD_Z_LAYER).with_rotation(Quat::from_rotation_z(-PI * 0.25)),
+        Bird {
+            position: bird_position.clone(),
             color: WHITE.into(),
+        },
+    ));
+
+    let bird_position = Position { x: 14, y: 14 };
+    commands.spawn((
+        Sprite::from_image(asset_server.load("bird.png")),
+        Transform::from_xyz(bird_position.to_bevy_x(&game_board_canvas), bird_position.to_bevy_y(&game_board_canvas), BIRD_Z_LAYER).with_rotation(Quat::from_rotation_z(-PI * 0.5)),
+        Bird {
+            position: bird_position.clone(),
+            color: GREEN.into(),
         },
     ));
 

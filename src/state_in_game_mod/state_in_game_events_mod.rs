@@ -27,13 +27,13 @@ pub fn button_interaction_system(
 ) {
     for interaction in interaction_query {
         if *interaction.1 == Interaction::Pressed {
-            if *interaction.0 == ButtonEnum::KeyUp {
+            if *interaction.0 == ButtonEnum::KeyUp && snake_head.direction != Direction::Up {
                 snake_head.new_direction = Direction::Up;
-            } else if *interaction.0 == ButtonEnum::KeyRight {
+            } else if *interaction.0 == ButtonEnum::KeyRight && snake_head.direction != Direction::Right {
                 snake_head.new_direction = Direction::Right;
-            } else if *interaction.0 == ButtonEnum::KeyDown {
+            } else if *interaction.0 == ButtonEnum::KeyDown && snake_head.direction != Direction::Down {
                 snake_head.new_direction = Direction::Down;
-            } else if *interaction.0 == ButtonEnum::KeyLeft {
+            } else if *interaction.0 == ButtonEnum::KeyLeft && snake_head.direction != Direction::Left {
                 snake_head.new_direction = Direction::Left;
             } else if *interaction.0 == ButtonEnum::KeyX {
                 next_state.set(AppState::MainMenu);

@@ -1,5 +1,7 @@
 // state_dead_mod.rs
 
+use std::f32::consts::PI;
+
 use bevy::color::palettes::css::{GREEN, RED, WHITE, YELLOW};
 use bevy::{color::Color::Srgba, prelude::*};
 
@@ -20,6 +22,7 @@ pub fn add_dead_to_app(app: &mut App) {
             handle_dead_ui_input.run_if(in_state(AppState::Dead)),
             crate::handle_browser_resize.run_if(in_state(AppState::Dead)),
             button_interaction_system.run_if(in_state(AppState::Dead)),
+            rotate_bird.run_if(in_state(AppState::Dead)),
         ),
     );
 }
@@ -65,7 +68,7 @@ pub fn on_enter_dead(mut commands: Commands, game_board_canvas: Res<GameBoardCan
                 header_box.with_children(|header_box| {
                     // Header
                     header_box.spawn((
-                        Text::new("bestia.dev/snake_bevy_wasm"),
+                        Text::new("github.com/bestia-dev/snake_bevy_wasm"),
                         TextFont {
                             font_size: game_board_canvas.sprite_height,
                             ..default()
@@ -200,5 +203,11 @@ fn button_interaction_system(interaction_query: Query<(&ButtonEnum, &Interaction
         if *interaction.0 == ButtonEnum::KeyN && *interaction.1 == Interaction::Pressed {
             next_state.set(AppState::InGame);
         }
+    }
+}
+
+pub fn rotate_bird(time: Res<Time>, bird_query: Query<&mut Transform, With<crate::state_in_game_mod::Bird>>) {
+    for mut transform in bird_query {
+        transform.rotate_local_z(-PI * 2. * time.delta_secs());
     }
 }

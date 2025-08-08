@@ -53,15 +53,9 @@ pub fn check_dead(
     }
 }
 
-pub fn eat_bird(
-    mut snake_query: Query<&mut SnakeHead>,
-    mut bird_query: Query<&mut Bird>,
-    mut debug_text_query: Query<&mut DebugText>,
-    asset_server: Res<AssetServer>,
-    audio: Res<bevy_kira_audio::Audio>,
-) {
+pub fn eat_bird(mut snake_query: Query<&mut SnakeHead>, bird_query: Query<&mut Bird>, mut debug_text_query: Query<&mut DebugText>, asset_server: Res<AssetServer>, audio: Res<bevy_kira_audio::Audio>) {
     if let Ok(mut snake_head) = snake_query.single_mut() {
-        if let Ok(mut bird) = bird_query.single_mut() {
+        for mut bird in bird_query {
             if snake_head.position == bird.position {
                 audio.play(asset_server.load("bird_chirp.mp3"));
 
