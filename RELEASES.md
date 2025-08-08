@@ -10,6 +10,8 @@ The TODO section is part of the [README.md](https://github.com/automation-tasks-
 
 ## Unreleased
 
+## Version 1.3.41 (2025-08-08)
+
 - 3 birds, rotated
 
 - 3 birds
