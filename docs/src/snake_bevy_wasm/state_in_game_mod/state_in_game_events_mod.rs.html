@@ -27,13 +27,13 @@
 <a href=#27 id=27 data-nosnippet>27</a>) {
 <a href=#28 id=28 data-nosnippet>28</a>    <span class="kw">for </span>interaction <span class="kw">in </span>interaction_query {
 <a href=#29 id=29 data-nosnippet>29</a>        <span class="kw">if </span><span class="kw-2">*</span>interaction.<span class="number">1 </span>== Interaction::Pressed {
-<a href=#30 id=30 data-nosnippet>30</a>            <span class="kw">if </span><span class="kw-2">*</span>interaction.<span class="number">0 </span>== ButtonEnum::KeyUp {
+<a href=#30 id=30 data-nosnippet>30</a>            <span class="kw">if </span><span class="kw-2">*</span>interaction.<span class="number">0 </span>== ButtonEnum::KeyUp &amp;&amp; snake_head.direction != Direction::Up {
 <a href=#31 id=31 data-nosnippet>31</a>                snake_head.new_direction = Direction::Up;
-<a href=#32 id=32 data-nosnippet>32</a>            } <span class="kw">else if </span><span class="kw-2">*</span>interaction.<span class="number">0 </span>== ButtonEnum::KeyRight {
+<a href=#32 id=32 data-nosnippet>32</a>            } <span class="kw">else if </span><span class="kw-2">*</span>interaction.<span class="number">0 </span>== ButtonEnum::KeyRight &amp;&amp; snake_head.direction != Direction::Right {
 <a href=#33 id=33 data-nosnippet>33</a>                snake_head.new_direction = Direction::Right;
-<a href=#34 id=34 data-nosnippet>34</a>            } <span class="kw">else if </span><span class="kw-2">*</span>interaction.<span class="number">0 </span>== ButtonEnum::KeyDown {
+<a href=#34 id=34 data-nosnippet>34</a>            } <span class="kw">else if </span><span class="kw-2">*</span>interaction.<span class="number">0 </span>== ButtonEnum::KeyDown &amp;&amp; snake_head.direction != Direction::Down {
 <a href=#35 id=35 data-nosnippet>35</a>                snake_head.new_direction = Direction::Down;
-<a href=#36 id=36 data-nosnippet>36</a>            } <span class="kw">else if </span><span class="kw-2">*</span>interaction.<span class="number">0 </span>== ButtonEnum::KeyLeft {
+<a href=#36 id=36 data-nosnippet>36</a>            } <span class="kw">else if </span><span class="kw-2">*</span>interaction.<span class="number">0 </span>== ButtonEnum::KeyLeft &amp;&amp; snake_head.direction != Direction::Left {
 <a href=#37 id=37 data-nosnippet>37</a>                snake_head.new_direction = Direction::Left;
 <a href=#38 id=38 data-nosnippet>38</a>            } <span class="kw">else if </span><span class="kw-2">*</span>interaction.<span class="number">0 </span>== ButtonEnum::KeyX {
 <a href=#39 id=39 data-nosnippet>39</a>                next_state.set(AppState::MainMenu);

@@ -68,8 +68,8 @@
 <a href=#68 id=68 data-nosnippet>68</a>        };
 <a href=#69 id=69 data-nosnippet>69</a>    }
 <a href=#70 id=70 data-nosnippet>70</a>}
-<a href=#71 id=71 data-nosnippet>71</a><span class="kw">pub fn </span>render_bird(<span class="kw-2">mut </span>queried_entities: Query&lt;(<span class="kw-2">&amp;mut </span>Bird, <span class="kw-2">&amp;mut </span>Transform, <span class="kw-2">&amp;mut </span>Sprite), Changed&lt;Bird&gt;&gt;, game_board_canvas: Res&lt;GameBoardCanvas&gt;) {
-<a href=#72 id=72 data-nosnippet>72</a>    <span class="kw">if let </span><span class="prelude-val">Ok</span>((bird, <span class="kw-2">mut </span>transform, <span class="kw-2">mut </span>sprite)) = queried_entities.single_mut() {
+<a href=#71 id=71 data-nosnippet>71</a><span class="kw">pub fn </span>render_bird(queried_entities: Query&lt;(<span class="kw-2">&amp;mut </span>Bird, <span class="kw-2">&amp;mut </span>Transform, <span class="kw-2">&amp;mut </span>Sprite), Changed&lt;Bird&gt;&gt;, game_board_canvas: Res&lt;GameBoardCanvas&gt;) {
+<a href=#72 id=72 data-nosnippet>72</a>    <span class="kw">for </span>(bird, <span class="kw-2">mut </span>transform, <span class="kw-2">mut </span>sprite) <span class="kw">in </span>queried_entities {
 <a href=#73 id=73 data-nosnippet>73</a>        transform.translation.x = bird.position.to_bevy_x(<span class="kw-2">&amp;</span>game_board_canvas);
 <a href=#74 id=74 data-nosnippet>74</a>        transform.translation.y = bird.position.to_bevy_y(<span class="kw-2">&amp;</span>game_board_canvas);
 <a href=#75 id=75 data-nosnippet>75</a>        sprite.color = bird.color;

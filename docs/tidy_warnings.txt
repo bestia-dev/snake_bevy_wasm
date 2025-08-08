@@ -175,12 +175,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/fn.main.html
 Document: "2" is not a file!
 
-line 1 column 2246 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2246 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2262 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 2555 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2555 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 2572 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 2247 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2247 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2263 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 2556 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2556 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 2573 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 1870 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
@@ -188,12 +188,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/state_dead_mod/fn.handle_dead_ui_input.html
 Document: "2" is not a file!
 
-line 1 column 2420 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2420 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2436 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 2794 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2794 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 2811 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 2421 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2421 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2437 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 2795 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2795 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 2812 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 1948 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
@@ -201,26 +201,26 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/state_dead_mod/enum.ButtonEnum.html
 Document: "2" is not a file!
 
-line 1 column 6162 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 6162 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 6178 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 6524 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 6524 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 6541 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 6163 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 6163 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 6179 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 6525 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 6525 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 6542 - Warning: discarding unexpected </rustdoc-toolbar>
 line 3 column 495 - Warning: missing </summary> before <section>
-line 3 column 873 - Warning: <div> isn't allowed in <h3> elements
+line 3 column 874 - Warning: <div> isn't allowed in <h3> elements
 line 4 column 277 - Warning: discarding unexpected </div>
 line 4 column 298 - Warning: discarding unexpected </summary>
 line 4 column 361 - Warning: missing </summary> before <section>
-line 4 column 747 - Warning: discarding unexpected </summary>
-line 4 column 887 - Warning: missing </summary> before <section>
-line 4 column 1214 - Warning: discarding unexpected </summary>
+line 4 column 748 - Warning: discarding unexpected </summary>
+line 4 column 888 - Warning: missing </summary> before <section>
+line 4 column 1216 - Warning: discarding unexpected </summary>
 line 6 column 177 - Warning: missing </summary> before <section>
 line 12 column 17 - Warning: discarding unexpected </summary>
 line 12 column 138 - Warning: missing </summary> before <section>
-line 12 column 460 - Warning: discarding unexpected </summary>
-line 12 column 695 - Warning: missing </summary> before <section>
-line 12 column 1138 - Warning: discarding unexpected </summary>
+line 12 column 461 - Warning: discarding unexpected </summary>
+line 12 column 696 - Warning: missing </summary> before <section>
+line 12 column 1140 - Warning: discarding unexpected </summary>
 line 13 column 205 - Warning: missing </summary> before <section>
 line 13 column 465 - Warning: discarding unexpected </summary>
 line 13 column 475 - Warning: missing </span> before <div>
@@ -237,13 +237,13 @@ line 13 column 3357 - Warning: discarding unexpected </summary>
 line 13 column 3561 - Warning: missing </summary> before <section>
 line 13 column 4034 - Warning: discarding unexpected </summary>
 line 13 column 4261 - Warning: missing </summary> before <section>
-line 13 column 4780 - Warning: discarding unexpected </summary>
-line 13 column 4857 - Warning: missing </summary> before <section>
-line 13 column 5434 - Warning: discarding unexpected </summary>
-line 13 column 5627 - Warning: missing </summary> before <section>
-line 13 column 6287 - Warning: discarding unexpected </summary>
-line 14 column 3598 - Warning: missing </summary> before <section>
-line 14 column 3956 - Warning: <div> isn't allowed in <h3> elements
+line 13 column 4781 - Warning: discarding unexpected </summary>
+line 13 column 4858 - Warning: missing </summary> before <section>
+line 13 column 5436 - Warning: discarding unexpected </summary>
+line 13 column 5629 - Warning: missing </summary> before <section>
+line 13 column 6289 - Warning: discarding unexpected </summary>
+line 14 column 3599 - Warning: missing </summary> before <section>
+line 14 column 3957 - Warning: <div> isn't allowed in <h3> elements
 line 15 column 149 - Warning: discarding unexpected </div>
 line 15 column 170 - Warning: discarding unexpected </summary>
 line 15 column 247 - Warning: missing </summary> before <section>
@@ -385,10 +385,10 @@ line 71 column 135 - Warning: discarding unexpected </div>
 line 1 column 1932 - Warning: trimming empty <button>
 line 3 column 495 - Warning: trimming empty <summary>
 line 4 column 361 - Warning: trimming empty <summary>
-line 4 column 887 - Warning: trimming empty <summary>
+line 4 column 888 - Warning: trimming empty <summary>
 line 6 column 177 - Warning: trimming empty <summary>
 line 12 column 138 - Warning: trimming empty <summary>
-line 12 column 695 - Warning: trimming empty <summary>
+line 12 column 696 - Warning: trimming empty <summary>
 line 13 column 205 - Warning: trimming empty <summary>
 line 13 column 475 - Warning: trimming empty <span>
 line 13 column 873 - Warning: trimming empty <summary>
@@ -397,9 +397,9 @@ line 13 column 2209 - Warning: trimming empty <summary>
 line 13 column 2887 - Warning: trimming empty <summary>
 line 13 column 3561 - Warning: trimming empty <summary>
 line 13 column 4261 - Warning: trimming empty <summary>
-line 13 column 4857 - Warning: trimming empty <summary>
-line 13 column 5627 - Warning: trimming empty <summary>
-line 14 column 3598 - Warning: trimming empty <summary>
+line 13 column 4858 - Warning: trimming empty <summary>
+line 13 column 5629 - Warning: trimming empty <summary>
+line 14 column 3599 - Warning: trimming empty <summary>
 line 15 column 247 - Warning: trimming empty <summary>
 line 15 column 1008 - Warning: trimming empty <summary>
 line 17 column 360 - Warning: trimming empty <summary>
@@ -451,12 +451,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/state_dead_mod/fn.on_exit_dead.html
 Document: "2" is not a file!
 
-line 1 column 2404 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2404 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2420 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 2770 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2770 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 2787 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 2405 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2405 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2421 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 2771 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2771 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 2788 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 1932 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
@@ -464,12 +464,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/state_dead_mod/fn.button_interaction_system.html
 Document: "2" is not a file!
 
-line 1 column 2430 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2430 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2446 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 2809 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2809 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 2826 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 2431 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2431 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2447 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 2810 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2810 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 2827 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 1958 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
@@ -477,12 +477,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/state_dead_mod/index.html
 Document: "2" is not a file!
 
-line 1 column 2674 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2674 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2690 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 2983 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2983 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 3000 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 2675 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2675 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2691 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 2984 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2984 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 3001 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 1923 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
@@ -490,25 +490,38 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/state_dead_mod/fn.add_dead_to_app.html
 Document: "2" is not a file!
 
-line 1 column 2410 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2410 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2426 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 2779 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2779 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 2796 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 2411 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2411 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2427 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 2780 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2780 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 2797 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 1938 - Warning: trimming empty <button>
+This document has errors that must be fixed before
+using HTML Tidy to generate a tidied up version.
+
+./docs/snake_bevy_wasm/state_dead_mod/fn.rotate_bird.html
+Document: "2" is not a file!
+
+line 1 column 2403 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2403 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2419 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 2768 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2768 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 2785 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 1930 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
 
 ./docs/snake_bevy_wasm/state_dead_mod/fn.on_enter_dead.html
 Document: "2" is not a file!
 
-line 1 column 2406 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2406 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2422 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 2773 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2773 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 2790 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 2407 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2407 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2423 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 2774 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2774 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 2791 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 1934 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
@@ -516,12 +529,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/enum.Orientation.html
 Document: "2" is not a file!
 
-line 1 column 5859 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 5859 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 5875 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 6173 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 6173 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 6190 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 5860 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 5860 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 5876 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 6174 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 6174 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 6191 - Warning: discarding unexpected </rustdoc-toolbar>
 line 4 column 652 - Warning: missing </summary> before <section>
 line 4 column 1147 - Warning: discarding unexpected </summary>
 line 4 column 1224 - Warning: missing </summary> before <section>
@@ -698,12 +711,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/fn.landscape.html
 Document: "2" is not a file!
 
-line 1 column 2251 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2251 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2267 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 2565 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2565 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 2582 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 2252 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2252 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2268 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 2566 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2566 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 2583 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 1875 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
@@ -711,12 +724,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/constant.BOARD_WIDTH.html
 Document: "2" is not a file!
 
-line 1 column 2272 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2272 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2288 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 2594 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2594 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 2611 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 2273 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2273 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2289 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 2595 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2595 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 2612 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 1896 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
@@ -724,12 +737,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/state_in_game_mod/struct.SnakeSegmentIndex.html
 Document: "2" is not a file!
 
-line 1 column 6438 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 6438 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 6454 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 6814 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 6814 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 6831 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 6439 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 6439 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 6455 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 6815 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 6815 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 6832 - Warning: discarding unexpected </rustdoc-toolbar>
 line 3 column 570 - Warning: missing </summary> before <section>
 line 3 column 1121 - Warning: discarding unexpected </summary>
 line 3 column 1198 - Warning: missing </summary> before <section>
@@ -1013,12 +1026,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/state_in_game_mod/constant.STEP_DURATION.html
 Document: "2" is not a file!
 
-line 1 column 2429 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2429 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2445 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 2805 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2805 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 2822 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 2430 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2430 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2446 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 2806 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2806 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 2823 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 1949 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
@@ -1026,12 +1039,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/state_in_game_mod/fn.on_exit_in_game.html
 Document: "2" is not a file!
 
-line 1 column 2421 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2421 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2437 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 2793 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2793 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 2810 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 2422 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2422 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2438 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 2794 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2794 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 2811 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 1941 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
@@ -1039,14 +1052,14 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/state_in_game_mod/struct.PointsText.html
 Document: "2" is not a file!
 
-line 1 column 5859 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 5859 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 5875 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 6228 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 6228 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 6245 - Warning: discarding unexpected </rustdoc-toolbar>
-line 1 column 6676 - Warning: missing </summary> before <section>
-line 1 column 7067 - Warning: <div> isn't allowed in <h3> elements
+line 1 column 5860 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 5860 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 5876 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 6229 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 6229 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 6246 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 6677 - Warning: missing </summary> before <section>
+line 1 column 7068 - Warning: <div> isn't allowed in <h3> elements
 line 2 column 277 - Warning: discarding unexpected </div>
 line 2 column 298 - Warning: discarding unexpected </summary>
 line 2 column 361 - Warning: missing </summary> before <section>
@@ -1217,7 +1230,7 @@ line 68 column 34 - Warning: discarding unexpected </div>
 line 68 column 214 - Warning: <div> isn't allowed in <h3> elements
 line 69 column 135 - Warning: discarding unexpected </div>
 line 1 column 1939 - Warning: trimming empty <button>
-line 1 column 6676 - Warning: trimming empty <summary>
+line 1 column 6677 - Warning: trimming empty <summary>
 line 2 column 361 - Warning: trimming empty <summary>
 line 2 column 891 - Warning: trimming empty <summary>
 line 4 column 177 - Warning: trimming empty <summary>
@@ -1282,12 +1295,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/state_in_game_mod/state_in_game_logic_mod/fn.move_snake_head.html
 Document: "2" is not a file!
 
-line 1 column 2529 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2529 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2545 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 2962 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2962 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 2979 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 2530 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2530 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2546 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 2963 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2963 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 2980 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 1996 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
@@ -1295,12 +1308,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/state_in_game_mod/state_in_game_logic_mod/fn.move_segments.html
 Document: "2" is not a file!
 
-line 1 column 2485 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2485 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2501 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 2916 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2916 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 2933 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 2486 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2486 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2502 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 2917 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2917 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 2934 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 1952 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
@@ -1308,12 +1321,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/state_in_game_mod/state_in_game_logic_mod/fn.eat_bird.html
 Document: "2" is not a file!
 
-line 1 column 2515 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2515 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2531 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 2941 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2941 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 2958 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 2516 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2516 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2532 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 2942 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2942 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 2959 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 1982 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
@@ -1321,12 +1334,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/state_in_game_mod/state_in_game_logic_mod/index.html
 Document: "2" is not a file!
 
-line 1 column 2795 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2795 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2811 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 3168 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 3168 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 3185 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 2796 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2796 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2812 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 3169 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 3169 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 3186 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 1990 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
@@ -1334,12 +1347,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/state_in_game_mod/state_in_game_logic_mod/fn.check_dead.html
 Document: "2" is not a file!
 
-line 1 column 2519 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2519 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2535 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 2947 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2947 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 2964 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 2520 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2520 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2536 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 2948 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2948 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 2965 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 1986 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
@@ -1347,12 +1360,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/state_in_game_mod/state_in_game_logic_mod/constant.BIRD_COLORS.html
 Document: "2" is not a file!
 
-line 1 column 2533 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2533 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2549 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 2968 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2968 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 2985 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 2534 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2534 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2550 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 2969 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2969 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 2986 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 2000 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
@@ -1360,12 +1373,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/state_in_game_mod/enum.ButtonEnum.html
 Document: "2" is not a file!
 
-line 1 column 6422 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 6422 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 6438 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 6787 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 6787 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 6804 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 6423 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 6423 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 6439 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 6788 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 6788 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 6805 - Warning: discarding unexpected </rustdoc-toolbar>
 line 7 column 1048 - Warning: missing </summary> before <section>
 line 7 column 1433 - Warning: <div> isn't allowed in <h3> elements
 line 8 column 277 - Warning: discarding unexpected </div>
@@ -1610,14 +1623,14 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/state_in_game_mod/struct.Music.html
 Document: "2" is not a file!
 
-line 1 column 5804 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 5804 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 5820 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 6168 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 6168 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 6185 - Warning: discarding unexpected </rustdoc-toolbar>
-line 1 column 6609 - Warning: missing </summary> before <section>
-line 1 column 6975 - Warning: <div> isn't allowed in <h3> elements
+line 1 column 5805 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 5805 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 5821 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 6169 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 6169 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 6186 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 6610 - Warning: missing </summary> before <section>
+line 1 column 6976 - Warning: <div> isn't allowed in <h3> elements
 line 2 column 277 - Warning: discarding unexpected </div>
 line 2 column 298 - Warning: discarding unexpected </summary>
 line 2 column 361 - Warning: missing </summary> before <section>
@@ -1788,7 +1801,7 @@ line 68 column 34 - Warning: discarding unexpected </div>
 line 68 column 214 - Warning: <div> isn't allowed in <h3> elements
 line 69 column 135 - Warning: discarding unexpected </div>
 line 1 column 1929 - Warning: trimming empty <button>
-line 1 column 6609 - Warning: trimming empty <summary>
+line 1 column 6610 - Warning: trimming empty <summary>
 line 2 column 361 - Warning: trimming empty <summary>
 line 2 column 891 - Warning: trimming empty <summary>
 line 4 column 177 - Warning: trimming empty <summary>
@@ -1853,12 +1866,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/state_in_game_mod/struct.Bird.html
 Document: "2" is not a file!
 
-line 1 column 5997 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 5997 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 6013 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 6360 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 6360 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 6377 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 5998 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 5998 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 6014 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 6361 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 6361 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 6378 - Warning: discarding unexpected </rustdoc-toolbar>
 line 4 column 753 - Warning: missing </summary> before <section>
 line 4 column 1114 - Warning: <div> isn't allowed in <h3> elements
 line 5 column 277 - Warning: discarding unexpected </div>
@@ -2096,13 +2109,13 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/state_in_game_mod/struct.InstanceHandle.html
 Document: "2" is not a file!
 
-line 1 column 5775 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 5775 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 5791 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 6148 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 6148 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 6165 - Warning: discarding unexpected </rustdoc-toolbar>
-line 1 column 7239 - Warning: <div> isn't allowed in <h3> elements
+line 1 column 5776 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 5776 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 5792 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 6149 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 6149 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 6166 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 7240 - Warning: <div> isn't allowed in <h3> elements
 line 2 column 277 - Warning: discarding unexpected </div>
 line 2 column 3419 - Warning: missing </summary> before <section>
 line 2 column 3777 - Warning: <div> isn't allowed in <h3> elements
@@ -2271,12 +2284,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/state_in_game_mod/state_in_game_render_mod/fn.render_debug_text.html
 Document: "2" is not a file!
 
-line 1 column 2535 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2535 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2551 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 2971 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2971 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 2988 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 2536 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2536 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2552 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 2972 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2972 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 2989 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 2001 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
@@ -2284,12 +2297,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/state_in_game_mod/state_in_game_render_mod/fn.render_points_text.html
 Document: "2" is not a file!
 
-line 1 column 2537 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2537 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2553 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 2974 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2974 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 2991 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 2538 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2538 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2554 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 2975 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2975 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 2992 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 2003 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
@@ -2297,12 +2310,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/state_in_game_mod/state_in_game_render_mod/fn.render_bird.html
 Document: "2" is not a file!
 
-line 1 column 2523 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2523 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2539 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 2953 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2953 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 2970 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 2524 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2524 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2540 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 2954 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2954 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 2971 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 1989 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
@@ -2310,12 +2323,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/state_in_game_mod/state_in_game_render_mod/fn.rotate_segment.html
 Document: "2" is not a file!
 
-line 1 column 2529 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2529 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2545 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 2962 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2962 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 2979 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 2530 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2530 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2546 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 2963 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2963 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 2980 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 1995 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
@@ -2323,12 +2336,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/state_in_game_mod/state_in_game_render_mod/fn.render_snake_head.html
 Document: "2" is not a file!
 
-line 1 column 2535 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2535 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2551 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 2971 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2971 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 2988 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 2536 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2536 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2552 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 2972 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2972 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 2989 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 2001 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
@@ -2336,12 +2349,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/state_in_game_mod/state_in_game_render_mod/index.html
 Document: "2" is not a file!
 
-line 1 column 2737 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2737 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2753 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 3111 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 3111 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 3128 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 2738 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2738 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2754 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 3112 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 3112 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 3129 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 1992 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
@@ -2349,12 +2362,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/state_in_game_mod/state_in_game_render_mod/fn.render_segment.html
 Document: "2" is not a file!
 
-line 1 column 2529 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2529 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2545 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 2962 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2962 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 2979 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 2530 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2530 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2546 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 2963 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2963 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 2980 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 1995 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
@@ -2362,12 +2375,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/state_in_game_mod/struct.Position.html
 Document: "2" is not a file!
 
-line 1 column 6427 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 6427 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 6443 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 6794 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 6794 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 6811 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 6428 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 6428 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 6444 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 6795 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 6795 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 6812 - Warning: discarding unexpected </rustdoc-toolbar>
 line 4 column 755 - Warning: missing </summary> before <section>
 line 4 column 1114 - Warning: discarding unexpected </summary>
 line 4 column 1191 - Warning: missing </summary> before <section>
@@ -2599,12 +2612,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/state_in_game_mod/constant.OTHER_Z_LAYER.html
 Document: "2" is not a file!
 
-line 1 column 2429 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2429 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2445 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 2805 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2805 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 2822 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 2430 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2430 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2446 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 2806 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2806 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 2823 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 1949 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
@@ -2612,12 +2625,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/state_in_game_mod/constant.SNAKE_Z_LAYER.html
 Document: "2" is not a file!
 
-line 1 column 2429 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2429 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2445 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 2805 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2805 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 2822 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 2430 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2430 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2446 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 2806 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2806 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 2823 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 1949 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
@@ -2625,12 +2638,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/state_in_game_mod/fn.add_in_game_to_app.html
 Document: "2" is not a file!
 
-line 1 column 2427 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2427 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2443 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 2802 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2802 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 2819 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 2428 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2428 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2444 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 2803 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2803 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 2820 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 1947 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
@@ -2638,12 +2651,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/state_in_game_mod/state_in_game_events_mod/fn.button_interaction_system.html
 Document: "2" is not a file!
 
-line 1 column 2551 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2551 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2567 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 2995 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2995 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 3012 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 2552 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2552 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2568 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 2996 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2996 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 3013 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 2017 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
@@ -2651,12 +2664,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/state_in_game_mod/state_in_game_events_mod/fn.handle_movement_input.html
 Document: "2" is not a file!
 
-line 1 column 2543 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2543 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2559 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 2983 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2983 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 3000 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 2544 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2544 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2560 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 2984 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2984 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 3001 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 2009 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
@@ -2664,12 +2677,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/state_in_game_mod/state_in_game_events_mod/index.html
 Document: "2" is not a file!
 
-line 1 column 2737 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2737 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2753 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 3111 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 3111 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 3128 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 2738 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2738 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2754 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 3112 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 3112 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 3129 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 1992 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
@@ -2677,14 +2690,14 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/state_in_game_mod/struct.AnimatedText.html
 Document: "2" is not a file!
 
-line 1 column 5879 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 5879 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 5895 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 6250 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 6250 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 6267 - Warning: discarding unexpected </rustdoc-toolbar>
-line 1 column 6698 - Warning: missing </summary> before <section>
-line 1 column 7099 - Warning: <div> isn't allowed in <h3> elements
+line 1 column 5880 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 5880 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 5896 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 6251 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 6251 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 6268 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 6699 - Warning: missing </summary> before <section>
+line 1 column 7100 - Warning: <div> isn't allowed in <h3> elements
 line 2 column 277 - Warning: discarding unexpected </div>
 line 2 column 298 - Warning: discarding unexpected </summary>
 line 2 column 361 - Warning: missing </summary> before <section>
@@ -2855,7 +2868,7 @@ line 68 column 34 - Warning: discarding unexpected </div>
 line 68 column 214 - Warning: <div> isn't allowed in <h3> elements
 line 69 column 135 - Warning: discarding unexpected </div>
 line 1 column 1943 - Warning: trimming empty <button>
-line 1 column 6698 - Warning: trimming empty <summary>
+line 1 column 6699 - Warning: trimming empty <summary>
 line 2 column 361 - Warning: trimming empty <summary>
 line 2 column 891 - Warning: trimming empty <summary>
 line 4 column 177 - Warning: trimming empty <summary>
@@ -2920,12 +2933,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/state_in_game_mod/constant.BIRD_Z_LAYER.html
 Document: "2" is not a file!
 
-line 1 column 2427 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2427 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2443 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 2802 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2802 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 2819 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 2428 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2428 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2444 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 2803 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2803 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 2820 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 1947 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
@@ -2933,12 +2946,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/state_in_game_mod/struct.DebugText.html
 Document: "2" is not a file!
 
-line 1 column 6006 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 6006 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 6022 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 6374 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 6374 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 6391 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 6007 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 6007 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 6023 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 6375 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 6375 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 6392 - Warning: discarding unexpected </rustdoc-toolbar>
 line 3 column 636 - Warning: missing </summary> before <section>
 line 3 column 1022 - Warning: <div> isn't allowed in <h3> elements
 line 4 column 277 - Warning: discarding unexpected </div>
@@ -3176,12 +3189,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/state_in_game_mod/struct.SnakeHead.html
 Document: "2" is not a file!
 
-line 1 column 6526 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 6526 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 6542 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 6894 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 6894 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 6911 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 6527 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 6527 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 6543 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 6895 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 6895 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 6912 - Warning: discarding unexpected </rustdoc-toolbar>
 line 10 column 2470 - Warning: missing </summary> before <section>
 line 10 column 2856 - Warning: <div> isn't allowed in <h3> elements
 line 11 column 277 - Warning: discarding unexpected </div>
@@ -3419,12 +3432,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/state_in_game_mod/enum.Direction.html
 Document: "2" is not a file!
 
-line 1 column 6338 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 6338 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 6354 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 6702 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 6702 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 6719 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 6339 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 6339 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 6355 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 6703 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 6703 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 6720 - Warning: discarding unexpected </rustdoc-toolbar>
 line 6 column 882 - Warning: missing </summary> before <section>
 line 6 column 1387 - Warning: discarding unexpected </summary>
 line 6 column 1464 - Warning: missing </summary> before <section>
@@ -3647,12 +3660,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/state_in_game_mod/index.html
 Document: "2" is not a file!
 
-line 1 column 2861 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2861 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2877 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 3173 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 3173 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 3190 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 2862 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2862 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2878 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 3174 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 3174 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 3191 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 1929 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
@@ -3660,12 +3673,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/state_in_game_mod/struct.SnakeSegment.html
 Document: "2" is not a file!
 
-line 1 column 6610 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 6610 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 6626 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 6981 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 6981 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 6998 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 6611 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 6611 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 6627 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 6982 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 6982 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 6999 - Warning: discarding unexpected </rustdoc-toolbar>
 line 6 column 1408 - Warning: missing </summary> before <section>
 line 6 column 1934 - Warning: discarding unexpected </summary>
 line 6 column 2011 - Warning: missing </summary> before <section>
@@ -3949,12 +3962,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/state_in_game_mod/fn.on_enter_in_game.html
 Document: "2" is not a file!
 
-line 1 column 2423 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2423 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2439 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 2796 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2796 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 2813 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 2424 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2424 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2440 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 2797 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2797 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 2814 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 1943 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
@@ -3962,12 +3975,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/web_sys_mod/fn.get_element_by_id.html
 Document: "2" is not a file!
 
-line 1 column 2344 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2344 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2360 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 2712 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2712 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 2729 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 2345 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2345 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2361 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 2713 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2713 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 2730 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 1875 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
@@ -3975,12 +3988,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/web_sys_mod/fn.get_html_element_by_id.html
 Document: "2" is not a file!
 
-line 1 column 2354 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2354 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2370 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 2727 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2727 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 2744 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 2355 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2355 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2371 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 2728 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2728 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 2745 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 1885 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
@@ -3988,12 +4001,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/web_sys_mod/fn.set_html_element_inner_html.html
 Document: "2" is not a file!
 
-line 1 column 2511 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2511 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2527 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 2889 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2889 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 2906 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 2512 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2512 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2528 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 2890 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2890 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 2907 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 2042 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
@@ -4001,12 +4014,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/web_sys_mod/fn.open_url_in_new_tab.html
 Document: "2" is not a file!
 
-line 1 column 2412 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2412 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2428 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 2782 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2782 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 2799 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 2413 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2413 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2429 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 2783 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2783 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 2800 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 1943 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
@@ -4014,12 +4027,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/web_sys_mod/fn.get_input_element_value_string_by_id.html
 Document: "2" is not a file!
 
-line 1 column 2382 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2382 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2398 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 2769 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2769 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 2786 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 2383 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2383 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2399 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 2770 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2770 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 2787 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 1913 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
@@ -4027,12 +4040,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/web_sys_mod/fn.window.html
 Document: "2" is not a file!
 
-line 1 column 2347 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2347 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2363 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 2704 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2704 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 2721 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 2348 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2348 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2364 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 2705 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2705 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 2722 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 1878 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
@@ -4040,12 +4053,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/web_sys_mod/fn.debug_write.html
 Document: "2" is not a file!
 
-line 1 column 2353 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2353 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2369 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 2715 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2715 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 2732 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 2354 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2354 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2370 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 2716 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2716 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 2733 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 1884 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
@@ -4053,12 +4066,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/web_sys_mod/fn.get_client_height.html
 Document: "2" is not a file!
 
-line 1 column 2408 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2408 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2424 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 2776 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2776 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 2793 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 2409 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2409 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2425 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 2777 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2777 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 2794 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 1939 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
@@ -4066,12 +4079,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/web_sys_mod/fn.add_listener_to_button.html
 Document: "2" is not a file!
 
-line 1 column 2361 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2361 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2377 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 2734 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2734 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 2751 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 2362 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2362 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2378 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 2735 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2735 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 2752 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 1892 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
@@ -4079,12 +4092,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/web_sys_mod/fn.set_html_element_inner_text.html
 Document: "2" is not a file!
 
-line 1 column 2351 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2351 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2367 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 2729 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2729 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 2746 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 2352 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2352 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2368 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 2730 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2730 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 2747 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 1882 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
@@ -4092,12 +4105,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/web_sys_mod/index.html
 Document: "2" is not a file!
 
-line 1 column 2688 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2688 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2704 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 2994 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2994 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 3011 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 2689 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2689 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2705 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 2995 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2995 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 3012 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 1985 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
@@ -4105,12 +4118,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/web_sys_mod/fn.get_client_width.html
 Document: "2" is not a file!
 
-line 1 column 2406 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2406 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2422 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 2773 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2773 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 2790 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 2407 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2407 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2423 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 2774 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2774 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 2791 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 1937 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
@@ -4118,12 +4131,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/constant.VERSION.html
 Document: "2" is not a file!
 
-line 1 column 2264 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2264 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2280 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 2582 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2582 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 2599 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 2265 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2265 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2281 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 2583 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2583 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 2600 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 1888 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
@@ -4131,12 +4144,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/fn.handle_browser_resize.html
 Document: "2" is not a file!
 
-line 1 column 2418 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2418 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2434 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 2744 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2744 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 2761 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 2419 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2419 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2435 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 2745 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2745 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 2762 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 2042 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
@@ -4144,12 +4157,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/constant.BOARD_HEIGHT.html
 Document: "2" is not a file!
 
-line 1 column 2274 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2274 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2290 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 2597 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2597 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 2614 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 2275 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2275 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2291 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 2598 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2598 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 2615 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 1898 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
@@ -4157,12 +4170,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/enum.AppState.html
 Document: "2" is not a file!
 
-line 1 column 6885 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 6885 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 6901 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 7196 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 7196 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 7213 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 6886 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 6886 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 6902 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 7197 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 7197 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 7214 - Warning: discarding unexpected </rustdoc-toolbar>
 line 5 column 773 - Warning: missing </summary> before <section>
 line 5 column 1237 - Warning: discarding unexpected </summary>
 line 5 column 1314 - Warning: missing </summary> before <section>
@@ -4459,22 +4472,333 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/all.html
 Document: "2" is not a file!
 
-line 1 column 2497 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2497 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2513 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 2498 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2498 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2514 - Warning: discarding unexpected </rustdoc-search>
 line 1 column 1793 - Warning: trimming empty <button>
+This document has errors that must be fixed before
+using HTML Tidy to generate a tidied up version.
+
+./docs/snake_bevy_wasm/struct.CustomMaterial.html
+Document: "2" is not a file!
+
+line 1 column 6628 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 6628 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 6644 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 6949 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 6949 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 6966 - Warning: discarding unexpected </rustdoc-toolbar>
+line 3 column 485 - Warning: missing </summary> before <section>
+line 3 column 882 - Warning: discarding unexpected </summary>
+line 3 column 945 - Warning: missing </summary> before <section>
+line 3 column 1326 - Warning: discarding unexpected </summary>
+line 3 column 1911 - Warning: missing </summary> before <section>
+line 3 column 2413 - Warning: discarding unexpected </summary>
+line 3 column 2509 - Warning: missing </summary> before <section>
+line 9 column 93 - Warning: discarding unexpected </summary>
+line 9 column 269 - Warning: missing </summary> before <section>
+line 12 column 174 - Warning: discarding unexpected </summary>
+line 12 column 774 - Warning: missing </summary> before <section>
+line 12 column 1158 - Warning: discarding unexpected </summary>
+line 12 column 1330 - Warning: missing </summary> before <section>
+line 12 column 1662 - Warning: discarding unexpected </summary>
+line 13 column 138 - Warning: missing </summary> before <section>
+line 18 column 214 - Warning: discarding unexpected </summary>
+line 18 column 425 - Warning: missing </summary> before <section>
+line 18 column 673 - Warning: <div> isn't allowed in <h4> elements
+line 19 column 141 - Warning: discarding unexpected </div>
+line 19 column 162 - Warning: discarding unexpected </summary>
+line 20 column 123 - Warning: missing </summary> before <section>
+line 20 column 624 - Warning: discarding unexpected </summary>
+line 20 column 701 - Warning: missing </summary> before <section>
+line 20 column 1171 - Warning: discarding unexpected </summary>
+line 20 column 1390 - Warning: missing </summary> before <section>
+line 20 column 1894 - Warning: discarding unexpected </summary>
+line 20 column 2160 - Warning: missing </summary> before <section>
+line 20 column 2657 - Warning: discarding unexpected </summary>
+line 20 column 2734 - Warning: missing </summary> before <section>
+line 20 column 3362 - Warning: discarding unexpected </summary>
+line 20 column 3615 - Warning: missing </summary> before <section>
+line 22 column 17 - Warning: discarding unexpected </summary>
+line 22 column 94 - Warning: missing </summary> before <section>
+line 22 column 392 - Warning: discarding unexpected </summary>
+line 23 column 73 - Warning: missing </summary> before <section>
+line 23 column 377 - Warning: discarding unexpected </summary>
+line 24 column 73 - Warning: missing </summary> before <section>
+line 24 column 368 - Warning: discarding unexpected </summary>
+line 24 column 757 - Warning: missing </summary> before <section>
+line 28 column 282 - Warning: discarding unexpected </summary>
+line 28 column 458 - Warning: missing </summary> before <section>
+line 28 column 831 - Warning: <div> isn't allowed in <h3> elements
+line 29 column 500 - Warning: discarding unexpected </div>
+line 29 column 521 - Warning: discarding unexpected </summary>
+line 29 column 598 - Warning: missing </summary> before <section>
+line 29 column 975 - Warning: discarding unexpected </summary>
+line 29 column 1139 - Warning: missing </summary> before <section>
+line 29 column 1534 - Warning: discarding unexpected </summary>
+line 29 column 1697 - Warning: missing </summary> before <section>
+line 29 column 2214 - Warning: discarding unexpected </summary>
+line 29 column 2557 - Warning: missing </summary> before <section>
+line 29 column 3074 - Warning: discarding unexpected </summary>
+line 29 column 3433 - Warning: missing </summary> before <section>
+line 29 column 3953 - Warning: discarding unexpected </summary>
+line 29 column 4335 - Warning: missing </summary> before <section>
+line 29 column 4765 - Warning: discarding unexpected </summary>
+line 29 column 8664 - Warning: missing </summary> before <section>
+line 29 column 9022 - Warning: <div> isn't allowed in <h3> elements
+line 30 column 149 - Warning: discarding unexpected </div>
+line 30 column 170 - Warning: discarding unexpected </summary>
+line 30 column 247 - Warning: missing </summary> before <section>
+line 30 column 752 - Warning: discarding unexpected </summary>
+line 30 column 1008 - Warning: missing </summary> before <section>
+line 30 column 1232 - Warning: <div> isn't allowed in <h3> elements
+line 32 column 262 - Warning: discarding unexpected </div>
+line 32 column 283 - Warning: discarding unexpected </summary>
+line 32 column 360 - Warning: missing </summary> before <section>
+line 32 column 654 - Warning: discarding unexpected </summary>
+line 33 column 150 - Warning: missing </summary> before <section>
+line 33 column 327 - Warning: <div> isn't allowed in <h3> elements
+line 34 column 14 - Warning: discarding unexpected </div>
+line 34 column 35 - Warning: discarding unexpected </summary>
+line 34 column 794 - Warning: missing </summary> before <section>
+line 34 column 1199 - Warning: <div> isn't allowed in <h3> elements
+line 35 column 139 - Warning: discarding unexpected </div>
+line 35 column 160 - Warning: discarding unexpected </summary>
+line 35 column 237 - Warning: missing </summary> before <section>
+line 35 column 718 - Warning: discarding unexpected </summary>
+line 35 column 967 - Warning: missing </summary> before <section>
+line 35 column 1387 - Warning: <div> isn't allowed in <h3> elements
+line 36 column 139 - Warning: discarding unexpected </div>
+line 36 column 160 - Warning: discarding unexpected </summary>
+line 36 column 237 - Warning: missing </summary> before <section>
+line 36 column 745 - Warning: discarding unexpected </summary>
+line 36 column 999 - Warning: missing </summary> before <section>
+line 36 column 1413 - Warning: <div> isn't allowed in <h3> elements
+line 37 column 136 - Warning: discarding unexpected </div>
+line 37 column 157 - Warning: discarding unexpected </summary>
+line 37 column 234 - Warning: missing </summary> before <section>
+line 37 column 850 - Warning: discarding unexpected </summary>
+line 37 column 860 - Warning: missing </span> before <div>
+line 37 column 911 - Warning: inserting implicit <span>
+line 37 column 1029 - Warning: discarding unexpected </span>
+line 37 column 1321 - Warning: missing </summary> before <section>
+line 37 column 1518 - Warning: discarding unexpected </summary>
+line 37 column 1901 - Warning: missing </summary> before <section>
+line 37 column 2060 - Warning: <div> isn't allowed in <h3> elements
+line 38 column 126 - Warning: discarding unexpected </div>
+line 38 column 147 - Warning: discarding unexpected </summary>
+line 38 column 224 - Warning: missing </summary> before <section>
+line 38 column 809 - Warning: discarding unexpected </summary>
+line 39 column 190 - Warning: missing </summary> before <section>
+line 39 column 766 - Warning: discarding unexpected </summary>
+line 40 column 185 - Warning: missing </summary> before <section>
+line 40 column 515 - Warning: discarding unexpected </summary>
+line 41 column 131 - Warning: missing </summary> before <section>
+line 41 column 481 - Warning: discarding unexpected </summary>
+line 42 column 156 - Warning: missing </summary> before <section>
+line 42 column 327 - Warning: <div> isn't allowed in <h3> elements
+line 43 column 255 - Warning: discarding unexpected </div>
+line 43 column 276 - Warning: discarding unexpected </summary>
+line 43 column 353 - Warning: missing </summary> before <section>
+line 43 column 1082 - Warning: discarding unexpected </summary>
+line 44 column 215 - Warning: missing </summary> before <section>
+line 44 column 395 - Warning: <div> isn't allowed in <h3> elements
+line 45 column 17 - Warning: discarding unexpected </div>
+line 45 column 38 - Warning: discarding unexpected </summary>
+line 45 column 115 - Warning: missing </summary> before <section>
+line 45 column 436 - Warning: discarding unexpected </summary>
+line 45 column 566 - Warning: missing </summary> before <section>
+line 45 column 905 - Warning: discarding unexpected </summary>
+line 45 column 1041 - Warning: missing </summary> before <section>
+line 45 column 1502 - Warning: discarding unexpected </summary>
+line 45 column 1633 - Warning: missing </summary> before <section>
+line 45 column 2094 - Warning: discarding unexpected </summary>
+line 45 column 2225 - Warning: missing </summary> before <section>
+line 45 column 2689 - Warning: discarding unexpected </summary>
+line 45 column 2838 - Warning: missing </summary> before <section>
+line 45 column 3255 - Warning: discarding unexpected </summary>
+line 45 column 3332 - Warning: missing </summary> before <section>
+line 45 column 3705 - Warning: discarding unexpected </summary>
+line 46 column 77 - Warning: missing </summary> before <section>
+line 46 column 280 - Warning: discarding unexpected </summary>
+line 46 column 571 - Warning: missing </summary> before <section>
+line 46 column 751 - Warning: discarding unexpected </summary>
+line 46 column 828 - Warning: missing </summary> before <section>
+line 46 column 1063 - Warning: discarding unexpected </summary>
+line 47 column 111 - Warning: missing </summary> before <section>
+line 47 column 349 - Warning: discarding unexpected </summary>
+line 48 column 128 - Warning: missing </summary> before <section>
+line 48 column 537 - Warning: <div> isn't allowed in <h3> elements
+line 49 column 146 - Warning: discarding unexpected </div>
+line 49 column 167 - Warning: discarding unexpected </summary>
+line 49 column 244 - Warning: missing </summary> before <section>
+line 49 column 617 - Warning: discarding unexpected </summary>
+line 52 column 77 - Warning: missing </summary> before <section>
+line 52 column 498 - Warning: discarding unexpected </summary>
+line 52 column 575 - Warning: missing </summary> before <section>
+line 52 column 1204 - Warning: discarding unexpected </summary>
+line 55 column 179 - Warning: missing </summary> before <section>
+line 55 column 733 - Warning: <div> isn't allowed in <h4> elements
+line 56 column 265 - Warning: discarding unexpected </div>
+line 56 column 286 - Warning: discarding unexpected </summary>
+line 59 column 201 - Warning: missing </summary> before <section>
+line 59 column 392 - Warning: <div> isn't allowed in <h3> elements
+line 60 column 28 - Warning: discarding unexpected </div>
+line 60 column 49 - Warning: discarding unexpected </summary>
+line 60 column 337 - Warning: missing </summary> before <section>
+line 60 column 729 - Warning: <div> isn't allowed in <h3> elements
+line 61 column 136 - Warning: discarding unexpected </div>
+line 61 column 157 - Warning: discarding unexpected </summary>
+line 61 column 220 - Warning: missing </summary> before <section>
+line 61 column 629 - Warning: discarding unexpected </summary>
+line 61 column 765 - Warning: missing </summary> before <section>
+line 61 column 1157 - Warning: discarding unexpected </summary>
+line 61 column 1413 - Warning: missing </summary> before <section>
+line 61 column 1917 - Warning: discarding unexpected </summary>
+line 61 column 2193 - Warning: missing </summary> before <section>
+line 61 column 2378 - Warning: <div> isn't allowed in <h3> elements
+line 62 column 28 - Warning: discarding unexpected </div>
+line 62 column 49 - Warning: discarding unexpected </summary>
+line 62 column 334 - Warning: missing </summary> before <section>
+line 62 column 758 - Warning: <div> isn't allowed in <h3> elements
+line 63 column 146 - Warning: discarding unexpected </div>
+line 63 column 167 - Warning: discarding unexpected </summary>
+line 63 column 230 - Warning: missing </summary> before <section>
+line 63 column 790 - Warning: discarding unexpected </summary>
+line 63 column 934 - Warning: missing </summary> before <section>
+line 63 column 1801 - Warning: discarding unexpected </summary>
+line 63 column 1933 - Warning: missing </summary> before <section>
+line 63 column 2357 - Warning: <div> isn't allowed in <h3> elements
+line 64 column 155 - Warning: discarding unexpected </div>
+line 64 column 176 - Warning: discarding unexpected </summary>
+line 64 column 239 - Warning: missing </summary> before <section>
+line 64 column 984 - Warning: discarding unexpected </summary>
+line 64 column 1128 - Warning: missing </summary> before <section>
+line 64 column 1991 - Warning: discarding unexpected </summary>
+line 64 column 2123 - Warning: missing </summary> before <section>
+line 64 column 2282 - Warning: <div> isn't allowed in <h3> elements
+line 65 column 404 - Warning: discarding unexpected </div>
+line 65 column 425 - Warning: discarding unexpected </summary>
+line 65 column 875 - Warning: missing </summary> before <section>
+line 65 column 1066 - Warning: discarding unexpected </summary>
+line 65 column 1580 - Warning: missing </summary> before <section>
+line 65 column 1753 - Warning: <div> isn't allowed in <h3> elements
+line 66 column 27 - Warning: discarding unexpected </div>
+line 66 column 48 - Warning: discarding unexpected </summary>
+line 66 column 315 - Warning: missing </summary> before <section>
+line 66 column 507 - Warning: discarding unexpected </summary>
+line 66 column 584 - Warning: missing </summary> before <section>
+line 66 column 831 - Warning: <div> isn't allowed in <h4> elements
+line 67 column 153 - Warning: discarding unexpected </div>
+line 67 column 174 - Warning: discarding unexpected </summary>
+line 68 column 113 - Warning: missing </summary> before <section>
+line 68 column 375 - Warning: discarding unexpected </summary>
+line 69 column 257 - Warning: <div> isn't allowed in <h3> elements
+line 70 column 135 - Warning: discarding unexpected </div>
+line 70 column 326 - Warning: <div> isn't allowed in <h3> elements
+line 71 column 48 - Warning: discarding unexpected </div>
+line 71 column 219 - Warning: <div> isn't allowed in <h3> elements
+line 72 column 274 - Warning: discarding unexpected </div>
+line 72 column 454 - Warning: <div> isn't allowed in <h3> elements
+line 73 column 135 - Warning: discarding unexpected </div>
+line 73 column 327 - Warning: <div> isn't allowed in <h3> elements
+line 74 column 34 - Warning: discarding unexpected </div>
+line 74 column 214 - Warning: <div> isn't allowed in <h3> elements
+line 75 column 135 - Warning: discarding unexpected </div>
+line 1 column 1898 - Warning: trimming empty <button>
+line 3 column 485 - Warning: trimming empty <summary>
+line 3 column 945 - Warning: trimming empty <summary>
+line 3 column 1911 - Warning: trimming empty <summary>
+line 3 column 2509 - Warning: trimming empty <summary>
+line 9 column 269 - Warning: trimming empty <summary>
+line 12 column 774 - Warning: trimming empty <summary>
+line 12 column 1330 - Warning: trimming empty <summary>
+line 13 column 138 - Warning: trimming empty <summary>
+line 18 column 425 - Warning: trimming empty <summary>
+line 20 column 123 - Warning: trimming empty <summary>
+line 20 column 701 - Warning: trimming empty <summary>
+line 20 column 1390 - Warning: trimming empty <summary>
+line 20 column 2160 - Warning: trimming empty <summary>
+line 20 column 2734 - Warning: trimming empty <summary>
+line 20 column 3615 - Warning: trimming empty <summary>
+line 22 column 94 - Warning: trimming empty <summary>
+line 23 column 73 - Warning: trimming empty <summary>
+line 24 column 73 - Warning: trimming empty <summary>
+line 24 column 757 - Warning: trimming empty <summary>
+line 28 column 458 - Warning: trimming empty <summary>
+line 29 column 598 - Warning: trimming empty <summary>
+line 29 column 1139 - Warning: trimming empty <summary>
+line 29 column 1697 - Warning: trimming empty <summary>
+line 29 column 2557 - Warning: trimming empty <summary>
+line 29 column 3433 - Warning: trimming empty <summary>
+line 29 column 4335 - Warning: trimming empty <summary>
+line 29 column 8664 - Warning: trimming empty <summary>
+line 30 column 247 - Warning: trimming empty <summary>
+line 30 column 1008 - Warning: trimming empty <summary>
+line 32 column 360 - Warning: trimming empty <summary>
+line 33 column 150 - Warning: trimming empty <summary>
+line 34 column 794 - Warning: trimming empty <summary>
+line 35 column 237 - Warning: trimming empty <summary>
+line 35 column 967 - Warning: trimming empty <summary>
+line 36 column 237 - Warning: trimming empty <summary>
+line 36 column 999 - Warning: trimming empty <summary>
+line 37 column 234 - Warning: trimming empty <summary>
+line 37 column 860 - Warning: trimming empty <span>
+line 37 column 1321 - Warning: trimming empty <summary>
+line 37 column 1901 - Warning: trimming empty <summary>
+line 38 column 224 - Warning: trimming empty <summary>
+line 39 column 190 - Warning: trimming empty <summary>
+line 40 column 185 - Warning: trimming empty <summary>
+line 41 column 131 - Warning: trimming empty <summary>
+line 42 column 156 - Warning: trimming empty <summary>
+line 43 column 353 - Warning: trimming empty <summary>
+line 44 column 215 - Warning: trimming empty <summary>
+line 45 column 115 - Warning: trimming empty <summary>
+line 45 column 566 - Warning: trimming empty <summary>
+line 45 column 1041 - Warning: trimming empty <summary>
+line 45 column 1633 - Warning: trimming empty <summary>
+line 45 column 2225 - Warning: trimming empty <summary>
+line 45 column 2838 - Warning: trimming empty <summary>
+line 45 column 3332 - Warning: trimming empty <summary>
+line 46 column 77 - Warning: trimming empty <summary>
+line 46 column 571 - Warning: trimming empty <summary>
+line 46 column 828 - Warning: trimming empty <summary>
+line 47 column 111 - Warning: trimming empty <summary>
+line 48 column 128 - Warning: trimming empty <summary>
+line 49 column 244 - Warning: trimming empty <summary>
+line 52 column 77 - Warning: trimming empty <summary>
+line 52 column 575 - Warning: trimming empty <summary>
+line 55 column 179 - Warning: trimming empty <summary>
+line 59 column 201 - Warning: trimming empty <summary>
+line 60 column 337 - Warning: trimming empty <summary>
+line 61 column 220 - Warning: trimming empty <summary>
+line 61 column 765 - Warning: trimming empty <summary>
+line 61 column 1413 - Warning: trimming empty <summary>
+line 61 column 2193 - Warning: trimming empty <summary>
+line 62 column 334 - Warning: trimming empty <summary>
+line 63 column 230 - Warning: trimming empty <summary>
+line 63 column 934 - Warning: trimming empty <summary>
+line 63 column 1933 - Warning: trimming empty <summary>
+line 64 column 239 - Warning: trimming empty <summary>
+line 64 column 1128 - Warning: trimming empty <summary>
+line 64 column 2123 - Warning: trimming empty <summary>
+line 65 column 875 - Warning: trimming empty <summary>
+line 65 column 1580 - Warning: trimming empty <summary>
+line 66 column 315 - Warning: trimming empty <summary>
+line 66 column 584 - Warning: trimming empty <summary>
+line 68 column 113 - Warning: trimming empty <summary>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
 
 ./docs/snake_bevy_wasm/state_main_menu_mod/enum.ButtonEnum.html
 Document: "2" is not a file!
 
-line 1 column 6177 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 6177 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 6193 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 6544 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 6544 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 6561 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 6178 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 6178 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 6194 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 6545 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 6545 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 6562 - Warning: discarding unexpected </rustdoc-toolbar>
 line 3 column 495 - Warning: missing </summary> before <section>
 line 3 column 883 - Warning: <div> isn't allowed in <h3> elements
 line 4 column 277 - Warning: discarding unexpected </div>
@@ -4719,12 +5043,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/state_main_menu_mod/fn.handle_main_menu_ui_input.html
 Document: "2" is not a file!
 
-line 1 column 2445 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2445 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2461 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 2829 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2829 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 2846 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 2446 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2446 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2462 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 2830 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2830 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 2847 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 1963 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
@@ -4732,12 +5056,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/state_main_menu_mod/fn.on_exit_dead.html
 Document: "2" is not a file!
 
-line 1 column 2419 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2419 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2435 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 2790 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2790 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 2807 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 2420 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2420 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2436 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 2791 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2791 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 2808 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 1937 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
@@ -4745,12 +5069,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/state_main_menu_mod/fn.button_interaction_system.html
 Document: "2" is not a file!
 
-line 1 column 2445 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2445 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2461 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 2829 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2829 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 2846 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 2446 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2446 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2462 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 2830 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2830 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 2847 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 1963 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
@@ -4758,12 +5082,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/state_main_menu_mod/fn.on_enter_main_menu.html
 Document: "2" is not a file!
 
-line 1 column 2431 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2431 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2447 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 2808 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2808 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 2825 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 2432 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2432 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2448 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 2809 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2809 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 2826 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 1949 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
@@ -4771,12 +5095,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/state_main_menu_mod/fn.add_main_menu_to_app.html
 Document: "2" is not a file!
 
-line 1 column 2435 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2435 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2451 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 2814 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2814 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 2831 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 2436 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2436 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2452 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 2815 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2815 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 2832 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 1953 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
@@ -4784,12 +5108,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/state_main_menu_mod/index.html
 Document: "2" is not a file!
 
-line 1 column 2694 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2694 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2710 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 3008 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 3008 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 3025 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 2695 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2695 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2711 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 3009 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 3009 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 3026 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 1933 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
@@ -4797,12 +5121,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/fn.get_game_board_canvas.html
 Document: "2" is not a file!
 
-line 1 column 2280 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2280 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2296 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 2606 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2606 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 2623 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 2281 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2281 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2297 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 2607 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2607 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 2624 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 1904 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
@@ -4810,12 +5134,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/struct.GameBoardCanvas.html
 Document: "2" is not a file!
 
-line 1 column 6279 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 6279 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 6295 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 6601 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 6601 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 6618 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 6280 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 6280 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 6296 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 6602 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 6602 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 6619 - Warning: discarding unexpected </rustdoc-toolbar>
 line 9 column 2507 - Warning: <div> isn't allowed in <h3> elements
 line 10 column 277 - Warning: discarding unexpected </div>
 line 10 column 3333 - Warning: missing </summary> before <section>
@@ -4985,12 +5309,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/index.html
 Document: "2" is not a file!
 
-line 1 column 3209 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 3209 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 3225 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 3436 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 3436 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 3453 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 3210 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 3210 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 3226 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 3437 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 3437 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 3454 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 1812 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
@@ -4998,12 +5322,12 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/fn.portrait.html
 Document: "2" is not a file!
 
-line 1 column 2251 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2251 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 2267 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 2564 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 2564 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 2581 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 2252 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2252 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2268 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 2565 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2565 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 2582 - Warning: discarding unexpected </rustdoc-toolbar>
 line 1 column 1875 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
