@@ -10,11 +10,11 @@ The TODO section is part of the [README.md](https://github.com/automation-tasks-
 
 ## Unreleased
 
+- fragment shader
+
 ## Version 1.3.41 (2025-08-08)
 
 - 3 birds, rotated
-
-- 3 birds
 
 ## Version 1.2.7 (2025-08-08)
 

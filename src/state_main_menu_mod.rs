@@ -27,19 +27,19 @@ pub fn add_main_menu_to_app(app: &mut App) {
 pub fn on_enter_main_menu(
     mut commands: Commands,
     game_board_canvas: Res<GameBoardCanvas>,
-    //mut meshes: ResMut<Assets<Mesh>>,
-    //mut materials: ResMut<Assets<CustomMaterial>>,
+    mut meshes: ResMut<Assets<Mesh>>,
+    mut materials: ResMut<Assets<crate::CustomMaterial>>,
     //mut materials: ResMut<Assets<ColorMaterial>>,
     asset_server: Res<AssetServer>,
 ) {
     commands.spawn(Camera2d);
 
-    /*     commands.spawn((
+    commands.spawn((
         Mesh2d(meshes.add(Circle::default())),
         //MeshMaterial2d(materials.add(Color::from(RED))),
-        MeshMaterial2d(materials.add(CustomMaterial { color: LinearRgba::BLUE })),
+        MeshMaterial2d(materials.add(crate::CustomMaterial { color: LinearRgba::BLUE })),
         Transform::default().with_scale(Vec3::splat(400.)),
-    )); */
+    ));
 
     let mut client = if game_board_canvas.orientation == Orientation::Landscape {
         commands.spawn(crate::landscape(&game_board_canvas))
