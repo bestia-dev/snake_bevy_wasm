@@ -27,21 +27,21 @@
 <a href=#27 id=27 data-nosnippet>27</a><span class="kw">pub fn </span>on_enter_main_menu(
 <a href=#28 id=28 data-nosnippet>28</a>    <span class="kw-2">mut </span>commands: Commands,
 <a href=#29 id=29 data-nosnippet>29</a>    game_board_canvas: Res&lt;GameBoardCanvas&gt;,
-<a href=#30 id=30 data-nosnippet>30</a>    <span class="comment">//mut meshes: ResMut&lt;Assets&lt;Mesh&gt;&gt;,
-<a href=#31 id=31 data-nosnippet>31</a>    //mut materials: ResMut&lt;Assets&lt;CustomMaterial&gt;&gt;,
-<a href=#32 id=32 data-nosnippet>32</a>    //mut materials: ResMut&lt;Assets&lt;ColorMaterial&gt;&gt;,
+<a href=#30 id=30 data-nosnippet>30</a>    <span class="kw-2">mut </span>meshes: ResMut&lt;Assets&lt;Mesh&gt;&gt;,
+<a href=#31 id=31 data-nosnippet>31</a>    <span class="kw-2">mut </span>materials: ResMut&lt;Assets&lt;<span class="kw">crate</span>::CustomMaterial&gt;&gt;,
+<a href=#32 id=32 data-nosnippet>32</a>    <span class="comment">//mut materials: ResMut&lt;Assets&lt;ColorMaterial&gt;&gt;,
 <a href=#33 id=33 data-nosnippet>33</a>    </span>asset_server: Res&lt;AssetServer&gt;,
 <a href=#34 id=34 data-nosnippet>34</a>) {
 <a href=#35 id=35 data-nosnippet>35</a>    commands.spawn(Camera2d);
 <a href=#36 id=36 data-nosnippet>36</a>
-<a href=#37 id=37 data-nosnippet>37</a>    <span class="comment">/*     commands.spawn((
+<a href=#37 id=37 data-nosnippet>37</a>    commands.spawn((
 <a href=#38 id=38 data-nosnippet>38</a>        Mesh2d(meshes.add(Circle::default())),
-<a href=#39 id=39 data-nosnippet>39</a>        //MeshMaterial2d(materials.add(Color::from(RED))),
-<a href=#40 id=40 data-nosnippet>40</a>        MeshMaterial2d(materials.add(CustomMaterial { color: LinearRgba::BLUE })),
-<a href=#41 id=41 data-nosnippet>41</a>        Transform::default().with_scale(Vec3::splat(400.)),
-<a href=#42 id=42 data-nosnippet>42</a>    )); */
+<a href=#39 id=39 data-nosnippet>39</a>        <span class="comment">//MeshMaterial2d(materials.add(Color::from(RED))),
+<a href=#40 id=40 data-nosnippet>40</a>        </span>MeshMaterial2d(materials.add(<span class="kw">crate</span>::CustomMaterial { color: LinearRgba::BLUE })),
+<a href=#41 id=41 data-nosnippet>41</a>        Transform::default().with_scale(Vec3::splat(<span class="number">400.</span>)),
+<a href=#42 id=42 data-nosnippet>42</a>    ));
 <a href=#43 id=43 data-nosnippet>43</a>
-<a href=#44 id=44 data-nosnippet>44</a>    </span><span class="kw">let </span><span class="kw-2">mut </span>client = <span class="kw">if </span>game_board_canvas.orientation == Orientation::Landscape {
+<a href=#44 id=44 data-nosnippet>44</a>    <span class="kw">let </span><span class="kw-2">mut </span>client = <span class="kw">if </span>game_board_canvas.orientation == Orientation::Landscape {
 <a href=#45 id=45 data-nosnippet>45</a>        commands.spawn(<span class="kw">crate</span>::landscape(<span class="kw-2">&amp;</span>game_board_canvas))
 <a href=#46 id=46 data-nosnippet>46</a>    } <span class="kw">else </span>{
 <a href=#47 id=47 data-nosnippet>47</a>        commands.spawn(<span class="kw">crate</span>::portrait(<span class="kw-2">&amp;</span>game_board_canvas))

@@ -4521,9 +4521,9 @@ line 20 column 3362 - Warning: discarding unexpected </summary>
 line 20 column 3615 - Warning: missing </summary> before <section>
 line 22 column 17 - Warning: discarding unexpected </summary>
 line 22 column 94 - Warning: missing </summary> before <section>
-line 22 column 392 - Warning: discarding unexpected </summary>
+line 22 column 398 - Warning: discarding unexpected </summary>
 line 23 column 73 - Warning: missing </summary> before <section>
-line 23 column 377 - Warning: discarding unexpected </summary>
+line 23 column 286 - Warning: discarding unexpected </summary>
 line 24 column 73 - Warning: missing </summary> before <section>
 line 24 column 368 - Warning: discarding unexpected </summary>
 line 24 column 757 - Warning: missing </summary> before <section>
