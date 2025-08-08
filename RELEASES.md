@@ -10,8 +10,9 @@ The TODO section is part of the [README.md](https://github.com/automation-tasks-
 
 ## Unreleased
 
-- colors
+## Version 1.2.7 (2025-08-08)
 
+- colors
 
 ## Version 1.1.132 (2025-08-07)
 
