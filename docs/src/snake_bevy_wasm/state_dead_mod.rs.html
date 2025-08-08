@@ -1,7 +1,7 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/state_dead_mod.rs`."><title>state_dead_mod.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-1a91846b.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="snake_bevy_wasm" data-themes="" data-resource-suffix="" data-rustdoc-version="1.88.0 (6b00bc388 2025-06-23)" data-channel="1.88.0" data-search-js="search-f7877310.js" data-settings-js="settings-5514c975.js" ><script src="../../static.files/storage-4e99c027.js"></script><script defer src="../../static.files/src-script-63605ae7.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-7ef8a74a.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-893ab5e7.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">snake_bevy_wasm/</div>state_dead_mod.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="comment">// state_dead_mod.rs
 <a href=#2 id=2 data-nosnippet>2</a>
-<a href=#3 id=3 data-nosnippet>3</a></span><span class="kw">use </span>bevy::color::palettes::css::{GREEN, RED, YELLOW};
-<a href=#4 id=4 data-nosnippet>4</a><span class="kw">use </span>bevy::{color, prelude::<span class="kw-2">*</span>};
+<a href=#3 id=3 data-nosnippet>3</a></span><span class="kw">use </span>bevy::color::palettes::css::{GREEN, RED, WHITE, YELLOW};
+<a href=#4 id=4 data-nosnippet>4</a><span class="kw">use </span>bevy::{color::Color::Srgba, prelude::<span class="kw-2">*</span>};
 <a href=#5 id=5 data-nosnippet>5</a>
 <a href=#6 id=6 data-nosnippet>6</a><span class="kw">use crate</span>::{AppState, GameBoardCanvas, Orientation};
 <a href=#7 id=7 data-nosnippet>7</a>
@@ -49,7 +49,7 @@
 <a href=#49 id=49 data-nosnippet>49</a>            Outline {
 <a href=#50 id=50 data-nosnippet>50</a>                width: Val::Px(<span class="number">1.</span>),
 <a href=#51 id=51 data-nosnippet>51</a>                offset: Val::Px(<span class="number">0.</span>),
-<a href=#52 id=52 data-nosnippet>52</a>                color: Color::WHITE,
+<a href=#52 id=52 data-nosnippet>52</a>                color: WHITE.into(),
 <a href=#53 id=53 data-nosnippet>53</a>            },
 <a href=#54 id=54 data-nosnippet>54</a>        ));
 <a href=#55 id=55 data-nosnippet>55</a>
@@ -71,7 +71,7 @@
 <a href=#71 id=71 data-nosnippet>71</a>                            ..default()
 <a href=#72 id=72 data-nosnippet>72</a>                        },
 <a href=#73 id=73 data-nosnippet>73</a>                        TextLayout::new_with_justify(JustifyText::Center),
-<a href=#74 id=74 data-nosnippet>74</a>                        TextColor::from(color::Color::Srgba(GREEN).with_alpha(<span class="number">0.7</span>)),
+<a href=#74 id=74 data-nosnippet>74</a>                        TextColor::from(Srgba(GREEN).with_alpha(<span class="number">0.7</span>)),
 <a href=#75 id=75 data-nosnippet>75</a>                    ));
 <a href=#76 id=76 data-nosnippet>76</a>                });
 <a href=#77 id=77 data-nosnippet>77</a>            }
@@ -92,7 +92,7 @@
 <a href=#92 id=92 data-nosnippet>92</a>                            ..default()
 <a href=#93 id=93 data-nosnippet>93</a>                        },
 <a href=#94 id=94 data-nosnippet>94</a>                        TextLayout::new_with_justify(JustifyText::Center),
-<a href=#95 id=95 data-nosnippet>95</a>                        TextColor::from(color::Color::Srgba(YELLOW).with_alpha(<span class="number">0.7</span>)),
+<a href=#95 id=95 data-nosnippet>95</a>                        TextColor::from(Srgba(YELLOW).with_alpha(<span class="number">0.7</span>)),
 <a href=#96 id=96 data-nosnippet>96</a>                    ));
 <a href=#97 id=97 data-nosnippet>97</a>                });
 <a href=#98 id=98 data-nosnippet>98</a>            }
@@ -113,7 +113,7 @@
 <a href=#113 id=113 data-nosnippet>113</a>                            ..default()
 <a href=#114 id=114 data-nosnippet>114</a>                        },
 <a href=#115 id=115 data-nosnippet>115</a>                        TextLayout::new_with_justify(JustifyText::Center),
-<a href=#116 id=116 data-nosnippet>116</a>                        TextColor::from(color::Color::Srgba(RED).with_alpha(<span class="number">0.7</span>)),
+<a href=#116 id=116 data-nosnippet>116</a>                        TextColor::from(Srgba(RED).with_alpha(<span class="number">0.7</span>)),
 <a href=#117 id=117 data-nosnippet>117</a>                    ));
 <a href=#118 id=118 data-nosnippet>118</a>                });
 <a href=#119 id=119 data-nosnippet>119</a>            }
@@ -142,7 +142,7 @@
 <a href=#142 id=142 data-nosnippet>142</a>                Outline {
 <a href=#143 id=143 data-nosnippet>143</a>                    width: Val::Px(<span class="number">1.</span>),
 <a href=#144 id=144 data-nosnippet>144</a>                    offset: Val::Px(-<span class="number">2.</span>),
-<a href=#145 id=145 data-nosnippet>145</a>                    color: Color::from(RED),
+<a href=#145 id=145 data-nosnippet>145</a>                    color: WHITE.into(),
 <a href=#146 id=146 data-nosnippet>146</a>                },
 <a href=#147 id=147 data-nosnippet>147</a>            ));
 <a href=#148 id=148 data-nosnippet>148</a>            keys.with_children(|keys| {
