@@ -1,5 +1,5 @@
 use bevy::{
-    color::palettes::css::{GREEN, RED, WHITE, WHITE_SMOKE},
+    color::palettes::css::{ALICE_BLUE, AZURE, BISQUE, CHOCOLATE, CORAL, CRIMSON, GREEN, RED, WHITE},
     prelude::*,
 };
 use bevy_kira_audio::AudioControl;
@@ -9,7 +9,7 @@ use crate::{
     state_in_game_mod::{Bird, DebugText, Direction, OTHER_Z_LAYER, SnakeHead, SnakeSegment, SnakeSegmentIndex},
 };
 
-const BIRD_COLORS: [Srgba; 4] = [RED, GREEN, WHITE_SMOKE, WHITE];
+const BIRD_COLORS: [Srgba; 9] = [GREEN, RED, WHITE, AZURE, BISQUE, ALICE_BLUE, CHOCOLATE, CORAL, CRIMSON];
 
 // fixed time every 0.5 seconds
 pub fn move_snake_head(mut snake_query: Query<&mut SnakeHead>) {
@@ -106,7 +106,6 @@ pub fn move_segments(
             snake_head.just_eating = false;
 
             commands.spawn((
-                StateScoped(AppState::InGame),
                 Sprite::from_image(asset_server.load("segment_horizontal.png")),
                 Transform::from_xyz(
                     snake_head.last_position.to_bevy_x(&game_board_canvas),

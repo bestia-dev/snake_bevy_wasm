@@ -3,7 +3,7 @@
 use bevy::prelude::*;
 
 use crate::{AppState, GameBoardCanvas, Orientation, VERSION};
-use bevy::color::palettes::css::{GREEN, RED, YELLOW};
+use bevy::color::palettes::css::{GREEN, RED, WHITE, YELLOW};
 
 #[derive(Component, PartialEq)]
 enum ButtonEnum {
@@ -48,7 +48,7 @@ pub fn on_enter_main_menu(mut commands: Commands, game_board_canvas: Res<GameBoa
             Outline {
                 width: Val::Px(1.),
                 offset: Val::Px(0.),
-                color: Color::WHITE,
+                color: WHITE.into(),
             },
         ));
 
@@ -143,7 +143,7 @@ pub fn on_enter_main_menu(mut commands: Commands, game_board_canvas: Res<GameBoa
                 Outline {
                     width: Val::Px(1.),
                     offset: Val::Px(-2.),
-                    color: Color::from(RED),
+                    color: WHITE.into(),
                 },
             ));
             keys.with_children(|keys| {

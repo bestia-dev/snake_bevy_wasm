@@ -2,10 +2,7 @@
 
 use std::f32::consts::PI;
 
-use bevy::{
-    color::palettes::css::{RED, WHITE},
-    prelude::*,
-};
+use bevy::{color::palettes::css::WHITE, prelude::*};
 use bevy_kira_audio::{AudioControl, AudioInstance, AudioTween};
 
 use crate::{AppState, GameBoardCanvas, Orientation};
@@ -146,7 +143,7 @@ fn on_enter_in_game(mut commands: Commands, asset_server: Res<AssetServer>, audi
     };
 
     client.with_children(|client| {
-        client.spawn((
+        let mut game_canvas = client.spawn((
             Node {
                 // Make node fill the entirety of its parent (in this case the window)
                 display: Display::Grid,
@@ -158,9 +155,22 @@ fn on_enter_in_game(mut commands: Commands, asset_server: Res<AssetServer>, audi
             Outline {
                 width: Val::Px(2.),
                 offset: Val::Px(-1.),
-                color: Color::BLACK,
+                color: WHITE.into(),
             },
         ));
+        game_canvas.with_children(|game_canvas| {
+            game_canvas.spawn((
+                Text::new(""),
+                Node {
+                    position_type: PositionType::Absolute,
+                    bottom: Val::Px(5.0),
+                    left: Val::Px(15.0),
+                    ..default()
+                },
+                PointsText {},
+            ));
+        });
+
         // second cell
         if game_board_canvas.orientation == Orientation::Portrait {
             let mut keys = client.spawn((
@@ -189,7 +199,7 @@ fn on_enter_in_game(mut commands: Commands, asset_server: Res<AssetServer>, audi
                 Outline {
                     width: Val::Px(1.),
                     offset: Val::Px(-2.),
-                    color: Color::from(RED),
+                    color: WHITE.into(),
                 },
             ));
 
@@ -221,6 +231,7 @@ fn on_enter_in_game(mut commands: Commands, asset_server: Res<AssetServer>, audi
                         justify_content: JustifyContent::Center,
                         // vertically center child text
                         align_items: AlignItems::Center,
+                        padding: UiRect::all(Val::Px(5.0)),
                         ..default()
                     },
                 ));
@@ -254,6 +265,7 @@ fn on_enter_in_game(mut commands: Commands, asset_server: Res<AssetServer>, audi
                         justify_content: JustifyContent::Center,
                         // vertically center child text
                         align_items: AlignItems::Center,
+                        padding: UiRect::all(Val::Px(5.0)),
                         ..default()
                     },
                 ));
@@ -273,6 +285,7 @@ fn on_enter_in_game(mut commands: Commands, asset_server: Res<AssetServer>, audi
                         justify_content: JustifyContent::Center,
                         // vertically center child text
                         align_items: AlignItems::Center,
+                        padding: UiRect::all(Val::Px(5.0)),
                         ..default()
                     },
                 ));
@@ -292,6 +305,7 @@ fn on_enter_in_game(mut commands: Commands, asset_server: Res<AssetServer>, audi
                         justify_content: JustifyContent::Center,
                         // vertically center child text
                         align_items: AlignItems::Center,
+                        padding: UiRect::all(Val::Px(5.0)),
                         ..default()
                     },
                 ));
@@ -353,17 +367,6 @@ fn on_enter_in_game(mut commands: Commands, asset_server: Res<AssetServer>, audi
             position: bird_position.clone(),
             color: WHITE.into(),
         },
-    ));
-
-    commands.spawn((
-        Text::new(""),
-        Node {
-            position_type: PositionType::Absolute,
-            bottom: Val::Px(5.0),
-            left: Val::Px(15.0),
-            ..default()
-        },
-        PointsText {},
     ));
 
     // DebugText

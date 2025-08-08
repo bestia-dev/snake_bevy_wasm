@@ -1,7 +1,7 @@
 // state_dead_mod.rs
 
-use bevy::color::palettes::css::{GREEN, RED, YELLOW};
-use bevy::{color, prelude::*};
+use bevy::color::palettes::css::{GREEN, RED, WHITE, YELLOW};
+use bevy::{color::Color::Srgba, prelude::*};
 
 use crate::{AppState, GameBoardCanvas, Orientation};
 
@@ -49,7 +49,7 @@ pub fn on_enter_dead(mut commands: Commands, game_board_canvas: Res<GameBoardCan
             Outline {
                 width: Val::Px(1.),
                 offset: Val::Px(0.),
-                color: Color::WHITE,
+                color: WHITE.into(),
             },
         ));
 
@@ -71,7 +71,7 @@ pub fn on_enter_dead(mut commands: Commands, game_board_canvas: Res<GameBoardCan
                             ..default()
                         },
                         TextLayout::new_with_justify(JustifyText::Center),
-                        TextColor::from(color::Color::Srgba(GREEN).with_alpha(0.7)),
+                        TextColor::from(Srgba(GREEN).with_alpha(0.7)),
                     ));
                 });
             }
@@ -92,7 +92,7 @@ pub fn on_enter_dead(mut commands: Commands, game_board_canvas: Res<GameBoardCan
                             ..default()
                         },
                         TextLayout::new_with_justify(JustifyText::Center),
-                        TextColor::from(color::Color::Srgba(YELLOW).with_alpha(0.7)),
+                        TextColor::from(Srgba(YELLOW).with_alpha(0.7)),
                     ));
                 });
             }
@@ -113,7 +113,7 @@ pub fn on_enter_dead(mut commands: Commands, game_board_canvas: Res<GameBoardCan
                             ..default()
                         },
                         TextLayout::new_with_justify(JustifyText::Center),
-                        TextColor::from(color::Color::Srgba(RED).with_alpha(0.7)),
+                        TextColor::from(Srgba(RED).with_alpha(0.7)),
                     ));
                 });
             }
@@ -142,7 +142,7 @@ pub fn on_enter_dead(mut commands: Commands, game_board_canvas: Res<GameBoardCan
                 Outline {
                     width: Val::Px(1.),
                     offset: Val::Px(-2.),
-                    color: Color::from(RED),
+                    color: WHITE.into(),
                 },
             ));
             keys.with_children(|keys| {

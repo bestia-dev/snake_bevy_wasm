@@ -11,8 +11,8 @@ use crate::{
 /*
 pub fn draw_axis(mut gizmos: Gizmos) {
     // gizmos.axes_2d(transform, 300);
-    gizmos.arrow_2d(Vec2::ZERO, Vec2::X * 300., bevy::color::palettes::css::GREEN);
-    gizmos.arrow_2d(Vec2::ZERO, Vec2::Y * 300., bevy::color::palettes::css::RED);
+    gizmos.arrow_2d(Vec2::ZERO, Vec2::X * 300., GREEN);
+    gizmos.arrow_2d(Vec2::ZERO, Vec2::Y * 300., RED);
 }
 */
 
