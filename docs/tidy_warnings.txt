@@ -4011,6 +4011,19 @@ line 1 column 2042 - Warning: trimming empty <button>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
 
+./docs/snake_bevy_wasm/web_sys_mod/fn.get_device_pixel_ratio.html
+Document: "2" is not a file!
+
+line 1 column 2419 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2419 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 2435 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 2792 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 2792 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 2809 - Warning: discarding unexpected </rustdoc-toolbar>
+line 1 column 1949 - Warning: trimming empty <button>
+This document has errors that must be fixed before
+using HTML Tidy to generate a tidied up version.
+
 ./docs/snake_bevy_wasm/web_sys_mod/fn.open_url_in_new_tab.html
 Document: "2" is not a file!
 
@@ -4482,19 +4495,19 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/struct.CustomMaterial.html
 Document: "2" is not a file!
 
-line 1 column 6628 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 6628 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 6644 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 6949 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 6949 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 6966 - Warning: discarding unexpected </rustdoc-toolbar>
-line 3 column 485 - Warning: missing </summary> before <section>
-line 3 column 882 - Warning: discarding unexpected </summary>
-line 3 column 945 - Warning: missing </summary> before <section>
-line 3 column 1326 - Warning: discarding unexpected </summary>
-line 3 column 1911 - Warning: missing </summary> before <section>
-line 3 column 2413 - Warning: discarding unexpected </summary>
-line 3 column 2509 - Warning: missing </summary> before <section>
+line 1 column 6646 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 6646 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 6662 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 6967 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 6967 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 6984 - Warning: discarding unexpected </rustdoc-toolbar>
+line 3 column 622 - Warning: missing </summary> before <section>
+line 3 column 1019 - Warning: discarding unexpected </summary>
+line 3 column 1082 - Warning: missing </summary> before <section>
+line 3 column 1463 - Warning: discarding unexpected </summary>
+line 3 column 2048 - Warning: missing </summary> before <section>
+line 3 column 2550 - Warning: discarding unexpected </summary>
+line 3 column 2646 - Warning: missing </summary> before <section>
 line 9 column 93 - Warning: discarding unexpected </summary>
 line 9 column 269 - Warning: missing </summary> before <section>
 line 12 column 174 - Warning: discarding unexpected </summary>
@@ -4706,10 +4719,10 @@ line 74 column 34 - Warning: discarding unexpected </div>
 line 74 column 214 - Warning: <div> isn't allowed in <h3> elements
 line 75 column 135 - Warning: discarding unexpected </div>
 line 1 column 1898 - Warning: trimming empty <button>
-line 3 column 485 - Warning: trimming empty <summary>
-line 3 column 945 - Warning: trimming empty <summary>
-line 3 column 1911 - Warning: trimming empty <summary>
-line 3 column 2509 - Warning: trimming empty <summary>
+line 3 column 622 - Warning: trimming empty <summary>
+line 3 column 1082 - Warning: trimming empty <summary>
+line 3 column 2048 - Warning: trimming empty <summary>
+line 3 column 2646 - Warning: trimming empty <summary>
 line 9 column 269 - Warning: trimming empty <summary>
 line 12 column 774 - Warning: trimming empty <summary>
 line 12 column 1330 - Warning: trimming empty <summary>
@@ -5134,175 +5147,175 @@ using HTML Tidy to generate a tidied up version.
 ./docs/snake_bevy_wasm/struct.GameBoardCanvas.html
 Document: "2" is not a file!
 
-line 1 column 6280 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 6280 - Warning: discarding unexpected <rustdoc-search>
-line 1 column 6296 - Warning: discarding unexpected </rustdoc-search>
-line 1 column 6602 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
-line 1 column 6602 - Warning: discarding unexpected <rustdoc-toolbar>
-line 1 column 6619 - Warning: discarding unexpected </rustdoc-toolbar>
-line 9 column 2507 - Warning: <div> isn't allowed in <h3> elements
-line 10 column 277 - Warning: discarding unexpected </div>
-line 10 column 3333 - Warning: missing </summary> before <section>
-line 10 column 3691 - Warning: <div> isn't allowed in <h3> elements
-line 11 column 149 - Warning: discarding unexpected </div>
-line 11 column 170 - Warning: discarding unexpected </summary>
-line 11 column 247 - Warning: missing </summary> before <section>
-line 11 column 752 - Warning: discarding unexpected </summary>
-line 11 column 1008 - Warning: missing </summary> before <section>
-line 11 column 1232 - Warning: <div> isn't allowed in <h3> elements
-line 13 column 262 - Warning: discarding unexpected </div>
-line 13 column 283 - Warning: discarding unexpected </summary>
-line 13 column 360 - Warning: missing </summary> before <section>
-line 13 column 654 - Warning: discarding unexpected </summary>
-line 14 column 150 - Warning: missing </summary> before <section>
-line 14 column 555 - Warning: <div> isn't allowed in <h3> elements
-line 15 column 139 - Warning: discarding unexpected </div>
-line 15 column 160 - Warning: discarding unexpected </summary>
-line 15 column 237 - Warning: missing </summary> before <section>
-line 15 column 718 - Warning: discarding unexpected </summary>
-line 15 column 967 - Warning: missing </summary> before <section>
-line 15 column 1387 - Warning: <div> isn't allowed in <h3> elements
+line 1 column 6362 - Error: <rustdoc-search> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 6362 - Warning: discarding unexpected <rustdoc-search>
+line 1 column 6378 - Warning: discarding unexpected </rustdoc-search>
+line 1 column 6684 - Error: <rustdoc-toolbar> is not recognized! Did you mean to enable the custom-tags option?
+line 1 column 6684 - Warning: discarding unexpected <rustdoc-toolbar>
+line 1 column 6701 - Warning: discarding unexpected </rustdoc-toolbar>
+line 10 column 2765 - Warning: <div> isn't allowed in <h3> elements
+line 11 column 277 - Warning: discarding unexpected </div>
+line 11 column 3333 - Warning: missing </summary> before <section>
+line 11 column 3691 - Warning: <div> isn't allowed in <h3> elements
+line 12 column 149 - Warning: discarding unexpected </div>
+line 12 column 170 - Warning: discarding unexpected </summary>
+line 12 column 247 - Warning: missing </summary> before <section>
+line 12 column 752 - Warning: discarding unexpected </summary>
+line 12 column 1008 - Warning: missing </summary> before <section>
+line 12 column 1232 - Warning: <div> isn't allowed in <h3> elements
+line 14 column 262 - Warning: discarding unexpected </div>
+line 14 column 283 - Warning: discarding unexpected </summary>
+line 14 column 360 - Warning: missing </summary> before <section>
+line 14 column 654 - Warning: discarding unexpected </summary>
+line 15 column 150 - Warning: missing </summary> before <section>
+line 15 column 555 - Warning: <div> isn't allowed in <h3> elements
 line 16 column 139 - Warning: discarding unexpected </div>
 line 16 column 160 - Warning: discarding unexpected </summary>
 line 16 column 237 - Warning: missing </summary> before <section>
-line 16 column 745 - Warning: discarding unexpected </summary>
-line 16 column 999 - Warning: missing </summary> before <section>
-line 16 column 1196 - Warning: discarding unexpected </summary>
-line 16 column 1579 - Warning: missing </summary> before <section>
-line 16 column 1738 - Warning: <div> isn't allowed in <h3> elements
-line 17 column 126 - Warning: discarding unexpected </div>
-line 17 column 147 - Warning: discarding unexpected </summary>
-line 17 column 224 - Warning: missing </summary> before <section>
-line 17 column 809 - Warning: discarding unexpected </summary>
-line 18 column 190 - Warning: missing </summary> before <section>
-line 18 column 766 - Warning: discarding unexpected </summary>
-line 19 column 185 - Warning: missing </summary> before <section>
-line 19 column 515 - Warning: discarding unexpected </summary>
-line 20 column 131 - Warning: missing </summary> before <section>
-line 20 column 481 - Warning: discarding unexpected </summary>
-line 21 column 156 - Warning: missing </summary> before <section>
-line 21 column 327 - Warning: <div> isn't allowed in <h3> elements
-line 22 column 255 - Warning: discarding unexpected </div>
-line 22 column 276 - Warning: discarding unexpected </summary>
-line 22 column 353 - Warning: missing </summary> before <section>
-line 22 column 1082 - Warning: discarding unexpected </summary>
-line 23 column 215 - Warning: missing </summary> before <section>
-line 23 column 632 - Warning: discarding unexpected </summary>
-line 23 column 709 - Warning: missing </summary> before <section>
+line 16 column 718 - Warning: discarding unexpected </summary>
+line 16 column 967 - Warning: missing </summary> before <section>
+line 16 column 1387 - Warning: <div> isn't allowed in <h3> elements
+line 17 column 139 - Warning: discarding unexpected </div>
+line 17 column 160 - Warning: discarding unexpected </summary>
+line 17 column 237 - Warning: missing </summary> before <section>
+line 17 column 745 - Warning: discarding unexpected </summary>
+line 17 column 999 - Warning: missing </summary> before <section>
+line 17 column 1196 - Warning: discarding unexpected </summary>
+line 17 column 1579 - Warning: missing </summary> before <section>
+line 17 column 1738 - Warning: <div> isn't allowed in <h3> elements
+line 18 column 126 - Warning: discarding unexpected </div>
+line 18 column 147 - Warning: discarding unexpected </summary>
+line 18 column 224 - Warning: missing </summary> before <section>
+line 18 column 809 - Warning: discarding unexpected </summary>
+line 19 column 190 - Warning: missing </summary> before <section>
+line 19 column 766 - Warning: discarding unexpected </summary>
+line 20 column 185 - Warning: missing </summary> before <section>
+line 20 column 515 - Warning: discarding unexpected </summary>
+line 21 column 131 - Warning: missing </summary> before <section>
+line 21 column 481 - Warning: discarding unexpected </summary>
+line 22 column 156 - Warning: missing </summary> before <section>
+line 22 column 327 - Warning: <div> isn't allowed in <h3> elements
+line 23 column 255 - Warning: discarding unexpected </div>
+line 23 column 276 - Warning: discarding unexpected </summary>
+line 23 column 353 - Warning: missing </summary> before <section>
 line 23 column 1082 - Warning: discarding unexpected </summary>
-line 24 column 77 - Warning: missing </summary> before <section>
-line 24 column 280 - Warning: discarding unexpected </summary>
-line 24 column 571 - Warning: missing </summary> before <section>
-line 24 column 751 - Warning: discarding unexpected </summary>
-line 24 column 828 - Warning: missing </summary> before <section>
-line 24 column 1063 - Warning: discarding unexpected </summary>
-line 25 column 111 - Warning: missing </summary> before <section>
-line 25 column 349 - Warning: discarding unexpected </summary>
-line 26 column 128 - Warning: missing </summary> before <section>
-line 26 column 537 - Warning: <div> isn't allowed in <h3> elements
-line 27 column 146 - Warning: discarding unexpected </div>
-line 27 column 167 - Warning: discarding unexpected </summary>
-line 27 column 244 - Warning: missing </summary> before <section>
-line 27 column 617 - Warning: discarding unexpected </summary>
-line 30 column 77 - Warning: missing </summary> before <section>
-line 30 column 498 - Warning: discarding unexpected </summary>
-line 30 column 575 - Warning: missing </summary> before <section>
-line 30 column 1204 - Warning: discarding unexpected </summary>
-line 33 column 179 - Warning: missing </summary> before <section>
-line 33 column 733 - Warning: <div> isn't allowed in <h4> elements
-line 34 column 265 - Warning: discarding unexpected </div>
-line 34 column 286 - Warning: discarding unexpected </summary>
-line 37 column 201 - Warning: missing </summary> before <section>
-line 37 column 392 - Warning: <div> isn't allowed in <h3> elements
-line 38 column 28 - Warning: discarding unexpected </div>
-line 38 column 49 - Warning: discarding unexpected </summary>
-line 38 column 337 - Warning: missing </summary> before <section>
-line 38 column 522 - Warning: <div> isn't allowed in <h3> elements
+line 24 column 215 - Warning: missing </summary> before <section>
+line 24 column 632 - Warning: discarding unexpected </summary>
+line 24 column 709 - Warning: missing </summary> before <section>
+line 24 column 1082 - Warning: discarding unexpected </summary>
+line 25 column 77 - Warning: missing </summary> before <section>
+line 25 column 280 - Warning: discarding unexpected </summary>
+line 25 column 571 - Warning: missing </summary> before <section>
+line 25 column 751 - Warning: discarding unexpected </summary>
+line 25 column 828 - Warning: missing </summary> before <section>
+line 25 column 1063 - Warning: discarding unexpected </summary>
+line 26 column 111 - Warning: missing </summary> before <section>
+line 26 column 349 - Warning: discarding unexpected </summary>
+line 27 column 128 - Warning: missing </summary> before <section>
+line 27 column 537 - Warning: <div> isn't allowed in <h3> elements
+line 28 column 146 - Warning: discarding unexpected </div>
+line 28 column 167 - Warning: discarding unexpected </summary>
+line 28 column 244 - Warning: missing </summary> before <section>
+line 28 column 617 - Warning: discarding unexpected </summary>
+line 31 column 77 - Warning: missing </summary> before <section>
+line 31 column 498 - Warning: discarding unexpected </summary>
+line 31 column 575 - Warning: missing </summary> before <section>
+line 31 column 1204 - Warning: discarding unexpected </summary>
+line 34 column 179 - Warning: missing </summary> before <section>
+line 34 column 733 - Warning: <div> isn't allowed in <h4> elements
+line 35 column 265 - Warning: discarding unexpected </div>
+line 35 column 286 - Warning: discarding unexpected </summary>
+line 38 column 201 - Warning: missing </summary> before <section>
+line 38 column 392 - Warning: <div> isn't allowed in <h3> elements
 line 39 column 28 - Warning: discarding unexpected </div>
 line 39 column 49 - Warning: discarding unexpected </summary>
-line 39 column 334 - Warning: missing </summary> before <section>
-line 39 column 758 - Warning: <div> isn't allowed in <h3> elements
-line 40 column 146 - Warning: discarding unexpected </div>
-line 40 column 167 - Warning: discarding unexpected </summary>
-line 40 column 230 - Warning: missing </summary> before <section>
-line 40 column 790 - Warning: discarding unexpected </summary>
-line 40 column 934 - Warning: missing </summary> before <section>
-line 40 column 1801 - Warning: discarding unexpected </summary>
-line 40 column 1933 - Warning: missing </summary> before <section>
-line 40 column 2357 - Warning: <div> isn't allowed in <h3> elements
-line 41 column 155 - Warning: discarding unexpected </div>
-line 41 column 176 - Warning: discarding unexpected </summary>
-line 41 column 239 - Warning: missing </summary> before <section>
-line 41 column 984 - Warning: discarding unexpected </summary>
-line 41 column 1128 - Warning: missing </summary> before <section>
-line 41 column 1991 - Warning: discarding unexpected </summary>
-line 41 column 2123 - Warning: missing </summary> before <section>
-line 41 column 2314 - Warning: discarding unexpected </summary>
-line 41 column 2828 - Warning: missing </summary> before <section>
-line 41 column 3001 - Warning: <div> isn't allowed in <h3> elements
-line 42 column 27 - Warning: discarding unexpected </div>
-line 42 column 48 - Warning: discarding unexpected </summary>
-line 42 column 315 - Warning: missing </summary> before <section>
-line 42 column 507 - Warning: discarding unexpected </summary>
-line 42 column 584 - Warning: missing </summary> before <section>
-line 42 column 831 - Warning: <div> isn't allowed in <h4> elements
-line 43 column 153 - Warning: discarding unexpected </div>
-line 43 column 174 - Warning: discarding unexpected </summary>
-line 44 column 113 - Warning: missing </summary> before <section>
-line 44 column 375 - Warning: discarding unexpected </summary>
-line 45 column 257 - Warning: <div> isn't allowed in <h3> elements
-line 46 column 135 - Warning: discarding unexpected </div>
-line 46 column 326 - Warning: <div> isn't allowed in <h3> elements
-line 47 column 48 - Warning: discarding unexpected </div>
-line 47 column 219 - Warning: <div> isn't allowed in <h3> elements
-line 48 column 274 - Warning: discarding unexpected </div>
-line 48 column 454 - Warning: <div> isn't allowed in <h3> elements
-line 49 column 135 - Warning: discarding unexpected </div>
-line 49 column 327 - Warning: <div> isn't allowed in <h3> elements
-line 50 column 34 - Warning: discarding unexpected </div>
-line 50 column 214 - Warning: <div> isn't allowed in <h3> elements
-line 51 column 135 - Warning: discarding unexpected </div>
+line 39 column 337 - Warning: missing </summary> before <section>
+line 39 column 522 - Warning: <div> isn't allowed in <h3> elements
+line 40 column 28 - Warning: discarding unexpected </div>
+line 40 column 49 - Warning: discarding unexpected </summary>
+line 40 column 334 - Warning: missing </summary> before <section>
+line 40 column 758 - Warning: <div> isn't allowed in <h3> elements
+line 41 column 146 - Warning: discarding unexpected </div>
+line 41 column 167 - Warning: discarding unexpected </summary>
+line 41 column 230 - Warning: missing </summary> before <section>
+line 41 column 790 - Warning: discarding unexpected </summary>
+line 41 column 934 - Warning: missing </summary> before <section>
+line 41 column 1801 - Warning: discarding unexpected </summary>
+line 41 column 1933 - Warning: missing </summary> before <section>
+line 41 column 2357 - Warning: <div> isn't allowed in <h3> elements
+line 42 column 155 - Warning: discarding unexpected </div>
+line 42 column 176 - Warning: discarding unexpected </summary>
+line 42 column 239 - Warning: missing </summary> before <section>
+line 42 column 984 - Warning: discarding unexpected </summary>
+line 42 column 1128 - Warning: missing </summary> before <section>
+line 42 column 1991 - Warning: discarding unexpected </summary>
+line 42 column 2123 - Warning: missing </summary> before <section>
+line 42 column 2314 - Warning: discarding unexpected </summary>
+line 42 column 2828 - Warning: missing </summary> before <section>
+line 42 column 3001 - Warning: <div> isn't allowed in <h3> elements
+line 43 column 27 - Warning: discarding unexpected </div>
+line 43 column 48 - Warning: discarding unexpected </summary>
+line 43 column 315 - Warning: missing </summary> before <section>
+line 43 column 507 - Warning: discarding unexpected </summary>
+line 43 column 584 - Warning: missing </summary> before <section>
+line 43 column 831 - Warning: <div> isn't allowed in <h4> elements
+line 44 column 153 - Warning: discarding unexpected </div>
+line 44 column 174 - Warning: discarding unexpected </summary>
+line 45 column 113 - Warning: missing </summary> before <section>
+line 45 column 375 - Warning: discarding unexpected </summary>
+line 46 column 257 - Warning: <div> isn't allowed in <h3> elements
+line 47 column 135 - Warning: discarding unexpected </div>
+line 47 column 326 - Warning: <div> isn't allowed in <h3> elements
+line 48 column 48 - Warning: discarding unexpected </div>
+line 48 column 219 - Warning: <div> isn't allowed in <h3> elements
+line 49 column 274 - Warning: discarding unexpected </div>
+line 49 column 454 - Warning: <div> isn't allowed in <h3> elements
+line 50 column 135 - Warning: discarding unexpected </div>
+line 50 column 327 - Warning: <div> isn't allowed in <h3> elements
+line 51 column 34 - Warning: discarding unexpected </div>
+line 51 column 214 - Warning: <div> isn't allowed in <h3> elements
+line 52 column 135 - Warning: discarding unexpected </div>
 line 1 column 1900 - Warning: trimming empty <button>
-line 10 column 3333 - Warning: trimming empty <summary>
-line 11 column 247 - Warning: trimming empty <summary>
-line 11 column 1008 - Warning: trimming empty <summary>
-line 13 column 360 - Warning: trimming empty <summary>
-line 14 column 150 - Warning: trimming empty <summary>
-line 15 column 237 - Warning: trimming empty <summary>
-line 15 column 967 - Warning: trimming empty <summary>
+line 11 column 3333 - Warning: trimming empty <summary>
+line 12 column 247 - Warning: trimming empty <summary>
+line 12 column 1008 - Warning: trimming empty <summary>
+line 14 column 360 - Warning: trimming empty <summary>
+line 15 column 150 - Warning: trimming empty <summary>
 line 16 column 237 - Warning: trimming empty <summary>
-line 16 column 999 - Warning: trimming empty <summary>
-line 16 column 1579 - Warning: trimming empty <summary>
-line 17 column 224 - Warning: trimming empty <summary>
-line 18 column 190 - Warning: trimming empty <summary>
-line 19 column 185 - Warning: trimming empty <summary>
-line 20 column 131 - Warning: trimming empty <summary>
-line 21 column 156 - Warning: trimming empty <summary>
-line 22 column 353 - Warning: trimming empty <summary>
-line 23 column 215 - Warning: trimming empty <summary>
-line 23 column 709 - Warning: trimming empty <summary>
-line 24 column 77 - Warning: trimming empty <summary>
-line 24 column 571 - Warning: trimming empty <summary>
-line 24 column 828 - Warning: trimming empty <summary>
-line 25 column 111 - Warning: trimming empty <summary>
-line 26 column 128 - Warning: trimming empty <summary>
-line 27 column 244 - Warning: trimming empty <summary>
-line 30 column 77 - Warning: trimming empty <summary>
-line 30 column 575 - Warning: trimming empty <summary>
-line 33 column 179 - Warning: trimming empty <summary>
-line 37 column 201 - Warning: trimming empty <summary>
-line 38 column 337 - Warning: trimming empty <summary>
-line 39 column 334 - Warning: trimming empty <summary>
-line 40 column 230 - Warning: trimming empty <summary>
-line 40 column 934 - Warning: trimming empty <summary>
-line 40 column 1933 - Warning: trimming empty <summary>
-line 41 column 239 - Warning: trimming empty <summary>
-line 41 column 1128 - Warning: trimming empty <summary>
-line 41 column 2123 - Warning: trimming empty <summary>
-line 41 column 2828 - Warning: trimming empty <summary>
-line 42 column 315 - Warning: trimming empty <summary>
-line 42 column 584 - Warning: trimming empty <summary>
-line 44 column 113 - Warning: trimming empty <summary>
+line 16 column 967 - Warning: trimming empty <summary>
+line 17 column 237 - Warning: trimming empty <summary>
+line 17 column 999 - Warning: trimming empty <summary>
+line 17 column 1579 - Warning: trimming empty <summary>
+line 18 column 224 - Warning: trimming empty <summary>
+line 19 column 190 - Warning: trimming empty <summary>
+line 20 column 185 - Warning: trimming empty <summary>
+line 21 column 131 - Warning: trimming empty <summary>
+line 22 column 156 - Warning: trimming empty <summary>
+line 23 column 353 - Warning: trimming empty <summary>
+line 24 column 215 - Warning: trimming empty <summary>
+line 24 column 709 - Warning: trimming empty <summary>
+line 25 column 77 - Warning: trimming empty <summary>
+line 25 column 571 - Warning: trimming empty <summary>
+line 25 column 828 - Warning: trimming empty <summary>
+line 26 column 111 - Warning: trimming empty <summary>
+line 27 column 128 - Warning: trimming empty <summary>
+line 28 column 244 - Warning: trimming empty <summary>
+line 31 column 77 - Warning: trimming empty <summary>
+line 31 column 575 - Warning: trimming empty <summary>
+line 34 column 179 - Warning: trimming empty <summary>
+line 38 column 201 - Warning: trimming empty <summary>
+line 39 column 337 - Warning: trimming empty <summary>
+line 40 column 334 - Warning: trimming empty <summary>
+line 41 column 230 - Warning: trimming empty <summary>
+line 41 column 934 - Warning: trimming empty <summary>
+line 41 column 1933 - Warning: trimming empty <summary>
+line 42 column 239 - Warning: trimming empty <summary>
+line 42 column 1128 - Warning: trimming empty <summary>
+line 42 column 2123 - Warning: trimming empty <summary>
+line 42 column 2828 - Warning: trimming empty <summary>
+line 43 column 315 - Warning: trimming empty <summary>
+line 43 column 584 - Warning: trimming empty <summary>
+line 45 column 113 - Warning: trimming empty <summary>
 This document has errors that must be fixed before
 using HTML Tidy to generate a tidied up version.
 

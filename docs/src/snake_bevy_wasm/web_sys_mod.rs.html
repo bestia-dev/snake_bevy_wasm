@@ -97,4 +97,9 @@
 <a href=#97 id=97 data-nosnippet>97</a>        .document_element()
 <a href=#98 id=98 data-nosnippet>98</a>        .expect(<span class="string">"There should be a document_element"</span>)
 <a href=#99 id=99 data-nosnippet>99</a>        .client_height()
-<a href=#100 id=100 data-nosnippet>100</a>}</code></pre></div></section></main></body></html>
+<a href=#100 id=100 data-nosnippet>100</a>}
+<a href=#101 id=101 data-nosnippet>101</a>
+<a href=#102 id=102 data-nosnippet>102</a><span class="comment">// get scale factor DPR of screen
+<a href=#103 id=103 data-nosnippet>103</a></span><span class="kw">pub fn </span>get_device_pixel_ratio() -&gt; f32 {
+<a href=#104 id=104 data-nosnippet>104</a>    web_sys::window().expect(<span class="string">"There should be a window"</span>).device_pixel_ratio() <span class="kw">as </span>f32
+<a href=#105 id=105 data-nosnippet>105</a>}</code></pre></div></section></main></body></html>
