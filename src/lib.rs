@@ -4,7 +4,7 @@
 //! # snake_bevy_wasm
 //!
 //! **Simple snake game with Bevy, Rust and Wasm**  
-//! ***version: 1.3.44 date: 2025-08-08 author: [bestia.dev](https://bestia.dev) repository: [GitHub](https://github.com/bestia-dev/snake_bevy_wasm)***
+//! ***version: 1.3.50 date: 2025-08-11 author: [bestia.dev](https://bestia.dev) repository: [GitHub](https://github.com/bestia-dev/snake_bevy_wasm)***
 //!
 //!  ![maintained](https://img.shields.io/badge/maintained-green)
 //!  ![work-in-progress](https://img.shields.io/badge/work_in_progress-yellow)
@@ -14,9 +14,9 @@
 //!  [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/bestia-dev/snake_bevy_wasm/blob/master/LICENSE)
 //!  ![snake_bevy_wasm](https://bestia.dev/webpage_hit_counter/get_svg_image/1481465721.svg)
 //!
-//! [![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-1332-green.svg)](https://github.com/bestia-dev/snake_bevy_wasm/)
+//! [![Lines in Rust code](https://img.shields.io/badge/Lines_in_Rust-1344-green.svg)](https://github.com/bestia-dev/snake_bevy_wasm/)
 //! [![Lines in Doc comments](https://img.shields.io/badge/Lines_in_Doc_comments-82-blue.svg)](https://github.com/bestia-dev/snake_bevy_wasm/)
-//! [![Lines in Comments](https://img.shields.io/badge/Lines_in_comments-138-purple.svg)](https://github.com/bestia-dev/snake_bevy_wasm/)
+//! [![Lines in Comments](https://img.shields.io/badge/Lines_in_comments-139-purple.svg)](https://github.com/bestia-dev/snake_bevy_wasm/)
 //! [![Lines in examples](https://img.shields.io/badge/Lines_in_examples-0-yellow.svg)](https://github.com/bestia-dev/snake_bevy_wasm/)
 //! [![Lines in tests](https://img.shields.io/badge/Lines_in_tests-0-orange.svg)](https://github.com/bestia-dev/snake_bevy_wasm/)
 //!
@@ -44,6 +44,7 @@
 //!
 //! ## TODO
 //!
+//! The shader needs to know client width and height.
 //! And code happily ever after...
 //!
 //! ## Open-source and free as a beer
@@ -96,6 +97,7 @@ pub enum Orientation {
 pub struct GameBoardCanvas {
     client_width: i32,
     client_height: i32,
+    scale_factor: f32,
     orientation: Orientation,
     board_canvas_width: i32,
     board_canvas_height: i32,
@@ -107,7 +109,7 @@ pub struct GameBoardCanvas {
 #[derive(Asset, TypePath, AsBindGroup, Debug, Clone)]
 struct CustomMaterial {
     #[uniform(0)]
-    color: LinearRgba,
+    screen_size: Vec2,
 }
 
 /// The Material trait is very configurable, but comes with sensible defaults for all methods.
@@ -182,6 +184,7 @@ fn get_game_board_canvas() -> GameBoardCanvas {
     // check viewport and define sizes
     let client_width = wsm::get_client_width();
     let client_height = wsm::get_client_height();
+    let scale_factor = wsm::get_device_pixel_ratio();
 
     // landscape for PC monitor viewport is around 1280 x 712px
     // portrait for mobile phone it is around 360px x 649px
@@ -195,6 +198,7 @@ fn get_game_board_canvas() -> GameBoardCanvas {
     GameBoardCanvas {
         client_width,
         client_height,
+        scale_factor,
         orientation,
         board_canvas_width: game_square_width,
         board_canvas_height: game_square_width,

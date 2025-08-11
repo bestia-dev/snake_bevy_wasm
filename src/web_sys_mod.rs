@@ -98,3 +98,8 @@ pub fn get_client_height() -> i32 {
         .expect("There should be a document_element")
         .client_height()
 }
+
+// get scale factor DPR of screen
+pub fn get_device_pixel_ratio() -> f32 {
+    web_sys::window().expect("There should be a window").device_pixel_ratio() as f32
+}

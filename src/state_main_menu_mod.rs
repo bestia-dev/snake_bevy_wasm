@@ -37,7 +37,12 @@ pub fn on_enter_main_menu(
     commands.spawn((
         Mesh2d(meshes.add(Rectangle::default())),
         //MeshMaterial2d(materials.add(Color::from(RED))),
-        MeshMaterial2d(materials.add(crate::CustomMaterial { color: LinearRgba::BLUE })),
+        MeshMaterial2d(materials.add(crate::CustomMaterial {
+            screen_size: Vec2::new(
+                game_board_canvas.client_width as f32 / game_board_canvas.scale_factor,
+                game_board_canvas.client_height as f32 / game_board_canvas.scale_factor,
+            ),
+        })),
         Transform::default().with_scale(Vec3::new(game_board_canvas.client_width as f32, game_board_canvas.client_height as f32, 0.)),
     ));
 
