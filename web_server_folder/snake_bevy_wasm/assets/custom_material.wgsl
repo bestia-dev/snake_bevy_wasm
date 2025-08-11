@@ -1,3 +1,4 @@
+
 #import bevy_render::globals::Globals
 
 @group(0) @binding(1) var<uniform> globals: Globals;
@@ -11,8 +12,12 @@ fn palette(t: f32) -> vec3f {
 }
 
 @fragment
-fn fragment(@builtin(position) pos: vec4f) -> @location(0) vec4f {
-  var uv = (pos.xy * 2.0 - vec2f(100.,100.)) / 300.;
+fn fragment(@builtin(position) pos: vec4f) -> @location(0) vec4<f32> {
+  let width=800.;
+  let height=800.;
+  let factor=700.;
+
+  var uv = (pos.xy * 2.0 - vec2f(width,height)) / factor;
   let uv0 = uv;
   var finalColor = vec3f(0.0);
 
@@ -31,7 +36,7 @@ fn fragment(@builtin(position) pos: vec4f) -> @location(0) vec4f {
     finalColor += col * d;
   }
 
-  return vec4f(finalColor, 1.0);
+  return vec4f(finalColor/10., 1.0);
 }
 
 // Ported from Shader Art Coding (https://www.youtube.com/watch?v=f4s1h2YETNY)

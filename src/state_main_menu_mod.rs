@@ -35,10 +35,10 @@ pub fn on_enter_main_menu(
     commands.spawn(Camera2d);
 
     commands.spawn((
-        Mesh2d(meshes.add(Circle::default())),
+        Mesh2d(meshes.add(Rectangle::default())),
         //MeshMaterial2d(materials.add(Color::from(RED))),
         MeshMaterial2d(materials.add(crate::CustomMaterial { color: LinearRgba::BLUE })),
-        Transform::default().with_scale(Vec3::splat(400.)),
+        Transform::default().with_scale(Vec3::new(game_board_canvas.client_width as f32, game_board_canvas.client_height as f32, 0.)),
     ));
 
     let mut client = if game_board_canvas.orientation == Orientation::Landscape {
