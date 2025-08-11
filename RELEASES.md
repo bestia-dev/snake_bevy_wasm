@@ -10,6 +10,8 @@ The TODO section is part of the [README.md](https://github.com/automation-tasks-
 
 ## Unreleased
 
+## Version 1.3.50 (2025-08-11)
+
 - fragment shader
 
 ## Version 1.3.44 (2025-08-08)
