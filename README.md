@@ -51,7 +51,6 @@ Read the releases changelog in a separate md file:
 
 ## TODO
 
-The shader needs to know client width and height.
 And code happily ever after...
 
 ## Open-source and free as a beer
